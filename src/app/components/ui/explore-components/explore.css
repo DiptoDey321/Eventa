@@ -1,0 +1,160 @@
+.explore-slider-cotainer {
+  padding: 40px 0px;
+}
+
+.explore-slider-cotainer .swiper-pagination-bullet-active {
+  background-color: white !important;
+  opacity: 1 !important;
+  height: 15px !important;
+  width: 15px !important;
+}
+
+.explore-slider-cotainer .swiper-pagination-bullet {
+  background-color: white !important;
+  opacity: 1 !important;
+  margin: 0px 10px !important;
+  height: 12px !important;
+  width: 12px !important;
+}
+
+.explore-slider-cotainer .swiper-pagination {
+  width: 150px !important;
+}
+
+.explore-card-container .album-image-container img {
+  height: 400px;
+  width: fit-content;
+}
+
+.ex-card-details-container {
+  color: white;
+  width: 400px;
+}
+
+.ex-card-details-container .card-heading {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.ex-card-details-container .location-date {
+  margin-top: 20px !important;
+}
+
+.ex-card-details-container .location-date p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px !important;
+  font-size: 15px;
+}
+
+.ex-card-details-container .poeples-count {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px !important;
+}
+
+.ex-card-details-container .get-tickets-btn {
+  color: black;
+  background-color: #ffbf00;
+  border: 0px;
+  margin-top: 20px !important;
+  font-weight: 500;
+  height: 35px;
+  width: 150px;
+  transition: all 0.3s ease-in-out;
+}
+
+.ex-card-details-container .get-tickets-btn:hover {
+  transform: scale(1.03);
+  background-color: #ffbf00 !important;
+  color: black !important;
+}
+
+/* event items  */
+
+.explore-items-sections {
+  padding: 30px 60px 50px 60px;
+  background-color: #e4af0f;
+  color: black !important;
+}
+
+.exlore-filter {
+  background-color: rgba(53, 53, 53, 0.158) !important;
+  padding: 20px 0px 20px 0px;
+  margin: 0px 80px 30px 80px !important;
+  border-radius: 10px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.exlore-filter .ant-select {
+  width: 220px !important;
+  height: 40px;
+}
+
+.exlore-filter .ant-select-arrow {
+  top: 39% !important;
+}
+
+.exlore-filter .custpm-btn {
+  height: 40px !important;
+  background-color: rgb(46, 46, 46);
+  color: white !important;
+}
+
+.exlore-filter .custpm-btn:hover {
+  background-color: rgb(240, 240, 240) !important;
+  color: black !important;
+}
+
+.explore-items-sections .card-lists {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card-container {
+  background-color: rgb(46, 46, 46) !important;
+}
+
+.event-item-container .organizer-details {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 15px;
+  margin-top: 10px !important;
+  color: #c0c0c0;
+}
+.event-item-container .item-heading {
+  font-size: 20px;
+  margin: 13px 0px 10px 0px !important;
+  font-weight: 600;
+  color: #e6e6e6;
+}
+
+.event-item-container .location-date {
+  display: flex;
+  align-items: start;
+  color: #e6e6e6;
+  margin-top: 15px !important;
+  gap: 10px;
+}
+
+.event-item-container .location-date .from-to {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.event-item-container .location-date .from-to .from {
+  display: flex;
+  flex-direction: column;
+}
+
+.event-item-container .location-date .from-to .from .format {
+  font-size: 16px;
+  font-weight: 600;
+}

@@ -1,0 +1,82 @@
+.login-form-parent-container {
+  background-image: url(../../../public/login-backlground.webp);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form-child-container {
+  background-color: #323640;
+  padding: 50px 50px;
+  border-radius: 10px;
+}
+
+.login-form-child-container .logo-container {
+  display: flex;
+  justify-content: center;
+}
+
+.login-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+}
+
+.login-btn-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.login-common-style {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 16px;
+  color: white;
+}
+
+.input-field-login {
+  width: 300px !important;
+  border: none;
+  height: 40px;
+  background-color: rgb(106 109 116 / 0%) !important;
+  color: white !important;
+}
+
+.input-field-login:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+input::placeholder {
+  color: #9399a3 !important; /* Change this color to whatever you prefer */
+}
+.ant-input {
+  padding-left: 5px !important;
+}
+.ant-input-affix-wrapper .anticon.ant-input-password-icon {
+  color: white !important;
+}
+
+/* for active class  */
+
+.icon-active-color path {
+  fill: #ffbf00 !important;
+}
+
+.icon-active-colorq path {
+  stroke: #ffbf00 !important;
+}
+.btn-active-color {
+  color: #ffbf00;
+}
+.common-style {
+  margin-top: 15px !important;
+}
