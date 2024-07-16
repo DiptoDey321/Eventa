@@ -1,7 +1,6 @@
 import type { BaseQueryFn } from "@reduxjs/toolkit/query";
-import axios from "axios";
 import type { AxiosRequestConfig, AxiosError } from "axios";
-import { instance } from "./axiosInstance";
+import { instance as axiosInstance } from "./axiosInstance";
 
 export const axiosBaseQuery =
   (
@@ -13,19 +12,21 @@ export const axiosBaseQuery =
       data?: AxiosRequestConfig["data"];
       params?: AxiosRequestConfig["params"];
       contentType?: string;
+      requiresAuth?: boolean;
     },
     unknown,
     unknown
   > =>
-  async ({ url, method, data, params, contentType }) => {
+  async ({ url, method, data, params, contentType, requiresAuth = true }) => {
     try {
-      const result = await instance({
+      const result = await axiosInstance({
         url: baseUrl + url,
         method,
         data,
         params,
         headers: {
           "Content-Type": contentType || "application/json",
+          requiresAuth,
         },
       });
       return { data: result.data };

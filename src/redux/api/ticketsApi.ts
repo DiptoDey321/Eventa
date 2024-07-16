@@ -9,12 +9,31 @@ export const ticketsApi = baseApi.injectEndpoints({
         method: "POST",
         data,
         contentType: "multipart/form-data",
+        requiresAuth: true,
       }),
       invalidatesTags: ["event"],
+    }),
+
+    getEventCategory: build.query({
+      query: () => ({
+        url: `/event-categories`,
+        method: "GET",
+        requiresAuth: false,
+      }),
+    }),
+
+    createTickets: build.mutation({
+      query: (ticketsdata) => ({
+        url: `/tickets`,
+        method: "POST",
+        data: ticketsdata,
+        requiresAuth: true,
+      }),
+      invalidatesTags: ["tickets"],
     }),
   }),
 });
 
 export const {
-  usePostEventMutation
+  usePostEventMutation, useGetEventCategoryQuery, useCreateTicketsMutation
 } = ticketsApi;

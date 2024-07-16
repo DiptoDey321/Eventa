@@ -22,7 +22,7 @@ import { TicketType } from "@/types/ticketsInterfece";
 import moment from "moment";
 import initialBackground from '../../../../../public/selltickets-sidebg.webp'
 import Image, { StaticImageData } from "next/image";
-import { usePostEventMutation } from "@/redux/api/ticketsApi";
+import { useCreateTicketsMutation, useGetEventCategoryQuery, usePostEventMutation } from "@/redux/api/ticketsApi";
 
 const { Option } = Select;
 
@@ -43,10 +43,13 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
     string | StaticImageData
   >(initialBackground);
 
-   const [postEvent, { isLoading, isError, isSuccess }] =
-     usePostEventMutation();
+  const { data, error, isLoading } = useGetEventCategoryQuery(undefined);
+
+  const [postEvent] = usePostEventMutation();
+  const [createTickets] = useCreateTicketsMutation();
 
   const [img, setImg] = useState<Image | null>(null);
+  
 
   const [tickets, setTickets] = useState<TicketType[]>([
     {
@@ -71,6 +74,7 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
   const transformTickets = (tickets:any) => {
     return tickets.map((ticket: any) => ({
       title: ticket.name,
+      ticket_type_id: "668458900c4a7b1d8494880a",
       description: ticket.description,
       qty: ticket.quantity,
       price: ticket.price,
@@ -92,7 +96,6 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
     }));
   };
 
-
   const onSubmitAllData = async() => {
    const formData = new FormData();
    formData.append("title", formValues.title);
@@ -103,24 +106,34 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
    formData.append("category_id", formValues.category_id);
    formData.append("description", formValues.description);
    if (formValues.event_phone == undefined){
-    formData.append("email", formValues.event_email);
+    formData.append("event_email", formValues.event_email);
     formData.append("is_phone_selected", "false");
    }else{
-      formData.append("phone", formValues.event_phone);
-      formData.append("is_phone_selected", "true");
+    formData.append("iso_code", "BD");
+    formData.append("phone", formValues.event_phone);
+    formData.append("is_phone_selected", "true");
    } 
    formData.append("event_image_url", img == null ? "" : img.uid);
    
 
   try {
-    const result = await postEvent(formData);
-    console.log("Event posted successfully:", result);
+    const resultOfEventCreate = await postEvent(formData);
+
+    if (resultOfEventCreate?.data?.data?._id){
+       const resultOfTicketsCreate = await createTickets({
+         event_id: resultOfEventCreate?.data?.data?._id,
+         tickets: transformTickets(tickets),
+       });
+
+       console.log("ticekts posted successfully:", resultOfTicketsCreate);
+    }
+     
+    console.log("Event posted successfully:", resultOfEventCreate?.data?.data?._id);
+    
   } catch (error) {
     console.error("Failed to post event:", error);
   }
   };
-
-
 
   const cancelEventCreate = () =>{
     activeComponents();
@@ -185,243 +198,247 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
 
   return (
     <div className="cell-ticket-container">
-      <div className="cell-ticket-inner">
-        <div className="tickets-btn-container">
-          <div className="create-cancel-btn btn2">
-            <Button
-              onClick={cancelEventCreate}
-              icon={<CloseOutlined />}
-              className="custom-btn"
-            >
-              Exit Event Creation
-            </Button>
+      {data !== null && (
+        <div className="cell-ticket-inner">
+          <div className="tickets-btn-container">
+            <div className="create-cancel-btn btn2">
+              <Button
+                onClick={cancelEventCreate}
+                icon={<CloseOutlined />}
+                className="custom-btn"
+              >
+                Exit Event Creation
+              </Button>
 
-            <Button
-              style={{ width: "200px" }}
-              onClick={onSubmitAllData}
-              className="custom-btn sub-btn"
-            >
-              Create Event
-            </Button>
+              <Button
+                style={{ width: "200px" }}
+                onClick={onSubmitAllData}
+                className="custom-btn sub-btn"
+              >
+                Create Event
+              </Button>
+            </div>
+          </div>
+          <div className="main-container">
+            <Row>
+              <Col span={12}>
+                <div className="form-cotainer">
+                  <Form
+                    form={form}
+                    layout="vertical"
+                    onValuesChange={handleFormChange}
+                  >
+                    <Form.Item
+                      name="title"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input the event name!",
+                        },
+                      ]}
+                    >
+                      <Input
+                        className="input-field-event-create"
+                        placeholder="Enter event name"
+                      />
+                    </Form.Item>
+
+                    {/* start date & end date  */}
+                    <Row>
+                      <Col span={12}>
+                        <Form.Item
+                          className="common-class common-classOne"
+                          name="event_start_date_time"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Please select the start time!",
+                            },
+                          ]}
+                        >
+                          <DatePicker
+                            className="input-field-event-create"
+                            style={{ width: "100%" }}
+                            showTime
+                            format="YYYY-MM-DD HH:mm:ss"
+                          />
+                        </Form.Item>
+                      </Col>
+
+                      <Col span={12}>
+                        <Form.Item
+                          className="common-class common-classTwo"
+                          name="event_end_date_time"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Please select the end time!",
+                            },
+                          ]}
+                        >
+                          <DatePicker
+                            className="input-field-event-create"
+                            style={{ width: "100%" }}
+                            showTime
+                            format="YYYY-MM-DD HH:mm:ss"
+                          />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+
+                    <Form.Item
+                      className="common-class"
+                      name="venue_name"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input the venue name!",
+                        },
+                      ]}
+                    >
+                      <Input
+                        className="input-field-event-create"
+                        placeholder="Enter venue name"
+                      />
+                    </Form.Item>
+
+                    <Form.Item
+                      className="common-class"
+                      name="address"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input the address!",
+                        },
+                      ]}
+                    >
+                      <Input
+                        className="input-field-event-create"
+                        placeholder="Enter address"
+                      />
+                    </Form.Item>
+
+                    <Form.Item
+                      className="common-class"
+                      name="category_id"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please select a category!",
+                        },
+                      ]}
+                    >
+                      <Select
+                        className="input-field-event-create"
+                        placeholder="Select a category"
+                      >
+                        {data?.data?.map((category: any) => (
+                          <Option key={category._id} value={category._id}>
+                            {category.title}
+                          </Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+
+                    <Form.Item
+                      className="common-class"
+                      name="description"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input the description!",
+                        },
+                      ]}
+                    >
+                      <ReactQuill
+                        value={editorValue}
+                        onChange={setEditorValue}
+                      />
+                    </Form.Item>
+
+                    <Form.Item className="common-class">
+                      <Row justify="end">
+                        <Col>
+                          <Switch
+                            style={{ border: "1px solid #ffbf00" }}
+                            checkedChildren={<MailOutlined />}
+                            checked={isPhone}
+                            onChange={setIsPhone}
+                          />
+                        </Col>
+                      </Row>
+                    </Form.Item>
+
+                    {!isPhone ? (
+                      <Form.Item
+                        className="common-class"
+                        name="event_phone"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input your phone number!",
+                          },
+                          { validator: validatePhoneNumber },
+                        ]}
+                      >
+                        <Input
+                          className="input-field-event-create"
+                          placeholder="Enter phone number"
+                        />
+                      </Form.Item>
+                    ) : (
+                      <Form.Item
+                        className="common-class"
+                        name="event_email"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input your email address!",
+                          },
+                          { validator: validateEmail },
+                        ]}
+                      >
+                        <Input
+                          className="input-field-event-create"
+                          placeholder="Enter email address"
+                        />
+                      </Form.Item>
+                    )}
+                  </Form>
+                </div>
+              </Col>
+              <Col span={12}>
+                <div className="sell-tickets-side-bg">
+                  <Image
+                    className="right-img-property"
+                    src={backgroundImage}
+                    alt="Event image"
+                    width={300}
+                    height={660}
+                  />
+                  <div className="img-blur-effect"></div>
+                  <div className="upload-options">
+                    <Upload {...uploadProps}>
+                      <Button className="cutsom-btn" icon={<UploadOutlined />}>
+                        Upload Image
+                      </Button>
+                    </Upload>
+                  </div>
+                </div>
+              </Col>
+            </Row>
+          </div>
+
+          {/* tickets container  */}
+          <div className="tickets-container-components">
+            <Tickets
+              tickets={tickets}
+              addTicket={addTicket}
+              updateTicket={updateTicket}
+            ></Tickets>
           </div>
         </div>
-        <div className="main-container">
-          <Row>
-            <Col span={12}>
-              <div className="form-cotainer">
-                <Form
-                  form={form}
-                  layout="vertical"
-                  onValuesChange={handleFormChange}
-                >
-                  <Form.Item
-                    name="title"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input the event name!",
-                      },
-                    ]}
-                  >
-                    <Input
-                      className="input-field-event-create"
-                      placeholder="Enter event name"
-                    />
-                  </Form.Item>
-
-                  {/* start date & end date  */}
-                  <Row>
-                    <Col span={12}>
-                      <Form.Item
-                        className="common-class common-classOne"
-                        name="event_start_date_time"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Please select the start time!",
-                          },
-                        ]}
-                      >
-                        <DatePicker
-                          className="input-field-event-create"
-                          style={{ width: "100%" }}
-                          showTime
-                          format="YYYY-MM-DD HH:mm:ss"
-                        />
-                      </Form.Item>
-                    </Col>
-
-                    <Col span={12}>
-                      <Form.Item
-                        className="common-class common-classTwo"
-                        name="event_end_date_time"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Please select the end time!",
-                          },
-                        ]}
-                      >
-                        <DatePicker
-                          className="input-field-event-create"
-                          style={{ width: "100%" }}
-                          showTime
-                          format="YYYY-MM-DD HH:mm:ss"
-                        />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-
-                  <Form.Item
-                    className="common-class"
-                    name="venue_name"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input the venue name!",
-                      },
-                    ]}
-                  >
-                    <Input
-                      className="input-field-event-create"
-                      placeholder="Enter venue name"
-                    />
-                  </Form.Item>
-
-                  <Form.Item
-                    className="common-class"
-                    name="address"
-                    rules={[
-                      { required: true, message: "Please input the address!" },
-                    ]}
-                  >
-                    <Input
-                      className="input-field-event-create"
-                      placeholder="Enter address"
-                    />
-                  </Form.Item>
-
-                  <Form.Item
-                    className="common-class"
-                    name="category_id"
-                    rules={[
-                      { required: true, message: "Please select a category!" },
-                    ]}
-                  >
-                    <Select
-                      className="input-field-event-create"
-                      placeholder="Select a category"
-                    >
-                      <Option value={1}>Conference</Option>
-                      <Option value={2}>Meetup</Option>
-                      <Option value={3}>Workshop</Option>
-                      <Option value={4}>Webinar</Option>
-                    </Select>
-                  </Form.Item>
-
-                  <Form.Item
-                    className="common-class"
-                    name="description"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input the description!",
-                      },
-                    ]}
-                  >
-                    <ReactQuill value={editorValue} onChange={setEditorValue} />
-                  </Form.Item>
-
-                  <Form.Item className="common-class">
-                    <Row justify="end">
-                      <Col>
-                        <Switch
-                          style={{ border: "1px solid #ffbf00" }}
-                          checkedChildren={<MailOutlined />}
-                          checked={isPhone}
-                          onChange={setIsPhone}
-                        />
-                      </Col>
-                    </Row>
-                  </Form.Item>
-
-                  {!isPhone ? (
-                    <Form.Item
-                      className="common-class"
-                      name="event_phone"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input your phone number!",
-                        },
-                        { validator: validatePhoneNumber },
-                      ]}
-                    >
-                      <Input
-                        className="input-field-event-create"
-                        placeholder="Enter phone number"
-                      />
-                    </Form.Item>
-                  ) : (
-                    <Form.Item
-                      className="common-class"
-                      name="event_email"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input your email address!",
-                        },
-                        { validator: validateEmail },
-                      ]}
-                    >
-                      <Input
-                        className="input-field-event-create"
-                        placeholder="Enter email address"
-                      />
-                    </Form.Item>
-                  )}
-
-                  {/* <Form.Item className="create-cancel-btn common-class">
-                    <Row justify="center">
-                      <Col>
-                       
-                      </Col>
-                    </Row>
-                  </Form.Item> */}
-                </Form>
-              </div>
-            </Col>
-            <Col span={12}>
-              <div className="sell-tickets-side-bg">
-                <Image
-                  className="right-img-property"
-                  src={backgroundImage}
-                  alt="Event image"
-                  width={300}
-                  height={660}
-                />
-                <div className="img-blur-effect"></div>
-                <div className="upload-options">
-                  <Upload {...uploadProps}>
-                    <Button className="cutsom-btn" icon={<UploadOutlined />}>
-                      Upload Image
-                    </Button>
-                  </Upload>
-                </div>
-              </div>
-            </Col>
-          </Row>
-        </div>
-
-        {/* tickets container  */}
-        <div className="tickets-container-components">
-          <Tickets
-            tickets={tickets}
-            addTicket={addTicket}
-            updateTicket={updateTicket}
-          ></Tickets>
-        </div>
-      </div>
+      )}
     </div>
   );
 };
