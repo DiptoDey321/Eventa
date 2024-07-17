@@ -1,5 +1,4 @@
 import { baseApi } from "./baseApi";
-const AUTH_URL = "/auth";
 
 export const ticketsApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

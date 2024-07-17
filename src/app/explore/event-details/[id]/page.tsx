@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import imgSrc from "./../../../../../public/party-2.png";
 import EventDetailsHero from '@/app/components/resuable-component/EventDetailsHero';
 import "./../eventDetails.css";
@@ -8,7 +8,7 @@ import { RootState } from "@/redux/store";
 import TicktesSell from '@/app/components/resuable-component/TicktesSell';
 import { Button, Col, List, Row, Typography } from 'antd';
 import Modal from 'antd/es/modal/Modal';
-import { removeTicket, updateTicketQuantity } from "@/redux/slice/cartSlice";
+import { initializeCart, removeTicket, updateTicketQuantity } from "@/redux/slice/cartSlice";
 import {
   DeleteOutlined,
   PlusOutlined,
@@ -21,9 +21,20 @@ const { Text } = Typography;
 
 function EventDetails({ params }: { params: { id: string } }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const cart = localStorage.getItem("cart");
+      console.log(cart);
+     if (cart) {
+       dispatch(initializeCart(JSON.parse(cart)));
+     }
+    }
+  }, [dispatch]);
 
   const tickets = useSelector((state: RootState) => state.cart.tickets);
-  const dispatch = useDispatch();
+  
 
   const totalItems = tickets.reduce(
     (total, ticket) => total + ticket.quantity,
@@ -212,9 +223,6 @@ function EventDetails({ params }: { params: { id: string } }) {
                     ticket.quantity
                   } = $${ticket.price * ticket.quantity}`}
                 />
-                {/* <Text strong>
-                <span style={{paddingRight:"8px "}}>{`Total: $${ticket.price * ticket.quantity}`}</span>
-              </Text> */}
               </List.Item>
             )}
           />

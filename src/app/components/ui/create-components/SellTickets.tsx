@@ -14,7 +14,6 @@ import {
   message,
 } from "antd";
 import { MailOutlined } from "@ant-design/icons";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { CloseOutlined, UploadOutlined } from "@ant-design/icons";
 import Tickets from "./Tickets";
@@ -23,6 +22,10 @@ import moment from "moment";
 import initialBackground from '../../../../../public/selltickets-sidebg.webp'
 import Image, { StaticImageData } from "next/image";
 import { useCreateTicketsMutation, useGetEventCategoryQuery, usePostEventMutation } from "@/redux/api/ticketsApi";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), {
+  ssr: false,
+});
 
 const { Option } = Select;
 

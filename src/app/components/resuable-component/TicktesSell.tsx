@@ -27,8 +27,12 @@ const TicktesSell: React.FC<TicketProps> = ({ id, price, details }) => {
   useEffect(() => {
     if (cartTicket) {
       setQuantity(cartTicket.quantity);
+    } else {
+      
+      setQuantity(1);
     }
   }, [cartTicket]);
+
 
   const handleAddToCart = () => {
     dispatch(addTicket({ id, price, quantity }));
@@ -49,6 +53,7 @@ const TicktesSell: React.FC<TicketProps> = ({ id, price, details }) => {
       dispatch(updateTicketQuantity({ id, quantity: newQuantity }));
     }
   };
+  
   return (
     <div className="antd-custome-card">
       <Card>
