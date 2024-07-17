@@ -55,3 +55,7 @@ body {
   color: black !important;
   border: none;
 }
+
+.ant-picker-dropdown .ant-picker-ranges {
+  gap: 15px;
+}

@@ -15,8 +15,8 @@
 
 .sell-tickets-side-bg {
   position: relative;
-  width: 600px;
-  height: 660px;
+  /* width: 600px; */
+  height: 650px;
 }
 
 .right-img-property {
@@ -151,7 +151,7 @@
 }
 
 .input-field-event-create {
-  border: none;
+  border-color: #ffbf00 !important;
   height: 40px;
   background-color: rgb(106 109 116 / 0%) !important;
   color: white !important;
@@ -226,7 +226,12 @@ input::placeholder {
 .ticket-card .ant-card-head {
   color: white;
   border: none !important;
-  background-color: rgba(0, 0, 0, 0.219);
+  background-color: rgba(75, 75, 75, 0.089) !important;
+}
+
+.ant-card .ant-card-head-title {
+  color: white;
+  /* background-color: #202020; */
 }
 
 .ticket-card .ant-card-body {

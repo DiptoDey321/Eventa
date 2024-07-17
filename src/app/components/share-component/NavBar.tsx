@@ -8,7 +8,7 @@ import { message } from "antd";
 const NavBar = () => {
     
   const routeName = usePathname();
-   const router = useRouter();
+  const router = useRouter();
   
   const handleNavigation =(route:string) =>{
     if(route == "cs"){

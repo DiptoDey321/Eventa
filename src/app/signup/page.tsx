@@ -32,8 +32,7 @@ function SignUpPage() {
   const [datas, setDatas] = useState<SignUpFormValues>();
   const [isOtpFormVisible, setIsOtpFormVisible] = useState(false);
   const [otp, setOtp] = useState("");
-   const router = useRouter();
-
+  const router = useRouter();
   const [sendOtp] = useSendOtpMutation();
   const [userSignup] = useUserSignupMutation();
 

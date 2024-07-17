@@ -23,6 +23,7 @@ import initialBackground from '../../../../../public/selltickets-sidebg.webp'
 import Image, { StaticImageData } from "next/image";
 import { useCreateTicketsMutation, useGetEventCategoryQuery, usePostEventMutation } from "@/redux/api/ticketsApi";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
 });
@@ -45,15 +46,11 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
   const [backgroundImage, setBackgroundImage] = useState<
     string | StaticImageData
   >(initialBackground);
-
+  const router = useRouter();
   const { data, error, isLoading } = useGetEventCategoryQuery(undefined);
-
   const [postEvent] = usePostEventMutation();
   const [createTickets] = useCreateTicketsMutation();
-
   const [img, setImg] = useState<Image | null>(null);
-  
-
   const [tickets, setTickets] = useState<TicketType[]>([
     {
       id: 1,
@@ -127,8 +124,14 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
          event_id: resultOfEventCreate?.data?.data?._id,
          tickets: transformTickets(tickets),
        });
-
-       console.log("ticekts posted successfully:", resultOfTicketsCreate);
+       if (resultOfTicketsCreate?.data?.is_success){
+        message.success("Event Created successfully!");
+        router.push("/explore");
+       }
+         console.log(
+           "ticekts posted successfully:",
+           resultOfTicketsCreate?.data?.is_success
+         );
     }
      
     console.log("Event posted successfully:", resultOfEventCreate?.data?.data?._id);
@@ -416,6 +419,7 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
                     className="right-img-property"
                     src={backgroundImage}
                     alt="Event image"
+                    // layout="responsive"
                     width={300}
                     height={660}
                   />
