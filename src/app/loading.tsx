@@ -1,5 +1,5 @@
-const loading = () => {
-  return <div>loading...</div>;
+const Loading = () => {
+  return <div style={{color : "white"}}>loading...</div>;
 };
 
-export default loading;
+export default Loading;

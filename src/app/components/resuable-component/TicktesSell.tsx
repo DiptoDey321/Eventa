@@ -8,15 +8,21 @@ import { RootState } from "@/redux/store";
 const { Text } = Typography;
 
 interface TicketProps {
-  id: number;
+  id: string;
   price: number;
   details: string;
+  eventId: string;
+  eventName: string;
 }
 
-const TicktesSell: React.FC<TicketProps> = ({ id, price, details }) => {
-  
+const TicktesSell: React.FC<TicketProps> = ({
+  id,
+  price,
+  details,
+  eventId,
+  eventName,
+}) => {
   const dispatch = useDispatch();
-
   const cartTicket = useSelector((state: RootState) =>
     state.cart.tickets.find((ticket) => ticket.id === id)
   );
@@ -28,21 +34,19 @@ const TicktesSell: React.FC<TicketProps> = ({ id, price, details }) => {
     if (cartTicket) {
       setQuantity(cartTicket.quantity);
     } else {
-      
       setQuantity(1);
     }
   }, [cartTicket]);
 
-
   const handleAddToCart = () => {
-    dispatch(addTicket({ id, price, quantity }));
+    dispatch(addTicket({ id, eventId, eventName, price, quantity }));
   };
 
   const increaseQuantity = () => {
     const newQuantity = quantity + 1;
     setQuantity(newQuantity);
     if (cartTicket) {
-      dispatch(updateTicketQuantity({ id, quantity: newQuantity }));
+      dispatch(updateTicketQuantity({ id, eventId, quantity: newQuantity }));
     }
   };
 
@@ -50,10 +54,10 @@ const TicktesSell: React.FC<TicketProps> = ({ id, price, details }) => {
     const newQuantity = Math.max(1, quantity - 1);
     setQuantity(newQuantity);
     if (cartTicket) {
-      dispatch(updateTicketQuantity({ id, quantity: newQuantity }));
+      dispatch(updateTicketQuantity({ id, eventId, quantity: newQuantity }));
     }
   };
-  
+
   return (
     <div className="antd-custome-card">
       <Card>

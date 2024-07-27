@@ -66,7 +66,7 @@ const RSVPSection = () => {
   return (
     <div className="RSVP-Section">
       <Row align="middle">
-        <Col span={12}>
+        <Col md={24} lg={12}>
           <motion.div
             ref={ref}
             initial="hidden"
@@ -89,13 +89,13 @@ const RSVPSection = () => {
             </div>
           </motion.div>
         </Col>
-        <Col span={12}>
+        <Col md={24} lg={12}>
           <motion.div
             ref={ref}
             initial="hidden"
             animate={controls}
             variants={containerVariants}
-            className="cau-parent-div"
+            className="cau-parent-div common-margin-top-mobile"
           >
             <Carousel autoplay>
               <div className="cau-content-parent">

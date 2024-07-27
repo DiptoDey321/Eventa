@@ -1,15 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface Ticket {
-  id: number;
+  id: string;
   price: number;
   quantity: number;
+  eventId: string;
+  eventName: string;
 }
 
 interface CartState {
   tickets: Ticket[];
 }
-
 
 const initialState: CartState = {
   tickets: [],
@@ -24,15 +25,18 @@ const cartSlice = createSlice({
     },
 
     addTicket: (state, action: PayloadAction<Ticket>) => {
+
       const existingTicket = state.tickets.find(
-        (ticket) => ticket.id === action.payload.id
+        (ticket) =>
+          ticket.id === action.payload.id &&
+          ticket.eventId === action.payload.eventId
       );
       if (existingTicket) {
         existingTicket.quantity += action.payload.quantity;
       } else {
         state.tickets.push(action.payload);
       }
-
+      
       if (typeof window !== "undefined") {
         localStorage.setItem("cart", JSON.stringify(state.tickets));
       }
@@ -40,10 +44,13 @@ const cartSlice = createSlice({
 
     updateTicketQuantity: (
       state,
-      action: PayloadAction<{ id: number; quantity: number }>
+      action: PayloadAction<{ id: string; eventId: string; quantity: number }>
     ) => {
+
       const ticket = state.tickets.find(
-        (ticket) => ticket.id === action.payload.id
+        (ticket) =>
+          ticket.id === action.payload.id &&
+          ticket.eventId === action.payload.eventId
       );
       if (ticket) {
         ticket.quantity = action.payload.quantity;
@@ -53,10 +60,19 @@ const cartSlice = createSlice({
       }
     },
 
-    removeTicket: (state, action: PayloadAction<number>) => {
+    removeTicket: (
+      state,
+      action: PayloadAction<{ id: string; eventId: string }>
+    ) => {
       state.tickets = state.tickets.filter(
-        (ticket) => ticket.id !== action.payload
+        (ticket) =>
+          !(
+            ticket.id === action.payload.id &&
+            ticket.eventId === action.payload.eventId
+          )
       );
+      console.log(state.tickets);
+      
       if (typeof window !== "undefined") {
         localStorage.setItem("cart", JSON.stringify(state.tickets));
       }

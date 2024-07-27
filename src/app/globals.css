@@ -59,3 +59,25 @@ body {
 .ant-picker-dropdown .ant-picker-ranges {
   gap: 15px;
 }
+
+.ant-pagination.ant-table-pagination {
+  margin-top: 20px !important;
+}
+
+.ant-pagination .ant-pagination-item-active {
+  border: 2px solid #ff9900 !important;
+}
+
+.ant-pagination .ant-pagination-item-active a {
+  color: #944700 !important;
+}
+
+.ant-pagination .ant-pagination-item {
+  background-color: aliceblue !important;
+}
+.ant-table-wrapper .ant-table-pagination {
+  gap: 5px !important;
+}
+.ant-space-gap-col-small {
+  padding-top: 10px;
+}

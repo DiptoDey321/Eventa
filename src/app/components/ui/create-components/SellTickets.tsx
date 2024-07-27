@@ -51,6 +51,7 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
   const [postEvent] = usePostEventMutation();
   const [createTickets] = useCreateTicketsMutation();
   const [img, setImg] = useState<Image | null>(null);
+  
   const [tickets, setTickets] = useState<TicketType[]>([
     {
       id: 1,

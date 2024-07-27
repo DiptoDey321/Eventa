@@ -161,3 +161,85 @@
   font-size: 18px;
   margin-top: 8px !important;
 }
+
+.user-profile .cover-are {
+  height: 300px;
+  width: 100%;
+  background-image: url(../../../../../public/user-cover.webp);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
+}
+
+.user-profile .user-info {
+  padding: 0px 150px 0px 150px;
+  position: relative;
+  top: -130px;
+  display: flex;
+}
+
+.user-profile .user-profile-pic {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-profile .cutom-btn-user-photo {
+  margin-top: 20px !important;
+  background: transparent !important;
+  color: #ecd500 !important;
+  border: none !important;
+}
+
+.user-profile .user-edit-form {
+  width: 100%;
+  margin-top: 200px !important;
+}
+.user-profile h2 {
+  color: white;
+  padding-bottom: 20px;
+}
+.user-edit-form .form-data {
+  display: flex;
+  justify-content: center;
+}
+
+.user-profile {
+  position: relative;
+  .common-input-style {
+    width: 600px !important;
+  }
+  .common-input-style1 {
+    width: 290px !important;
+  }
+  .common-margin-form {
+    margin-top: 15px !important;
+  }
+
+  .style-right {
+    margin-right: 10px !important;
+  }
+  .style-left {
+    margin-left: 10px !important;
+  }
+  .ant-form-item .ant-form-item-label > label {
+    color: azure !important;
+  }
+
+  .submit-custom-btn {
+    color: #ecd500 !important;
+    border: 1px solid #ecd500;
+    background: transparent;
+    width: 200px;
+    height: 40px;
+  }
+
+  .submit-custom-btn:hover {
+    background: transparent !important;
+  }
+}

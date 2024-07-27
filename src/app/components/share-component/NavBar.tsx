@@ -3,6 +3,8 @@
 import { usePathname, useRouter } from "next/navigation";
 import "./../ui/homepage-components/HomeStyle.css";
 import { message } from "antd";
+import MobileNavbar from "./MobileNavbar";
+import "./../ui/homepage-components/HomeStyle.css";
 
 
 const NavBar = () => {
@@ -11,7 +13,7 @@ const NavBar = () => {
   const router = useRouter();
   
   const handleNavigation =(route:string) =>{
-    if(route == "cs"){
+    if(route == "/cs"){
       message.info("Coming Soon...")
       return
     }
@@ -20,10 +22,15 @@ const NavBar = () => {
 
   return (
     <div className="dep-main-menu-container">
-      <div onClick={()=> router.push("/")} className="dep-menu-logo-container" style={{cursor:"pointer"}}>
+      <div
+        onClick={() => router.push("/")}
+        className="dep-menu-logo-container"
+        style={{ cursor: "pointer" }}
+      >
         <img src="https://i.ibb.co/Tm5thSk/logo.png" alt="" srcSet="" />
       </div>
-      <div className="dep-menu-container">
+
+      <div className="dep-menu-container desktop-menu">
         <ul>
           {routeName !== "/explore" && (
             <>
@@ -33,24 +40,15 @@ const NavBar = () => {
               >
                 Explore Events
               </li>
-              <li
-                onClick={() => handleNavigation("cs")}
-                className="cool-link"
-              >
+              <li onClick={() => handleNavigation("/cs")} className="cool-link">
                 Request A Demo
               </li>
-              <li
-                onClick={() => handleNavigation("cs")}
-                className="cool-link"
-              >
+              <li onClick={() => handleNavigation("/cs")} className="cool-link">
                 Magazine
               </li>
             </>
           )}
-          <li
-            onClick={() => handleNavigation("/login")}
-            className="cool-link"
-          >
+          <li onClick={() => handleNavigation("/login")} className="cool-link">
             Login
           </li>
         </ul>
@@ -58,6 +56,10 @@ const NavBar = () => {
         <a className="dep-btn-0" href="/create">
           Lunch An Event
         </a>
+      </div>
+
+      <div className="mobile-menu">
+        <MobileNavbar></MobileNavbar>
       </div>
     </div>
   );

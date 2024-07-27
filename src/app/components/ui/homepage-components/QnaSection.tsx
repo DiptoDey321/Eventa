@@ -81,7 +81,22 @@ const QnaSection = () => {
       </div>
 
       <Row align="middle">
-        <Col span={14}>
+        <Col md={24} lg={12}>
+          <motion.div
+            animate={{ y: ["0px", "20px", "0px", "-20px", "0px"] }}
+            transition={{
+              y: {
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+            }}
+            className="acc-image-container"
+          >
+            <img src="https://i.ibb.co/bs8T11D/faq.png" alt="" srcSet="" />
+          </motion.div>
+        </Col>
+        <Col md={24} lg={12}>
           <motion.div
             ref={ref}
             initial="hidden"
@@ -110,21 +125,6 @@ const QnaSection = () => {
                 </p>
               </div>
             ))}
-          </motion.div>
-        </Col>
-        <Col span={10}>
-          <motion.div
-            animate={{ y: ["0px", "20px", "0px", "-20px", "0px"] }}
-            transition={{
-              y: {
-                duration: 8,
-                repeat: Infinity,
-                ease: "easeInOut",
-              },
-            }}
-            className="acc-image-container"
-          >
-            <img src="https://i.ibb.co/bs8T11D/faq.png" alt="" srcSet="" />
           </motion.div>
         </Col>
       </Row>

@@ -13,6 +13,14 @@ export const ticketsApi = baseApi.injectEndpoints({
       invalidatesTags: ["event"],
     }),
 
+    getEvents: build.query({
+      query: () => ({
+        url: `/events`,
+        method: "GET",
+        requiresAuth: false,
+      }),
+    }),
+
     getEventCategory: build.query({
       query: () => ({
         url: `/event-categories`,
@@ -30,9 +38,18 @@ export const ticketsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["tickets"],
     }),
+
+    getEventDetails: build.query({
+      query: (id) => ({
+        url: `/events/${id}`,
+        method: "GET",
+        requiresAuth: false,
+      }),
+    }),
+
   }),
 });
 
 export const {
-  usePostEventMutation, useGetEventCategoryQuery, useCreateTicketsMutation
+  usePostEventMutation, useGetEventCategoryQuery, useCreateTicketsMutation, useGetEventsQuery, useGetEventDetailsQuery
 } = ticketsApi;

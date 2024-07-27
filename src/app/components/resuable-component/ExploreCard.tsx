@@ -1,4 +1,4 @@
-import { Card, Button, Typography, Avatar, Row, Col } from "antd";
+import { Card, Button, Typography, Row, Col } from "antd";
 import Image, { StaticImageData }  from "next/image";
 import { FC } from "react";
 const { Title, Text } = Typography;

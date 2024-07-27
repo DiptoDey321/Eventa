@@ -6,6 +6,7 @@
 }
 
 .hero-section-container .blur {
+  width: 100vw;
   padding: 100px 200px 100px 200px;
   backdrop-filter: blur(10px);
 }

@@ -40,7 +40,7 @@ const BarChart = () => {
   
   return (
     <div>
-      <div className="dep-selector-container">
+      {/* <div className="dep-selector-container">
         <Select
           defaultValue="Day"
           style={{ width: 120 }}
@@ -50,8 +50,12 @@ const BarChart = () => {
           <Option value="Month">Month</Option>
           <Option value="Year">Year</Option>
         </Select>
+      </div> */}
+      <div style={{ height: "300px" }}>
+        <Area {...config} />
       </div>
-      <div style={{ height: "300px"}}>
+
+      <div style={{ height: "300px" }}>
         <Area {...config} />
       </div>
     </div>

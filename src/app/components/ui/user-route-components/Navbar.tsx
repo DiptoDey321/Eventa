@@ -8,6 +8,8 @@ import { useState } from "react";
 import RightNav from "./RightNav";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import EventDetailsForUser from "./EventDetailsForUser";
+import UserProfile from "./UserProfile";
 
 const Navbar = () => {
 
@@ -30,28 +32,19 @@ const Navbar = () => {
     },
     {
       key: "2",
-      label: "Marketing",
-      children: "Content of Tab Pane 2",
+      label: "Tickets",
+      children: <EventDetailsForUser />,
     },
     {
       key: "3",
-      label: "Team",
-      children: "Content of Tab Pane 3",
+      label: "Events",
+      children: <EventDetailsForUser />,
     },
+
     {
       key: "4",
-      label: "Finance",
-      children: "Content of Tab Pane 4",
-    },
-    {
-      key: "5",
       label: "Profile",
-      children: "Content of Tab Pane 5",
-    },
-    {
-      key: "6",
-      label: "Settings",
-      children: "Content of Tab Pane 6",
+      children: <UserProfile />,
     },
   ];
 

@@ -1,8 +1,11 @@
 import { FC } from "react";
 import { Card } from "antd";
 import Image, { StaticImageData } from "next/image";
+import { useRouter } from "next/navigation";
+import moment from "moment";
 
 interface EventCardProps {
+  id:string
   imageSrc: StaticImageData;
   organizerIcon: StaticImageData;
   organizerName: string;
@@ -13,6 +16,7 @@ interface EventCardProps {
 }
 
 const ExploreItemsCard: FC<EventCardProps> = ({
+  id,
   imageSrc,
   organizerIcon,
   organizerName,
@@ -21,15 +25,24 @@ const ExploreItemsCard: FC<EventCardProps> = ({
   toDate,
   location,
 }) => {
+
+  const router = useRouter();
+
+  const goEventDetails = (id:string)=>{
+    router.push(`/explore/event-details/${id}`);
+  }
+  
   return (
     <div className="event-item-container">
       <Card
-      className="card-container"
+        onClick={() => goEventDetails(id)}
+        className="card-container"
         style={{
           width: 400,
           borderRadius: "16px",
           overflow: "hidden",
           border: "0px",
+          cursor: "pointer",
         }}
       >
         <Image
@@ -178,10 +191,16 @@ const ExploreItemsCard: FC<EventCardProps> = ({
 
           <div className="from-to">
             <div className="from">
-              <span>From:</span> <span className="format">{fromDate}</span>
+              <span>From:</span>{" "}
+              <span className="format">
+                {moment(fromDate).format("MMMM D, YYYY")}
+              </span>
             </div>
             <div className="from">
-              <span>From:</span> <span className="format">{toDate}</span>
+              <span>To:</span>{" "}
+              <span className="format">
+                {moment(toDate).format("MMMM D, YYYY")}
+              </span>
             </div>
           </div>
         </div>

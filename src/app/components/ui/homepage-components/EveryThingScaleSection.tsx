@@ -201,7 +201,7 @@ const EveryThingScaleSection = () => {
   return (
     <div className="RSVP-Section">
       <Row align="middle">
-        <Col span={12}>
+        <Col md={24} lg={12}>
           <motion.div
             ref={ref7}
             initial="hidden"
@@ -226,7 +226,7 @@ const EveryThingScaleSection = () => {
           </motion.div>
         </Col>
 
-        <Col span={12}>
+        <Col md={24} lg={12}>
           <div className="scale-right-section">
             <Row>
               <Col span={12}>

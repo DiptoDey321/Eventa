@@ -12,7 +12,7 @@ const HeroSection = ()=> {
   return (
     <div className="dep-hero-sectiom">
       <Row align="middle">
-        <Col span={12}>
+        <Col lg={24} xl={12}>
           <div className="dep-hero-right-side">
             <p className="title">Stress-free events</p>
             <p className="title gradient-color">Graranteed</p>
@@ -63,8 +63,8 @@ const HeroSection = ()=> {
             </div>
           </div>
         </Col>
-        <Col span={12}>
-          <div className="hero-image-container">
+        <Col lg={24} xl={12}>
+          <div className="hero-image-container common-margin-top-mobile">
             <motion.div
               className="main-img"
               animate={{ y: ["0px", "20px", "0px", "-20px", "0px"] }}

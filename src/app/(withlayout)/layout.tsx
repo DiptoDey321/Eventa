@@ -4,6 +4,8 @@ import Navbar from "../components/ui/user-route-components/Navbar";
 import Contents from "../components/ui/user-route-components/Contents";
 import { isUserLoggedIn } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
+import FooterSection from "../components/share-component/FooterSection";
+import '../components/ui/homepage-components/HomeStyle.css'
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
@@ -23,11 +25,14 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
 
   return (
-    <div className="user-main-layout">
-      <Navbar></Navbar>
+    <div>
+      <div className="user-main-layout">
+        <Navbar></Navbar>
+      </div>
       <div style={{ paddingTop: "50px" }}>
         <Contents>{children}</Contents>
       </div>
+      <FooterSection></FooterSection>
     </div>
   );
 };

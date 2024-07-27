@@ -1,10 +1,21 @@
-import React from 'react'
-import HomePageNav from '../components/share-component/NavBar';
-import FooterSection from '../components/share-component/FooterSection';
-import ExploreHeroSection from '../components/ui/explore-components/ExploreHeroSection';
-import ExploreItemsSection from '../components/ui/explore-components/ExploreItemsSection';
+"use client";
+import React from "react";
+import HomePageNav from "../components/share-component/NavBar";
+import FooterSection from "../components/share-component/FooterSection";
+import ExploreHeroSection from "../components/ui/explore-components/ExploreHeroSection";
+import ExploreItemsSection from "../components/ui/explore-components/ExploreItemsSection";
+import { useGetEventsQuery } from "@/redux/api/ticketsApi";
 
-function page() {
+function Page() {
+  const { data, error, isLoading } = useGetEventsQuery(undefined);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return;
+  }
   return (
     <div>
       <div className="home-page-basic-mx">
@@ -12,11 +23,11 @@ function page() {
       </div>
 
       <div className="explore-hero-sections">
-        <ExploreHeroSection></ExploreHeroSection>
+        <ExploreHeroSection data={data}></ExploreHeroSection>
       </div>
 
       <div className="">
-        <ExploreItemsSection></ExploreItemsSection>
+        <ExploreItemsSection data={data}></ExploreItemsSection>
       </div>
 
       <div className="homepage-footer">
@@ -26,4 +37,4 @@ function page() {
   );
 }
 
-export default page 
+export default Page;
