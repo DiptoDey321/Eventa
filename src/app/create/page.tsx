@@ -4,28 +4,31 @@ import { useState } from "react";
 import './createPageStyle.css'
 import { Button, message } from "antd";
 import SellTickets from "../components/ui/create-components/SellTickets";
+import { useRouter } from "next/navigation";
 
 const CreatePage = () => {
-    const [activeMainpage, setActiveMainPage] = useState(true)
-    const [isSellTicket, setIsSellTicket] = useState(true);
-    const [activeSellTicketComponent, setActiveSellTicketComponent] = useState(false)
+   const router = useRouter();
+    // const [activeMainpage, setActiveMainPage] = useState(true)
+    // const [isSellTicket, setIsSellTicket] = useState(true);
+    // const [activeSellTicketComponent, setActiveSellTicketComponent] = useState(false)
 
-    const handleChange = () => {
-      setIsSellTicket(!isSellTicket);
-    };
+    // const handleChange = () => {
+    //   setIsSellTicket(!isSellTicket);
+    // };
 
     const activeComponents  = () =>{
-      if (isSellTicket) {
-        setActiveSellTicketComponent(!activeSellTicketComponent);
-        setActiveMainPage(!activeMainpage);
-      }
-      else{
-        message.info("Cominng soon")
-      }
+      // if (isSellTicket) {
+      //   setActiveSellTicketComponent(!activeSellTicketComponent);
+      //   setActiveMainPage(!activeMainpage);
+      // }
+      // else{
+      //   message.info("Cominng soon")
+      // }
+      router.push("/");
     }
   return (
     <>
-      {activeMainpage && (
+      {/* {activeMainpage && (
         <div className="create-page">
           <div className="blur-container">
             <div className="">
@@ -62,9 +65,9 @@ const CreatePage = () => {
         </div>
       )}
 
-      {activeSellTicketComponent && (
+      {activeSellTicketComponent && ( */}
         <SellTickets activeComponents={activeComponents}></SellTickets>
-      )}
+      {/* )} */}
     </>
   );
 }

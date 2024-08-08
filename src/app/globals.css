@@ -75,9 +75,15 @@ body {
 .ant-pagination .ant-pagination-item {
   background-color: aliceblue !important;
 }
+
 .ant-table-wrapper .ant-table-pagination {
   gap: 5px !important;
 }
+
 .ant-space-gap-col-small {
   padding-top: 10px;
+}
+
+.ant-drawer-content-wrapper {
+  width: 300px !important;
 }

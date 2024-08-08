@@ -38,7 +38,7 @@ const ExploreItemsCard: FC<EventCardProps> = ({
         onClick={() => goEventDetails(id)}
         className="card-container"
         style={{
-          width: 400,
+          // width: 400,
           borderRadius: "16px",
           overflow: "hidden",
           border: "0px",

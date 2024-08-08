@@ -90,21 +90,22 @@
 .ql-editor {
   min-height: 200px;
   color: #fff;
-  box-shadow: 0 0 5pt 0.4pt #ffbf00;
-  border: 1px solid #ffbf00;
+  /* box-shadow: 0 0 5pt 0.4pt #ffbf00; */
+  border: 2px solid #ffbf00;
 }
 
 .ql-toolbar.ql-snow {
-  box-shadow: 0 0 5pt 0.4pt #ffbf00;
-  border: 1px solid #ffbf00 !important;
+  /* box-shadow: 0 0 5pt 0.4pt #ffbf00; */
+  border: 2px solid #ffbf00 !important;
+  border-bottom: none !important;
 }
 
 .ql-toolbar.ql-snow .ql-picker {
-  color: #9399a3;
+  color: #ffffff;
 }
 
 .ql-snow .ql-stroke {
-  stroke: #9399a3 !important;
+  stroke: #ffffff !important;
 }
 
 .ql-snow .ql-fill,
@@ -155,8 +156,8 @@
   height: 40px;
   background-color: rgb(106 109 116 / 0%) !important;
   color: white !important;
-  border: 1px solid #ffbf00;
-  box-shadow: 0 0 5pt 0.4pt #ffbf00;
+  border: 2px solid #ffbf00;
+  /* box-shadow: 0 0 5pt 0.4pt #ffbf00; */
 }
 
 .input-field-event-create:hover {
@@ -171,11 +172,35 @@
   box-shadow: 0 0 5pt 0.4pt #ffbf00;
 }
 
-input::placeholder {
-  color: #9399a3 !important; /* Change this color to whatever you prefer */
+.input-field-event-create::placeholder {
+  color: white !important;
 }
+
+.ant-picker-suffix {
+  color: white !important;
+}
+
+input::placeholder {
+  color: white !important;
+}
+
+#event_start_date_time::placeholder {
+  color: white !important;
+}
+
+#event_end_date_time::placeholder {
+  color: white !important;
+}
+
 .ant-input {
   padding-left: 10px !important;
+}
+
+.ant-select.ant-select-in-form-item {
+  border-radius: 4px !important;
+  height: 40px;
+  border: none !important;
+  border: 1px solid #ffbf00 !important;
 }
 
 .ant-select-selector {
@@ -185,7 +210,7 @@ input::placeholder {
 }
 
 .ant-select-selection-placeholder {
-  color: #9399a3 !important; /* Change this color to whatever you prefer */
+  color: #ffffff !important; /* Change this color to whatever you prefer */
 }
 
 .ant-switch.ant-switch-checked {
@@ -219,14 +244,19 @@ input::placeholder {
   background-color: transparent !important;
 }
 
-.ant-card-extra {
+/* .ant-card-extra {
   color: #fff !important;
-}
+} */
 
 .ticket-card .ant-card-head {
-  color: white;
+  /* color: white; */
   border: none !important;
-  background-color: rgba(75, 75, 75, 0.089) !important;
+  /* background-color: rgba(75, 75, 75, 0.089) !important; */
+  background-color: #ffbf00 !important;
+}
+
+.ticket-card .ticket-title {
+  color: black !important;
 }
 
 .ant-card .ant-card-head-title {
@@ -236,7 +266,7 @@ input::placeholder {
 
 .ticket-card .ant-card-body {
   color: black !important;
-  padding: 5px 20px 15px 25px !important;
+  padding: 10px 20px 15px 25px !important;
 }
 
 .tickets-container .ticket-body {
@@ -245,7 +275,7 @@ input::placeholder {
 
 .tickets-container .ant-card-bordered {
   border: 1px solid #ffbf00;
-  box-shadow: 0 0 5pt 0.4pt #ffbf00;
+  /* box-shadow: 0 0 5pt 0.4pt #ffbf00; */
 }
 
 /* modal-form  */

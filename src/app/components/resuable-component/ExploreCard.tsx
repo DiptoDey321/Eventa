@@ -29,10 +29,10 @@ const ExploreCard: FC<TransparentCardProps> = ({
           width: "100%",
         }}
       >
-        <Row align="middle">
+        <Row align="middle" gutter={[16,16]}>
           <Col span={12}>
             <div className="album-image-container">
-              <Image src={imageSrc} alt="Card Image" width={350} height={400} />
+              <Image src={imageSrc} alt="Card Image" width={350} height={500} />
             </div>
           </Col>
           <Col span={12}>

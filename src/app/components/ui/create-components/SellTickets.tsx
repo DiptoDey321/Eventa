@@ -119,8 +119,9 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
 
   try {
     const resultOfEventCreate = await postEvent(formData);
-
-    if (resultOfEventCreate?.data?.data?._id){
+    console.log(resultOfEventCreate?.data?.data?._id);
+    
+    if (resultOfEventCreate?.data?.data?._id != undefined){
        const resultOfTicketsCreate = await createTickets({
          event_id: resultOfEventCreate?.data?.data?._id,
          tickets: transformTickets(tickets),
@@ -133,6 +134,8 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
            "ticekts posted successfully:",
            resultOfTicketsCreate?.data?.is_success
          );
+    }else{
+      message.error("Please fill required field")
     }
      
     console.log("Event posted successfully:", resultOfEventCreate?.data?.data?._id);
@@ -143,7 +146,7 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
   };
 
   const cancelEventCreate = () =>{
-    activeComponents();
+    router.push("/");
   }
 
   

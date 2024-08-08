@@ -31,14 +31,15 @@
 .dep-menu-container ul {
   display: flex;
 }
+
 .dep-menu-container ul li {
   list-style: none;
   color: #fc0;
   text-decoration: none;
   position: relative;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 400;
-  margin: 0px 20px !important;
+  margin: 0px 23px !important;
   font-family: "DM Sans", sans-serif;
   white-space: nowrap;
   cursor: pointer;
@@ -109,11 +110,16 @@
 
 /* homepage hero starts here  */
 
+.dep-hero-sectiom {
+  padding: 60px 0px 60px 0px;
+}
+
 .dep-hero-right-side .title {
   font-size: 70px;
   line-height: 72px;
   color: white;
   font-weight: 700;
+  text-align: center;
 }
 .dep-hero-right-side .title.gradient-color {
   background: linear-gradient(90deg, #ff007a, #ffcc00);
@@ -123,6 +129,8 @@
 .dep-hero-right-side .dep-peoples-with-info {
   padding-top: 40px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 28px;
   font-size: 18px;
   font-weight: 400;
@@ -133,6 +141,7 @@
 
 .dep-hero-right-side .btns {
   display: flex;
+  justify-content: center;
   gap: 20px;
   margin-top: 30px !important;
   align-items: center;
@@ -162,6 +171,11 @@
 .dep-hero-right-side .btns .first-btn:hover,
 .dep-hero-right-side .btns .sec-btn:hover {
   transform: scale(1.03);
+}
+
+.dep-hero-right-side .application-link {
+  display: flex;
+  justify-content: center;
 }
 
 .dep-hero-right-side .application-link a {
@@ -326,14 +340,9 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  padding: 250px 100px 240px 100px;
 }
 
-.tool-management-container {
-  padding: 250px 100px 240px 100px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
 .tool-management-container .RSVP-description {
   color: white;
   margin-bottom: 20px !important;
@@ -749,12 +758,17 @@
   font-weight: 600;
 }
 
+.user-count-info .main-container .heading span:nth-child(2) {
+  font-size: 15px;
+}
+
 .main-container .btns {
   display: flex;
   gap: 20px;
   margin-top: 30px !important;
   align-items: center;
 }
+
 .main-container .btns a {
   margin: 1rem auto;
   border-radius: 5px;
@@ -974,6 +988,10 @@
 
 /* for mobile responsive  */
 @media (min-width: 320px) {
+  .dep-hero-right-side .title {
+    font-size: 40px;
+    line-height: 42px;
+  }
   .desktop-menu {
     display: none;
   }
@@ -994,6 +1012,91 @@
   }
   .events-list-container .event-main-des {
     width: 90%;
+  }
+  .home-page-basic-mx {
+    padding: 50px 10px 0px 20px;
+  }
+  .dep-hero-right-side .dep-peoples-with-info {
+    flex-direction: column;
+  }
+  .dep-hero-right-side .btns {
+    flex-direction: column;
+  }
+  .tool-management-container {
+    padding: 50px 10px 180px 10px;
+    background-image: none;
+    background-color: #322f30;
+  }
+  .tool-management-container .RSVP-description span:first-child,
+  .RSVP-Section .RSVP-description span:first-child {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  .tool-management-container .RSVP-description span:nth-child(2),
+  .RSVP-Section .RSVP-description span:nth-child(2) {
+    font-size: 13px;
+    line-height: 20px;
+  }
+  .everyting-scale-section {
+    padding: 30px 10px 20px 30px;
+    margin-top: -80px !important;
+  }
+  .events-list-container .eventa-events-main {
+    padding: 40px 0px 40px 40px;
+  }
+  .events-list-container .event-main-title span {
+    font-size: 30px;
+    line-height: 40px;
+  }
+  .events-list-container .event-main-title {
+    width: 90%;
+  }
+  .events-list-container .left-side .text-space-container .input-container {
+    width: 95% !important;
+  }
+
+  .events-list-container
+    .left-side
+    .text-space-container
+    .input-container
+    input {
+    width: 95%;
+  }
+
+  .events-list-container
+    .left-side
+    .text-space-container
+    .input-container
+    span {
+    right: 2%;
+    top: 3px;
+  }
+
+  .clients-section {
+    padding: 50px 10px 0px 10px;
+  }
+
+  .user-count-info .main-container .heading span:first-child {
+    font-size: 25px;
+    font-weight: 600;
+  }
+
+  .user-count-info .main-container .heading span:nth-child(2) {
+    font-size: 13px;
+  }
+  .main-container .btns {
+    flex-direction: column;
+  }
+
+  .hoempage-qna-section {
+    padding: 50px 10px 50px 10px;
+  }
+
+  .home-footer-container {
+    padding: 50px 10px 0px 10px;
+  }
+  .tool-management-container .tool-image-parent {
+    display: none;
   }
 }
 
@@ -1022,6 +1125,13 @@
 }
 
 @media (min-width: 768px) {
+  .home-page-basic-mx {
+    padding: 50px 50px 0px 50px;
+  }
+  .dep-hero-right-side .title {
+    font-size: 70px;
+    line-height: 72px;
+  }
   .desktop-menu {
     display: none;
   }
@@ -1043,9 +1153,94 @@
   .events-list-container .event-main-des {
     width: 90%;
   }
+  .dep-hero-right-side .dep-peoples-with-info {
+    flex-direction: row;
+  }
+  .dep-hero-right-side .btns {
+    flex-direction: row;
+  }
+  .tool-management-container {
+    padding: 250px 100px 240px 100px;
+    background-image: url(./../../../../../public/tool-managment-bg.webp);
+  }
+  .everyting-scale-section {
+    padding: 30px 100px 0px 100px;
+    margin-top: -4px !important;
+  }
+  .events-list-container .eventa-events-main {
+    padding: 40px 0px 70px 40px;
+  }
+  .events-list-container .event-main-title span {
+    font-size: 45px;
+    line-height: 50px;
+  }
+  .events-list-container .event-main-title {
+    width: 400px;
+  }
+  .events-list-container .left-side .text-space-container .input-container {
+    width: 300px !important;
+  }
+
+  .events-list-container
+    .left-side
+    .text-space-container
+    .input-container
+    input {
+    width: 250px !important;
+  }
+
+  .events-list-container
+    .left-side
+    .text-space-container
+    .input-container
+    span {
+    right: 8px;
+    top: 3px;
+  }
+  .clients-section {
+    padding: 50px 100px 0px 100px;
+  }
+
+  .tool-management-container .RSVP-description span:first-child,
+  .RSVP-Section .RSVP-description span:first-child {
+    font-size: 35px;
+    line-height: 45px;
+  }
+  .tool-management-container .RSVP-description span:nth-child(2),
+  .RSVP-Section .RSVP-description span:nth-child(2) {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .user-count-info .main-container .heading span:first-child {
+    font-size: 35px;
+    font-weight: 600;
+  }
+
+  .user-count-info .main-container .heading span:nth-child(2) {
+    font-size: 15px;
+  }
+
+  .main-container .btns {
+    flex-direction: row;
+  }
+
+  .hoempage-qna-section {
+    padding: 50px 110px 50px 100px;
+  }
+
+  .home-footer-container {
+    padding: 50px 100px 0px 100px;
+  }
+  .tool-management-container .tool-image-parent {
+    display: flex;
+  }
 }
 
 @media (min-width: 992px) {
+  .home-page-basic-mx {
+    padding: 50px 100px 0px 100px;
+  }
   .desktop-menu {
     display: flex;
   }

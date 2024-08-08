@@ -8,7 +8,7 @@ const FooterSection = () => {
   return (
     <div className="home-footer-container">
       <Row align="middle">
-        <Col span={16}>
+        <Col xs={12} md={16}>
           <div className="footer-left-side">
             <div className="logo">
               <img src="https://i.ibb.co/Tm5thSk/logo.png" alt="" srcSet="" />
@@ -39,7 +39,7 @@ const FooterSection = () => {
             </div>
           </div>
         </Col>
-        <Col span={8}>
+        <Col xs={12} md={8}>
           <div className="footer-right-container">
             <div className="">
               <span>Eventa</span>
@@ -62,9 +62,10 @@ const FooterSection = () => {
           </div>
         </Col>
       </Row>
+
       <div className="break"></div>
       <Row align="middle">
-        <Col span={16}>
+        <Col xs={12} md={16}>
           <div className="below-options">
             <span>Copyright © 2024 Eventa All rights reserved</span>
             <span>Terms of Use</span>
@@ -72,7 +73,7 @@ const FooterSection = () => {
             <span>Copyright Policy</span>
           </div>
         </Col>
-        <Col span={8}>
+        <Col xs={12} md={8}>
           <div className="social-icons">
             <span>
               <svg

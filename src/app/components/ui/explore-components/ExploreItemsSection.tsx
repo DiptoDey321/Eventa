@@ -52,52 +52,61 @@ const ExploreItemsSection =({data}:any) => {
             </Col>
           </Row>
         </div>
-        <div className="card-lists">
+        <Row gutter={[32, 32]}>
           {data?.data?.rows?.map((data: any, index: number) => (
-            <ExploreItemsCard
-              key={index}
-              id={data._id}
-              imageSrc={itemFour}
-              organizerName={`${data?.created_by.first_name} ${data?.created_by.last_name}`}
-              organizerIcon={orgIcon}
-              heading={data?.title}
-              fromDate={data?.event_start_date_time}
-              toDate={data?.event_end_date_time}
-              location={data?.address}
-            />
+            <Col sm={24} md={12} lg={8} key={index}>
+              <ExploreItemsCard
+                id={data._id}
+                imageSrc={itemFour}
+                organizerName={`${data?.created_by.first_name} ${data?.created_by.last_name}`}
+                organizerIcon={orgIcon}
+                heading={data?.title}
+                fromDate={data?.event_start_date_time}
+                toDate={data?.event_end_date_time}
+                location={data?.address}
+              />
+            </Col>
           ))}
 
-          <ExploreItemsCard
-            id="6697b09fd05d8e76ce183f9c"
-            imageSrc={itemTwo}
-            organizerName="Organizer Name"
-            organizerIcon={orgIcon}
-            heading="Event Heading Event Heading"
-            fromDate="June 28, 2024"
-            toDate="June 30, 2024"
-            location="Bozeman, MT Street 59718, USA"
-          />
-          <ExploreItemsCard
-            id="6697b09fd05d8e76ce183f9c"
-            imageSrc={itemThree}
-            organizerName="Organizer Name"
-            organizerIcon={orgIcon}
-            heading="Event Heading Event Heading"
-            fromDate="June 28, 2024"
-            toDate="June 30, 2024"
-            location="Bozeman, MT Street 59718, USA"
-          />
-          <ExploreItemsCard
-            id="6697b09fd05d8e76ce183f9c"
-            imageSrc={itemOne}
-            organizerName="Organizer Name"
-            organizerIcon={orgIcon}
-            heading="Event Heading Event Heading"
-            fromDate="June 28, 2024"
-            toDate="June 30, 2024"
-            location="Bozeman, MT Street 59718, USA"
-          />
-        </div>
+          <Col sm={24} md={12} lg={8}>
+            <ExploreItemsCard
+              id="6697b09fd05d8e76ce183f9c"
+              imageSrc={itemTwo}
+              organizerName="Organizer Name"
+              organizerIcon={orgIcon}
+              heading="Event Heading Event Heading"
+              fromDate="June 28, 2024"
+              toDate="June 30, 2024"
+              location="Bozeman, MT Street 59718, USA"
+            />
+          </Col>
+
+          <Col sm={24} md={12} lg={8}>
+            <ExploreItemsCard
+              id="6697b09fd05d8e76ce183f9c"
+              imageSrc={itemThree}
+              organizerName="Organizer Name"
+              organizerIcon={orgIcon}
+              heading="Event Heading Event Heading"
+              fromDate="June 28, 2024"
+              toDate="June 30, 2024"
+              location="Bozeman, MT Street 59718, USA"
+            />
+          </Col>
+
+          <Col sm={24} md={12} lg={8}>
+            <ExploreItemsCard
+              id="6697b09fd05d8e76ce183f9c"
+              imageSrc={itemOne}
+              organizerName="Organizer Name"
+              organizerIcon={orgIcon}
+              heading="Event Heading Event Heading"
+              fromDate="June 28, 2024"
+              toDate="June 30, 2024"
+              location="Bozeman, MT Street 59718, USA"
+            />
+          </Col>
+        </Row>
       </div>
     </div>
   );
