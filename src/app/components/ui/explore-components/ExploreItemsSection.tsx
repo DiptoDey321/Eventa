@@ -53,7 +53,7 @@ const ExploreItemsSection =({data}:any) => {
           </Row>
         </div>
         <Row gutter={[32, 32]}>
-          {data?.data?.rows?.map((data: any, index: number) => (
+          {data?.data?.map((data: any, index: number) => (
             <Col sm={24} md={12} lg={8} key={index}>
               <ExploreItemsCard
                 id={data._id}

@@ -15,7 +15,7 @@ export const ticketsApi = baseApi.injectEndpoints({
 
     getEvents: build.query({
       query: () => ({
-        url: `/events`,
+        url: `/events/public`,
         method: "GET",
         requiresAuth: false,
       }),
@@ -41,12 +41,11 @@ export const ticketsApi = baseApi.injectEndpoints({
 
     getEventDetails: build.query({
       query: (id) => ({
-        url: `/events/${id}`,
+        url: `events/public/${id}`,
         method: "GET",
         requiresAuth: false,
       }),
     }),
-
   }),
 });
 

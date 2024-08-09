@@ -16,6 +16,9 @@ function Page() {
   if (error) {
     return;
   }
+
+  console.log(data);
+  
   return (
     <div>
       <div className="home-page-basic-mx">

@@ -8,7 +8,7 @@ import album from '../../../../../public/album.webp'
 
 const ExploreHeroSection = ({ data}:any) => {
 
-  console.log(data.data.rows);
+  console.log(data.data);
   
   const handleButtonClick = () => {
     console.log("Button clicked!");
@@ -23,7 +23,7 @@ const ExploreHeroSection = ({ data}:any) => {
         modules={[Pagination]}
         className="mySwiper"
       >
-        {data?.data?.rows.map((data: any, index: number) => (
+        {data?.data?.map((data: any, index: number) => (
           <SwiperSlide key={index}>
             <div
               style={{
