@@ -5,10 +5,13 @@ import "./../ui/homepage-components/HomeStyle.css";
 import { message } from "antd";
 import MobileNavbar from "./MobileNavbar";
 import "./../ui/homepage-components/HomeStyle.css";
-
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { useEffect, useState } from "react";
 
 const NavBar = () => {
-    
+  const [loggedIn, setLoggedIn] = useState(false)
+  const user = useSelector((state: RootState) => state.auth.user);
   const routeName = usePathname();
   const router = useRouter();
   
@@ -19,6 +22,13 @@ const NavBar = () => {
     }
     router.push(route);
   }
+
+  useEffect(() => {
+    if (user.first_name) {
+      setLoggedIn(true);
+    };
+  }, [user]);
+  
 
   return (
     <div className="dep-main-menu-container">
@@ -48,9 +58,23 @@ const NavBar = () => {
               </li>
             </>
           )}
-          <li onClick={() => handleNavigation("/login")} className="cool-link">
-            Login
-          </li>
+          {!loggedIn && (
+            <li
+              onClick={() => handleNavigation("/login")}
+              className="cool-link"
+            >
+              Login
+            </li>
+          )}
+
+          {loggedIn && (
+            <li
+              onClick={() => handleNavigation("/user")}
+              className="cool-link"
+            >
+              Profile
+            </li>
+          )}
         </ul>
 
         <a className="dep-btn-0" href="/create">

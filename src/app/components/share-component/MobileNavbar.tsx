@@ -1,12 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MenuOutlined } from "@ant-design/icons";
 import { Button, Drawer, Menu, message, type MenuProps } from "antd";
 import "./../ui/homepage-components/HomeStyle.css";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 const MobileNavbar: React.FC = () => {
 
+  const [loggedIn, setLoggedIn] = useState(false);
+  const user = useSelector((state: RootState) => state.auth.user);
   const [visible, setVisible] = useState(false);
   const showDrawer = () => {
     setVisible(true);
@@ -16,7 +20,10 @@ const MobileNavbar: React.FC = () => {
     { key: "/explore", label: "Explore Events" },
     { key: "/demo", label: "Request A Demo" },
     { key: "/magazine", label: "Magazine" },
-    { key: "/login", label: "Login" },
+    {
+      key: `${loggedIn == false ? "/login" : "/user"} `,
+      label: `${loggedIn == false ? "Login" : "Profile"} `,
+    },
     { key: "/create", label: "Lunch An Event" },
   ];
 
@@ -27,13 +34,18 @@ const MobileNavbar: React.FC = () => {
   const router = useRouter();
 
   const onClick: MenuProps["onClick"] = (event) => {
-    console.log(event);
-       if (event.key == "/demo" || event.key == "/magazine") {
-         message.info("Coming Soon...");
-         return;
-       }
-       router.push(event.key);
+    if (event.key == "/demo" || event.key == "/magazine") {
+      message.info("Coming Soon...");
+      return;
+    }
+    router.push(event.key);
   };
+
+   useEffect(() => {
+     if (user.first_name) {
+       setLoggedIn(true);
+     }
+   }, [user]);
 
   return (
     <div>

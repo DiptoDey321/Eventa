@@ -1,10 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './createPageStyle.css'
 import { Button, message } from "antd";
 import SellTickets from "../components/ui/create-components/SellTickets";
 import { useRouter } from "next/navigation";
+import { isUserLoggedIn } from "@/services/auth.service";
 
 const CreatePage = () => {
    const router = useRouter();
@@ -26,6 +27,22 @@ const CreatePage = () => {
       // }
       router.push("/");
     }
+
+    const userLoggedIn = isUserLoggedIn();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    useEffect(() => {
+      if (!userLoggedIn) {
+        router.push("/login");
+      }
+      setIsLoading(true);
+    }, [router, userLoggedIn]);
+
+    if (!isLoading) {
+      return <div>loading ...</div>;
+    }
+
+
   return (
     <>
       {/* {activeMainpage && (

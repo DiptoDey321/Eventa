@@ -13,6 +13,8 @@ interface TicketProps {
   details: string;
   eventId: string;
   eventName: string;
+  qty: number;
+  ticketTitle: string;
 }
 
 const TicktesSell: React.FC<TicketProps> = ({
@@ -21,6 +23,8 @@ const TicktesSell: React.FC<TicketProps> = ({
   details,
   eventId,
   eventName,
+  qty,
+  ticketTitle,
 }) => {
   const dispatch = useDispatch();
   const cartTicket = useSelector((state: RootState) =>
@@ -39,7 +43,9 @@ const TicktesSell: React.FC<TicketProps> = ({
   }, [cartTicket]);
 
   const handleAddToCart = () => {
-    dispatch(addTicket({ id, eventId, eventName, price, quantity }));
+    dispatch(
+      addTicket({ id, eventId, eventName, ticketTitle, price, quantity })
+    );
   };
 
   const increaseQuantity = () => {
@@ -100,6 +106,7 @@ const TicktesSell: React.FC<TicketProps> = ({
               </Button>
             </div>
             <div className="details">
+              <h4>{ticketTitle}</h4>
               <span>{details}</span>
             </div>
             <div style={{ backgroundColor: "black", height: "1px" }}></div>
@@ -111,7 +118,9 @@ const TicktesSell: React.FC<TicketProps> = ({
                 alignItems: "center",
               }}
             >
-              <Text>*conditions apply</Text>
+              <Text>
+                <span>Available : {qty}</span>
+              </Text>
               <div className="tickets-count">
                 <Button
                   className="count-btn"

@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
+
+"use client"
 import "./UserRouteStyle.css";
 import React, { useState } from 'react'
 import { Select, Button } from "antd";

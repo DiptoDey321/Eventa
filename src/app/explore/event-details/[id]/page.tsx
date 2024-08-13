@@ -1,45 +1,42 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import imgSrc from "./../../../../../public/party-2.png";
-import EventDetailsHero from '@/app/components/resuable-component/EventDetailsHero';
+import EventDetailsHero from "@/app/components/resuable-component/EventDetailsHero";
 import "./../eventDetails.css";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import TicktesSell from '@/app/components/resuable-component/TicktesSell';
-import { Button, Col, List, Row, Typography } from 'antd';
-import Modal from 'antd/es/modal/Modal';
-import { initializeCart, removeTicket, updateTicketQuantity } from "@/redux/slice/cartSlice";
+import TicktesSell from "@/app/components/resuable-component/TicktesSell";
+import { Button, Col, List, Row, Typography } from "antd";
+import Modal from "antd/es/modal/Modal";
 import {
-  DeleteOutlined,
-  PlusOutlined,
-  MinusOutlined,
-} from "@ant-design/icons";
+  initializeCart,
+  removeTicket,
+  updateTicketQuantity,
+} from "@/redux/slice/cartSlice";
+import { DeleteOutlined, PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import FooterSection from "@/app/components/share-component/FooterSection";
 import { useGetEventDetailsQuery } from "@/redux/api/ticketsApi";
 import Loading from "@/app/loading";
+import { useRouter } from "next/navigation";
 
 const { Text } = Typography;
 
-
 function EventDetails({ params }: { params: { id: string } }) {
-  
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
   const { data, error, isLoading } = useGetEventDetailsQuery(params?.id);
-  
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const router = useRouter();
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const cart = localStorage.getItem("cart");
-     if (cart) {
-       dispatch(initializeCart(JSON.parse(cart)));
-     }
+      if (cart) {
+        dispatch(initializeCart(JSON.parse(cart)));
+      }
     }
   }, [dispatch]);
 
   const tickets = useSelector((state: RootState) => state.cart.tickets);
-  
 
   const totalItems = tickets.reduce(
     (total, ticket) => total + ticket.quantity,
@@ -58,39 +55,42 @@ function EventDetails({ params }: { params: { id: string } }) {
     setIsModalVisible(false);
   };
 
-   const increaseQuantity = (id: string, eventId: string) => {
-     const ticket = tickets.find(
-       (ticket) => ticket.id === id && ticket.eventId === eventId
-     );
-     if (ticket) {
-       dispatch(
-         updateTicketQuantity({ id, eventId, quantity: ticket.quantity + 1 })
-       );
-     }
-   };
-
-    const decreaseQuantity = (id: string, eventId: string) => {
-      const ticket = tickets.find(
-        (ticket) => ticket.id === id && ticket.eventId === eventId
+  const increaseQuantity = (id: string, eventId: string) => {
+    const ticket = tickets.find(
+      (ticket) => ticket.id === id && ticket.eventId === eventId
+    );
+    if (ticket) {
+      dispatch(
+        updateTicketQuantity({ id, eventId, quantity: ticket.quantity + 1 })
       );
-      if (ticket && ticket.quantity > 1) {
-        dispatch(
-          updateTicketQuantity({ id, eventId, quantity: ticket.quantity - 1 })
-        );
-      }
-    };
+    }
+  };
 
-    const handleRemoveTicket = (id: string, eventId: string) => {
-      console.log("comed here");
-      
-      dispatch(removeTicket({ id, eventId }));
-    };
+  const decreaseQuantity = (id: string, eventId: string) => {
+    const ticket = tickets.find(
+      (ticket) => ticket.id === id && ticket.eventId === eventId
+    );
+    if (ticket && ticket.quantity > 1) {
+      dispatch(
+        updateTicketQuantity({ id, eventId, quantity: ticket.quantity - 1 })
+      );
+    }
+  };
 
-    console.log("event details",data?.data);
-    
-     if (isLoading) {
-       return <Loading></Loading>;
-     } 
+  const handleRemoveTicket = (id: string, eventId: string) => {
+    console.log("comed here");
+
+    dispatch(removeTicket({ id, eventId }));
+  };
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+
+  const paymentPage = () =>{
+    router.push("/payment");
+  }
+  
 
   return (
     <>
@@ -119,16 +119,21 @@ function EventDetails({ params }: { params: { id: string } }) {
                 <hr />
                 <div className="tickets-lists">
                   <Row gutter={[30, 30]} justify="center">
-                    <Col span={12}>
-                      <TicktesSell
-                        id={`${params?.id}1`}
-                        price={100}
-                        details="RSVP + 2 Drinks + Paid line entry"
-                        eventId={params?.id}
-                        eventName={data?.data?.title}
-                      />
-                    </Col>
-                    <Col span={12}>
+                    {data?.data?.tickets.map((tickets: any, index: number) => (
+                      <Col key={index} xs={24} sm={24} md={12} xxl={8}>
+                        <TicktesSell
+                          id={tickets?._id}
+                          eventId={tickets?.event_id}
+                          price={tickets.price}
+                          qty={tickets.qty}
+                          ticketTitle={tickets.title}
+                          details={tickets?.description}
+                          eventName={data?.data?.title}
+                        />
+                      </Col>
+                    ))}
+
+                    {/* <Col span={12}>
                       <TicktesSell
                         id={`${params?.id}2`}
                         price={150}
@@ -137,6 +142,7 @@ function EventDetails({ params }: { params: { id: string } }) {
                         eventName={data?.data?.title}
                       />
                     </Col>
+
                     <Col span={12}>
                       <TicktesSell
                         id={`${params?.id}3`}
@@ -145,7 +151,7 @@ function EventDetails({ params }: { params: { id: string } }) {
                         eventId={params?.id}
                         eventName={data?.data?.title}
                       />
-                    </Col>
+                    </Col> */}
                   </Row>
                 </div>
               </div>
@@ -259,7 +265,7 @@ function EventDetails({ params }: { params: { id: string } }) {
                   ]}
                 >
                   <List.Item.Meta
-                    title={`${ticket.eventName} - Ticket ${ticket.id}`}
+                    title={`${ticket.eventName} - ${ticket.ticketTitle}`}
                     description={`Price: $${ticket.price} x ${
                       ticket.quantity
                     } = $${ticket.price * ticket.quantity}`}
@@ -270,7 +276,7 @@ function EventDetails({ params }: { params: { id: string } }) {
 
             <div className="payment-btn">
               {totalItems > 0 && (
-                <Button className="custom-btn">Process to Payment</Button>
+                <Button onClick={()=>paymentPage()}  className="custom-btn">Process to Payment</Button>
               )}
             </div>
           </Modal>
@@ -282,4 +288,4 @@ function EventDetails({ params }: { params: { id: string } }) {
   );
 }
 
-export default EventDetails
+export default EventDetails;

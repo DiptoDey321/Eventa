@@ -1,0 +1,224 @@
+@import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
+
+.ticket-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* gap: 30px; */
+  align-items: center;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+  background: black;
+  color: black;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+}
+
+.ticket {
+  margin: auto;
+  /* display: flex; */
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  /* height: 250px; */
+  width: 600px;
+  padding: 20px 0px 20px 0px;
+  border-radius: 4px;
+  margin: 30px 0px 30px 0px !important;
+}
+
+.ticket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.ticket-header p {
+  padding-right: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: "Staatliches", cursive;
+}
+
+.left {
+  display: flex;
+}
+
+.image {
+  height: 250px;
+  width: 250px;
+  background-image: url("https://media.pitchfork.com/photos/60db53e71dfc7ddc9f5086f9/1:1/w_1656,h_1656,c_limit/Olivia-Rodrigo-Sour-Prom.jpg");
+  background-size: contain;
+  opacity: 0.85;
+}
+
+.admit-one {
+  position: absolute;
+  color: darkgray;
+  height: 250px;
+  padding: 0 5px;
+  letter-spacing: 0.15em;
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+  writing-mode: vertical-rl;
+  transform: rotate(-180deg);
+  background-color: white;
+  font-size: 12px;
+}
+
+.admit-one span:nth-child(2) {
+  color: white;
+  font-weight: 700;
+}
+
+.left .ticket-number {
+  height: 250px;
+  width: 250px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  /* padding: 5px; */
+}
+
+.left .ticket-number p {
+  background-color: aliceblue;
+  color: black;
+  padding: 5px 10px;
+  border: 1px solid #404040;
+}
+
+.ticket-info {
+  padding: 10px 30px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-between;
+  /* align-items: center; */
+}
+
+.date {
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  padding: 5px 0;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.date span {
+  width: 100px;
+  font-family: "Staatliches", cursive;
+}
+
+.date span:first-child {
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.date span:last-child {
+  text-align: right;
+}
+
+.date .june-29 {
+  color: #d83565;
+  font-size: 20px;
+  white-space: nowrap;
+}
+
+.show-name h1 {
+  font-size: 42px;
+  font-family: "Nanum Pen Script", cursive !important;
+  color: #d83565;
+  text-align: center;
+  line-height: 41px;
+}
+
+.show-name h2 {
+  font-size: 22px;
+  font-family: "Nanum Pen Script", cursive !important;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #4a437e;
+  text-align: center;
+  line-height: 22px;
+}
+
+.time {
+  color: #4a437e;
+  text-align: left;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.time p {
+  font-family: "Staatliches", cursive;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.time span {
+  font-weight: 400;
+  color: gray;
+}
+
+.left .time {
+  font-size: 16px;
+}
+
+.location {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px solid gray;
+}
+
+.location .separator {
+  font-size: 20px;
+}
+
+.right {
+  width: 180px;
+  border-left: 1px dashed #404040;
+}
+
+.right .admit-one {
+  color: darkgray;
+}
+
+.right .admit-one span:nth-child(2) {
+  color: gray;
+}
+
+.right .right-info-container {
+  height: 250px;
+  padding: 10px 10px 10px 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.right .show-name h1 {
+  font-size: 18px;
+}
+
+.barcode {
+  height: 80px;
+}
+
+.barcode img {
+  height: 100%;
+}
+
+.right .ticket-number {
+  color: gray;
+}

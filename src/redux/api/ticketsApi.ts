@@ -41,7 +41,7 @@ export const ticketsApi = baseApi.injectEndpoints({
 
     getEventDetails: build.query({
       query: (id) => ({
-        url: `events/public/${id}`,
+        url: `/events/public/${id}`,
         method: "GET",
         requiresAuth: false,
       }),

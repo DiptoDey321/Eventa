@@ -1,7 +1,7 @@
 "use client";
 import "./UserRouteStyle.css";
-import { Badge, Button, Tabs } from "antd";
-import { BellOutlined, BarsOutlined } from "@ant-design/icons";
+import { Button, Tabs } from "antd";
+import { BarsOutlined } from "@ant-design/icons";
 import type { TabsProps } from "antd";
 import BarChart from "./BarChart";
 import { useState } from "react";
@@ -10,11 +10,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import EventDetailsForUser from "./EventDetailsForUser";
 import UserProfile from "./UserProfile";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
 
   const user = useSelector((state: RootState) => state.auth.user);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const router = useRouter();
 
   const openNotification = () => {
     console.log("hello");
@@ -59,7 +61,7 @@ const Navbar = () => {
   return (
     <>
       <div className="dep-user-header">
-        <div className="logo">
+        <div onClick={()=>router.push("/")} className="logo">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="180"

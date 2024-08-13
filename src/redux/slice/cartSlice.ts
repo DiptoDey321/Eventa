@@ -6,6 +6,7 @@ interface Ticket {
   quantity: number;
   eventId: string;
   eventName: string;
+  ticketTitle: string;
 }
 
 interface CartState {

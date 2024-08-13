@@ -90,9 +90,9 @@ const EventDetailsHero: React.FC<EventCardProps> = ({
               <p>{location}</p>
             </div>
           </div>
-          <div className="details">
+          {/* <div className="details">
             <p>{details}</p>
-          </div>
+          </div> */}
         </Col>
         <Col span={12}>
           <div className="img-container">
