@@ -29,6 +29,8 @@
 .ex-card-details-container {
   color: white;
   width: 400px;
+  display: flex;
+  justify-content: center;
 }
 
 .ex-card-details-container .card-heading {
@@ -162,4 +164,30 @@
 .event-item-container .location-date .from-to .from .format {
   font-size: 16px;
   font-weight: 600;
+}
+
+@media (min-width: 320px) {
+  .explore-slider-cotainer {
+    padding: 40px 10px 100px 10px;
+  }
+  .explore-card-container .album-image-container img {
+    width: fit-content;
+  }
+}
+@media (min-width: 576px) {
+}
+@media (min-width: 768px) {
+  .explore-slider-cotainer {
+    padding: 40px 0px 100px 0px;
+  }
+  .explore-card-container .album-image-container img {
+    max-height: 400px;
+    width: fit-content;
+  }
+}
+@media (min-width: 992px) {
+}
+@media (min-width: 1200px) {
+}
+@media (min-width: 1400) {
 }

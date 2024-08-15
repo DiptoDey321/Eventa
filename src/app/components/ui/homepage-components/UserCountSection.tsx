@@ -8,19 +8,17 @@ const UserCountSection = () => {
       <div className="main-container">
         <img src="https://i.ibb.co/VwNrq6h/users.png" alt="" />
         <div className="heading">
-          <span>Join 1 million+ Event-lovers</span>
-          <span>
-            It’s time to take your live experiences to the next level...
-          </span>
+          <span>Curious to know more!!</span>
+          <span>Have more questions regarding our serivices?</span>
         </div>
 
         <div className="btns">
           <a className="sec-btn" href="">
-            Explore Events
+            CTA-Request a demo
           </a>
-          <a className="first-btn" href="">
+          {/* <a className="first-btn" href="">
             Lunch an event
-          </a>
+          </a> */}
         </div>
       </div>
     </div>

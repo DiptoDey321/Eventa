@@ -24,10 +24,13 @@ const NavBar = () => {
   }
 
   useEffect(() => {
-    if (user.first_name) {
+    if (user?.first_name) {
       setLoggedIn(true);
     };
   }, [user]);
+
+  console.log(user?.first_name);
+  
   
 
   return (

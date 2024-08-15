@@ -42,7 +42,7 @@ const MobileNavbar: React.FC = () => {
   };
 
    useEffect(() => {
-     if (user.first_name) {
+     if (user?.first_name) {
        setLoggedIn(true);
      }
    }, [user]);

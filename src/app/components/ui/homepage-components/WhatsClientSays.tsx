@@ -52,7 +52,7 @@ const WhatsClientSays = () => {
       style={{ height: "500px" }}
     >
       <div className="heading">
-        <span>What Our Users Say...</span>
+        <span>Hear from our Users</span>
       </div>
       <div className="swipper-container">
         <Swiper

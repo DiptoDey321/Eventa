@@ -5,243 +5,245 @@ import { Button, Input, Space, Table } from "antd";
 import type { FilterDropdownProps } from "antd/es/table/interface";
 import Highlighter from "react-highlight-words";
 import { DeleteOutlined } from "@ant-design/icons";
+import { useGetTicketsQuery } from "@/redux/api/paymentApi";
 
 interface DataType {
   key: string;
   name: string;
   age: number;
   address: string;
-  request: string;
 }
 
 type DataIndex = keyof DataType;
-const data: DataType[] = [
+
+const dataDemo: DataType[] = [
   {
     key: "1",
     name: "John Brown",
     age: 32,
     address: "New York No. 1 Lake Park",
-    request: "Approved",
   },
   {
     key: "2",
     name: "Joe Black",
     age: 42,
     address: "London No. 1 Lake Park",
-    request: "Pending",
   },
   {
     key: "3",
     name: "Jim Green",
     age: 32,
     address: "Sydney No. 1 Lake Park",
-    request: "Pending",
   },
   {
     key: "4",
     name: "Jim Red",
     age: 32,
     address: "London No. 2 Lake Park",
-    request: "Approved",
   },
   {
     key: "5",
     name: "Jim Green",
     age: 32,
     address: "Sydney No. 1 Lake Park",
-    request: "Pending",
   },
   {
     key: "6",
     name: "Jim Red",
     age: 32,
     address: "London No. 2 Lake Park",
-    request: "Rejected",
   },
   {
-    key: "1",
+    key: "41",
     name: "John Brown",
     age: 32,
     address: "New York No. 1 Lake Park",
-    request: "Approved",
   },
   {
-    key: "2",
+    key: "52",
     name: "Joe Black",
     age: 42,
     address: "London No. 1 Lake Park",
-    request: "Rejected",
   },
   {
-    key: "3",
+    key: "53",
     name: "Jim Green",
     age: 32,
     address: "Sydney No. 1 Lake Park",
-    request: "Rejected",
   },
   {
-    key: "4",
+    key: "54",
     name: "Jim Red",
     age: 32,
     address: "London No. 2 Lake Park",
-    request: "Approved",
   },
   {
-    key: "5",
+    key: "55",
     name: "Jim Green",
     age: 32,
     address: "Sydney No. 1 Lake Park",
-    request: "Rejected",
   },
   {
-    key: "6",
+    key: "56",
     name: "Jim Red",
     age: 32,
     address: "London No. 2 Lake Park",
-    request: "Approved",
   },
   {
-    key: "7",
+    key: "57",
     name: "John Brown",
     age: 32,
     address: "New York No. 1 Lake Park",
-    request: "Pending",
   },
   {
-    key: "8",
+    key: "58",
     name: "Joe Black",
     age: 42,
     address: "London No. 1 Lake Park",
-    request: "Pending",
   },
   {
-    key: "9",
+    key: "59",
     name: "Jim Green",
     age: 32,
     address: "Sydney No. 1 Lake Park",
-    request: "Rejected",
   },
   {
     key: "10",
     name: "Jim Red",
     age: 32,
     address: "London No. 2 Lake Park",
-    request: "Approved",
   },
   {
     key: "11",
     name: "Jim Green",
     age: 32,
     address: "Sydney No. 1 Lake Park",
-    request: "Rejected",
   },
   {
     key: "12",
     name: "Jim Red",
     age: 32,
     address: "London No. 2 Lake Park",
-    request: "Rejected",
   },
   {
     key: "21",
     name: "John Brown",
     age: 32,
     address: "New York No. 1 Lake Park",
-    request: "Approved",
   },
   {
     key: "22",
     name: "Joe Black",
     age: 42,
     address: "London No. 1 Lake Park",
-    request: "Rejected",
   },
   {
     key: "23",
     name: "Jim Green",
     age: 32,
     address: "Sydney No. 1 Lake Park",
-    request: "Pending",
   },
-
   {
     key: "24",
     name: "Jim Red",
     age: 32,
     address: "London No. 2 Lake Park",
-    request: "Rejected",
   },
   {
     key: "25",
     name: "Jim Green",
     age: 32,
     address: "Sydney No. 1 Lake Park",
-    request: "Rejected",
   },
   {
     key: "26",
     name: "Jim Red",
     age: 32,
     address: "London No. 2 Lake Park",
-    request: "Approved",
   },
   {
     key: "31",
     name: "John Brown",
     age: 32,
     address: "New York No. 1 Lake Park",
-    request: "Rejected",
   },
   {
     key: "32",
     name: "Joe Black",
     age: 42,
     address: "London No. 1 Lake Park",
-    request: "Pending",
   },
   {
     key: "33",
     name: "Jim Green",
     age: 32,
     address: "Sydney No. 1 Lake Park",
-    request: "Rejected",
   },
   {
     key: "34",
     name: "Jim Red",
     age: 32,
     address: "London No. 2 Lake Park",
-    request: "Approved",
   },
   {
     key: "35",
     name: "Jim Green",
     age: 32,
     address: "Sydney No. 1 Lake Park",
-    request: "Rejected",
   },
   {
     key: "36",
     name: "Jim Red",
     age: 32,
     address: "London No. 2 Lake Park",
-    request: "Pending",
   },
-
   {
     key: "37",
     name: "John Brown",
     age: 32,
     address: "New York No. 1 Lake Park",
-    request: "Rejected",
+  },
+  {
+    key: "38",
+    name: "Joe Black",
+    age: 42,
+    address: "London No. 1 Lake Park",
+  },
+  {
+    key: "39",
+    name: "Jim Green",
+    age: 32,
+    address: "Sydney No. 1 Lake Park",
+  },
+  {
+    key: "14",
+    name: "Jim Red",
+    age: 32,
+    address: "London No. 2 Lake Park",
+  },
+  {
+    key: "15",
+    name: "Jim Green",
+    age: 32,
+    address: "Sydney No. 1 Lake Park",
+  },
+  {
+    key: "16",
+    name: "Jim Red",
+    age: 32,
+    address: "London No. 2 Lake Park",
   },
 ];
 
-
-const EventDetailsForUser: React.FC = () => {
+const UsersTickets = () => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
+
+  const { data, error, isLoading } = useGetTicketsQuery(undefined);
+
+  console.log(data);
+  
 
 
   const handleSearch = (
@@ -269,7 +271,10 @@ const EventDetailsForUser: React.FC = () => {
       clearFilters,
       close,
     }) => (
-      <div style={{ padding: 8, width :"250px" }} onKeyDown={(e) => e.stopPropagation()}>
+      <div
+        style={{ padding: 8, width: "250px" }}
+        onKeyDown={(e) => e.stopPropagation()}
+      >
         <Input
           ref={searchInput}
           placeholder={`Search ${dataIndex}`}
@@ -332,14 +337,14 @@ const EventDetailsForUser: React.FC = () => {
 
   const columns: TableColumnsType<DataType> = [
     {
-      title: "Organizer",
+      title: "Event Name",
       dataIndex: "name",
       key: "name",
       width: "30%",
       ...getColumnSearchProps("name"),
     },
     {
-      title: "Date",
+      title: "Token Number",
       dataIndex: "age",
       key: "age",
       width: "20%",
@@ -355,38 +360,27 @@ const EventDetailsForUser: React.FC = () => {
     },
 
     {
-      title: "Approved / Declined / Pending",
-      dataIndex: "request",
-      key: "request",
-      ...getColumnSearchProps("request"),
-      render: (text: string) => {
-        let color = "red"; 
-        let label = text;
-
-        if (text === "Approved") {
-          color = "green";
-        } else if (text === "Declined") {
-          color = "red";
-        } else if (text === "Pending") {
-          color = "orange";
-        }
-
-        return <span style={{ color }}>{label}</span>;
-      },
+      title: "Download Ticket",
+      key: "download",
+      render: (text, record) => (
+        <Button type="primary" onClick={() => handleDownload(record)}>
+          Download Ticket
+        </Button>
+      ),
     },
   ];
 
+  const handleDownload = (record: DataType) => {
+    // Implement your download logic here
+    console.log("Downloading ticket for", record.name);
+    // You can fetch the ticket data or trigger a download
+  };
+
   return (
     <div>
-      <div className="">
-        <Table
-          scroll={{ x: 1200, y: 400 }}
-          columns={columns}
-          dataSource={data}
-        />
-      </div>
+      <Table scroll={{ x: 1200, y: 400 }} columns={columns} dataSource={dataDemo} />
     </div>
   );
 };
 
-export default EventDetailsForUser;
+export default UsersTickets;

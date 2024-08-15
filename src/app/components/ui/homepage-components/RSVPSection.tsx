@@ -7,13 +7,11 @@ import { useEffect } from "react";
 
 const RSVPSection = () => {
 
- const controls = useAnimation();
+  const controls = useAnimation();
 
- const { ref, inView } = useInView({
-   threshold: 0.1,
- });
-
- 
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+  });
 
   const listVariants = {
     hidden: {
@@ -52,7 +50,6 @@ const RSVPSection = () => {
     },
   };
 
-
   useEffect(() => {
     if (inView) {
       controls.start("visible");
@@ -60,8 +57,6 @@ const RSVPSection = () => {
       controls.start("hidden");
     }
   }, [controls, inView]);
-
-
 
   return (
     <div className="RSVP-Section">

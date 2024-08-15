@@ -29,13 +29,19 @@ const ExploreCard: FC<TransparentCardProps> = ({
           width: "100%",
         }}
       >
-        <Row align="middle" gutter={[16,16]}>
-          <Col span={12}>
+        <Row align="middle" gutter={[16, 16]}>
+          <Col xs={24} sm={24} md={12}>
             <div className="album-image-container">
-              <Image src={imageSrc} alt="Card Image" width={350} height={500} />
+              <Image
+                src={imageSrc}
+                alt="Card Image"
+                layout="responsive"
+                width={350}
+                height={500}
+              />
             </div>
           </Col>
-          <Col span={12}>
+          <Col xs={24} sm={24} md={12}>
             <div className="ex-card-details-container">
               <div className="">
                 <span className="card-heading">{heading}</span>
@@ -108,14 +114,15 @@ const ExploreCard: FC<TransparentCardProps> = ({
                   />
                   <span style={{ marginLeft: "10px" }}> 989+ Going</span>
                 </div>
+
+                <Button
+                  className="get-tickets-btn"
+                  onClick={onButtonClick}
+                  style={{ marginTop: "10px" }}
+                >
+                  Get Tickets
+                </Button>
               </div>
-              <Button
-                className="get-tickets-btn"
-                onClick={onButtonClick}
-                style={{ marginTop: "10px" }}
-              >
-                Get Tickets
-              </Button>
             </div>
           </Col>
         </Row>

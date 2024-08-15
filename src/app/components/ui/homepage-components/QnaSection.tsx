@@ -49,17 +49,27 @@ const QnaSection = () => {
 
     const hiddenTexts: HiddenText[] = [
       {
-        label: "What kind of events is EVENTA best for?",
+        label: "How does Eventar platform handle payment processing?",
+        value:
+          "We integrate with various payment gateways to ensure secure and seamless payment processing. You can accept payments for tickets, registration fees, and other event-related costs directly through the platform.",
+      },
+      {
+        label:
+          "What are the latest and upcoming events that Eventa is planning to launch?",
+        value:
+          "We have various categories of events that are regularly launched on our platforms. Keep an eye on our App or website for the upcoming events",
+      },
+      {
+        label: "I am not willing to visit the event!! Will I get a refund?",
+        value:
+          " No but  you can always refer your friends as the condition applies",
+      },
+      {
+        label: "What are the events that are frequently launched on Eventa?",
         value:
           "From dinner party RSVPs to music festival tickets, our suite of tools optimize workflows and maximize sales for events of any size. Eventa is mostly used to scale the following communities, festivals, nightlife groups, fashion & wellness brands, startups/VCs, community organizations, and fraternities/sororities",
       },
-      {
-        label: "How does EVENTA help you reach new audiences?",
-        value: "Text of Accordion 2",
-      },
-      { label: "How does EVENTA make money?", value: "Text of Accordion 3" },
-      { label: "How do payouts work?", value: "Text of Accordion 4" },
-      { label: "Can I ________ on EVENTA?", value: "Text of Accordion 5" },
+      { label: " How often is the platform updated?", value: "We continuously update our platform to introduce new features, improve performance, and enhance security. We also listen to user feedback and make adjustments to ensure the platform meets your evolving needs." },
     ];
 
     const [visibility, setVisibility] = useState<boolean[]>(
@@ -81,7 +91,7 @@ const QnaSection = () => {
       </div>
 
       <Row align="middle">
-        <Col md={24} lg={12}>
+        <Col md={24} lg={10}>
           <motion.div
             animate={{ y: ["0px", "20px", "0px", "-20px", "0px"] }}
             transition={{
@@ -96,7 +106,7 @@ const QnaSection = () => {
             <img src="https://i.ibb.co/bs8T11D/faq.png" alt="" srcSet="" />
           </motion.div>
         </Col>
-        <Col md={24} lg={12}>
+        <Col md={24} lg={14}>
           <motion.div
             ref={ref}
             initial="hidden"
@@ -105,8 +115,9 @@ const QnaSection = () => {
             className="accordion"
           >
             {hiddenTexts.map((hiddenText, index) => (
-              <div key={hiddenText.label}>
+              <div style={{ cursor: "pointer" }} key={hiddenText.label}>
                 <button
+                  style={{ cursor: "pointer" }}
                   className="accordion__button"
                   onClick={() => handleToggleVisibility(index)}
                 >

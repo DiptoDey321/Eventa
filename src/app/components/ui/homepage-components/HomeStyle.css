@@ -4,6 +4,8 @@
 
 .home-page-basic-mx {
   padding: 50px 100px 0px 100px;
+  max-width: 1400px !important;
+  margin: auto !important;
 }
 
 .bg-yellows {
@@ -173,12 +175,11 @@
   transform: scale(1.03);
 }
 
-.dep-hero-right-side .application-link {
-  display: flex;
-  justify-content: center;
+.application-link {
+  padding-bottom: 20px;
 }
 
-.dep-hero-right-side .application-link a {
+.application-link a {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -193,22 +194,18 @@
   width: fit-content;
   border: 1px solid white;
 }
-
-.dep-hero-right-side .application-link a:hover {
+.application-link a:hover {
   color: white;
 }
-
-.dep-hero-right-side .application-link span:first-child {
+.application-link span:first-child {
   line-height: 14px;
 }
-
-.dep-hero-right-side .application-link .store-name {
+.application-link .store-name {
   font-size: 25px;
   font-weight: 600;
   line-height: 28px;
 }
-
-.dep-hero-right-side .application-link .hero-image-container {
+.application-link .hero-image-container {
   position: relative;
   z-index: 1;
   display: flex;
@@ -335,12 +332,18 @@
 
 /* tool-management starts here */
 
+.tools-max-width {
+  max-width: 1600px !important;
+  margin: auto !important;
+}
+
 .tool-management-container {
   background-image: url(./../../../../../public/tool-managment-bg.webp);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  padding: 250px 100px 240px 100px;
+  padding: 150px 100px 150px 100px;
+  margin-top: -2px !important;
 }
 
 .tool-management-container .RSVP-description {
@@ -391,6 +394,8 @@
 .everyting-scale-section {
   padding: 30px 100px 0px 100px;
   background-color: #ffbf00;
+  max-width: 1400px !important;
+  margin: auto !important;
   margin-top: -4px !important;
 }
 
@@ -426,7 +431,7 @@
   display: flex;
   align-items: center;
   color: white;
-  width: 160px;
+  width: 100%;
 }
 
 /* everything scale up section end here */
@@ -662,9 +667,11 @@
 /* what-clients-say start here  */
 
 .clients-section {
-  margin-top: 100px !important;
   background-color: #ffbf00;
   padding: 50px 100px 0px 100px;
+  max-width: 1400px !important;
+  margin: auto !important;
+  margin-top: 100px !important;
 }
 .what-clients-say .heading {
   font-size: 30px;
@@ -807,6 +814,11 @@
   padding: 50px 100px 0px 100px;
 }
 
+.footer-width-container {
+  max-width: 1600px !important;
+  margin: auto !important;
+}
+
 .home-footer-container .logo img {
   width: 200px;
 }
@@ -896,6 +908,11 @@
 /* footer part end here  */
 
 /* qna_section start here  */
+
+.qna_Section {
+  max-width: 1600px !important;
+  margin: auto !important;
+}
 
 .hoempage-qna-section {
   padding: 50px 100px 50px 100px;
@@ -1242,10 +1259,10 @@
     padding: 50px 100px 0px 100px;
   }
   .desktop-menu {
-    display: flex;
+    display: none;
   }
   .mobile-menu {
-    display: none;
+    display: block;
   }
   .common-margin-top-mobile {
     margin-top: 0px !important;
@@ -1261,6 +1278,15 @@
   }
   .events-list-container .event-main-des {
     width: 500px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .desktop-menu {
+    display: flex;
+  }
+  .mobile-menu {
+    display: none;
   }
 }
 

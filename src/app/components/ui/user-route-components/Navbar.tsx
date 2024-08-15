@@ -11,6 +11,7 @@ import { RootState } from "@/redux/store";
 import EventDetailsForUser from "./EventDetailsForUser";
 import UserProfile from "./UserProfile";
 import { useRouter } from "next/navigation";
+import UsersTickets from "./UsersTickets";
 
 const Navbar = () => {
 
@@ -35,7 +36,7 @@ const Navbar = () => {
     {
       key: "2",
       label: "Tickets",
-      children: <EventDetailsForUser />,
+      children: <UsersTickets />,
     },
     {
       key: "3",

@@ -27,7 +27,7 @@ const ExploreHeroSection = ({ data}:any) => {
           <SwiperSlide key={index}>
             <div
               style={{
-                height: "480px",
+                // height: "480px",
                 display: "flex",
                 justifyContent: "center",
               }}

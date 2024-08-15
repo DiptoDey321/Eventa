@@ -210,8 +210,9 @@ const EveryThingScaleSection = () => {
           >
             <div className="RSVP-description">
               <span>
-                Everything required to scale from
-                <br /> dinner party to music festival
+                {/* Everything required to scale from
+                <br /> dinner party to music festival */}
+                Our Services
               </span>
               <span className="basic-descriptions">
                 Craft a unique event experience. Design your event page with
@@ -228,7 +229,7 @@ const EveryThingScaleSection = () => {
 
         <Col md={24} lg={12}>
           <div className="scale-right-section">
-            <Row>
+            <Row gutter={12}>
               <Col xs={24} md={24} lg={12}>
                 <motion.div
                   ref={ref1}
@@ -292,7 +293,7 @@ const EveryThingScaleSection = () => {
                     </svg>
                   </div>
                   <div className="des">
-                    <span> 3D Table Mapping</span>
+                    <span>E-Ticketing</span>
                   </div>
                 </motion.div>
 
@@ -893,11 +894,11 @@ const EveryThingScaleSection = () => {
                     </svg>
                   </div>
                   <div className="des">
-                    <span> Team Management</span>
+                    <span>RSVP</span>
                   </div>
                 </motion.div>
 
-                <motion.div
+                {/* <motion.div
                   ref={ref3}
                   initial="hidden"
                   animate={controls3}
@@ -1128,7 +1129,7 @@ const EveryThingScaleSection = () => {
                   <div className="des">
                     <span> Instant Payout</span>
                   </div>
-                </motion.div>
+                </motion.div> */}
               </Col>
 
               <Col xs={24} md={24} lg={12}>
@@ -1234,7 +1235,7 @@ const EveryThingScaleSection = () => {
                     </svg>
                   </div>
                   <div className="des">
-                    <span>Instagram Guest List</span>
+                    <span>Venue Booking</span>
                   </div>
                 </motion.div>
 
@@ -1265,11 +1266,11 @@ const EveryThingScaleSection = () => {
                     </svg>
                   </div>
                   <div className="des">
-                    <span>FB AD Integration</span>
+                    <span>Free event consultancy</span>
                   </div>
                 </motion.div>
 
-                <motion.div
+                {/* <motion.div
                   ref={ref6}
                   initial="hidden"
                   animate={controls6}
@@ -1371,7 +1372,7 @@ const EveryThingScaleSection = () => {
                   <div className="des">
                     <span>Event UI</span>
                   </div>
-                </motion.div>
+                </motion.div> */}
               </Col>
             </Row>
           </div>

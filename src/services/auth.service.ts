@@ -10,5 +10,6 @@ export const isUserLoggedIn = () =>{
 }
 
 export const removeUserInfo = () =>{
-    return localStorage.removeItem("access_token");
+     localStorage.removeItem("access_token");
+     localStorage.removeItem("user");
 }
