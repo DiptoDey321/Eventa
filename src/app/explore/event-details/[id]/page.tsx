@@ -120,7 +120,7 @@ function EventDetails({ params }: { params: { id: string } }) {
                 <div className="tickets-lists">
                   <Row gutter={[30, 30]} justify="center">
                     {data?.data?.tickets.map((tickets: any, index: number) => (
-                      <Col key={index} xs={24} sm={24} md={12} xxl={8}>
+                      <Col key={index} xs={24} sm={24} md={24} lg={12} xxl={8}>
                         <TicktesSell
                           id={tickets?._id}
                           eventId={tickets?.event_id}

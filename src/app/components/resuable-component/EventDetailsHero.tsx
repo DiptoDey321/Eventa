@@ -1,6 +1,11 @@
-import { Row, Col, Typography, Space } from "antd";
-import { HeatMapOutlined, CheckCircleOutlined } from "@ant-design/icons";
+import { Row, Col, Typography, Space, Button } from "antd";
+import {
+  HeatMapOutlined,
+  CheckCircleOutlined,
+  RollbackOutlined,
+} from "@ant-design/icons";
 import Image, { StaticImageData } from "next/image";
+import { useRouter } from "next/navigation";
 
 
 const { Title, Text } = Typography;
@@ -28,10 +33,19 @@ const EventDetailsHero: React.FC<EventCardProps> = ({
   imageUrl,
   imageAlt,
 }) => {
+   const router = useRouter();
+
+
   return (
     <div className="event-details-hero-card">
-      <Row gutter={16} align="middle">
-        <Col span={12}>
+      <div style={{display:"flex", justifyContent:"end", paddingBottom:"30px"}}>
+        <Button onClick={()=>router.push("/explore")}>
+          <RollbackOutlined />
+          Back to events
+        </Button>
+      </div>
+      <Row gutter={[16,16]} align="middle">
+        <Col xs={24} sm={24} md={12}>
           <div className="upper-part" style={{ marginBottom: "20px" }}>
             <Space>
               <HeatMapOutlined style={{ fontSize: "24px", color: "Black" }} />
@@ -94,7 +108,7 @@ const EventDetailsHero: React.FC<EventCardProps> = ({
             <p>{details}</p>
           </div> */}
         </Col>
-        <Col span={12}>
+        <Col xs={24} sm={24} md={12}>
           <div className="img-container">
             <Image
               src={imageUrl}

@@ -7,13 +7,15 @@
 
 .hero-section-container .blur {
   width: 100vw;
-  padding: 100px 200px 100px 200px;
+  padding: 50px 200px 100px 200px;
   backdrop-filter: blur(10px);
 }
 
 .event-details-hero-card .upper-part {
   color: rgb(207, 207, 207);
   margin-left: 5px !important;
+  max-width: 1600px;
+  margin: auto !important;
 }
 
 .event-details-hero-card .upper-part .conpany-name {
@@ -57,6 +59,8 @@
 
 .tickets-container {
   padding: 50px 50px;
+  max-width: 1600px;
+  margin: auto !important;
 }
 
 .tickets-container .tickets h2 {
@@ -202,4 +206,29 @@
     background-color: Black;
     color: white;
   }
+}
+
+@media (min-width: 320px) {
+  .hero-section-container .blur {
+    padding: 50px 20px 100px 20px;
+  }
+  .tickets-container .tickets-card {
+    display: flex;
+    flex-direction: column;
+  }
+}
+@media (min-width: 576px) {
+}
+@media (min-width: 768px) {
+  .hero-section-container .blur {
+    padding: 50px 200px 100px 200px;
+  }
+  .tickets-container .tickets-card {
+    display: flex;
+    flex-direction: row;
+  }
+}
+@media (min-width: 992px) {
+}
+@media (min-width: 1200px) {
 }
