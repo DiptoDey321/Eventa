@@ -10,11 +10,13 @@ import type { RadioChangeEvent } from "antd";
 import { RollbackOutlined } from "@ant-design/icons";
 import "./payment.css"
 import { usePaymentMutation } from "@/redux/api/paymentApi";
+import { useRouter } from "next/navigation";
 
 const Payment = () => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const [payment] = usePaymentMutation();
+  const router = useRouter();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -91,19 +93,16 @@ const Payment = () => {
   }
 
   const handleSubmit = async(values: any) => {
-    console.log(values);
-    
     const data = {
       payment_method_id: "66ae060cd0dc1b0211a355c9",
       address: values.address,
       cart: transformData(tickets),
     };
-
     const res = await payment(data);
 
-    console.log(res);
-    
-    console.log("Form values", data);
+    if (res?.data?.is_success){
+      router.push(res?.data?.data);
+    }
   };
 
   const tickets = useSelector((state: RootState) => state.cart.tickets);

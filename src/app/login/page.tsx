@@ -28,6 +28,11 @@ const Login = () => {
         }).unwrap();
         if (res?.is_success) {
           storeUserInfo({ access_token: res?.data?.access_token });
+          dispatch(
+            forUserLoggedIn({
+              user: res.data.user,
+            })
+          );
           router.push("/user");
         }
       } else {

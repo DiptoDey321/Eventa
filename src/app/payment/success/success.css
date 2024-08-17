@@ -2,14 +2,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
 
 .ticket-container {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   /* gap: 30px; */
   align-items: center;
   /* flex-wrap: wrap; */
   justify-content: center;
-  background: black;
+  /* background: black; */
   color: black;
   font-size: 14px;
   letter-spacing: 0.1em;
@@ -25,7 +25,7 @@
   width: 600px;
   padding: 20px 0px 20px 0px;
   border-radius: 4px;
-  margin: 30px 0px 30px 0px !important;
+  margin: 10px 0px 30px 0px !important;
 }
 
 .ticket-header {
@@ -44,14 +44,22 @@
 
 .left {
   display: flex;
+  position: relative;
 }
 
 .image {
-  height: 250px;
+  /* height: 250px;
   width: 250px;
   background-image: url("https://media.pitchfork.com/photos/60db53e71dfc7ddc9f5086f9/1:1/w_1656,h_1656,c_limit/Olivia-Rodrigo-Sour-Prom.jpg");
-  background-size: contain;
+  background-size: contain; */
   opacity: 0.85;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.left .img-container img {
+  height: 250px;
 }
 
 .admit-one {

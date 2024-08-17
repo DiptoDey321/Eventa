@@ -46,9 +46,17 @@ export const ticketsApi = baseApi.injectEndpoints({
         requiresAuth: false,
       }),
     }),
+
+    getEventsForUser: build.query({
+      query: () => ({
+        url: `/events?page=1&limit=100`,
+        method: "GET",
+        requiresAuth: true,
+      }),
+    }),
   }),
 });
 
 export const {
-  usePostEventMutation, useGetEventCategoryQuery, useCreateTicketsMutation, useGetEventsQuery, useGetEventDetailsQuery
+  usePostEventMutation, useGetEventCategoryQuery, useCreateTicketsMutation, useGetEventsQuery, useGetEventDetailsQuery, useGetEventsForUserQuery
 } = ticketsApi;

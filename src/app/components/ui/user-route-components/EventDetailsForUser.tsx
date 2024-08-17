@@ -1,3 +1,4 @@
+"use client"
 import React, { useRef, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import type { InputRef, TableColumnsType, TableColumnType } from "antd";
@@ -5,245 +6,28 @@ import { Button, Input, Space, Table } from "antd";
 import type { FilterDropdownProps } from "antd/es/table/interface";
 import Highlighter from "react-highlight-words";
 import { DeleteOutlined } from "@ant-design/icons";
+import { useGetEventsForUserQuery } from "@/redux/api/ticketsApi";
 
 interface DataType {
   key: string;
-  name: string;
-  age: number;
+  title: string;
+  event_start_date_time: string;
+  event_end_date_time: string;
+  venue_name: string;
   address: string;
-  request: string;
+  event_status: string;
 }
 
 type DataIndex = keyof DataType;
-const data: DataType[] = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    request: "Approved",
-  },
-  {
-    key: "2",
-    name: "Joe Black",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    request: "Pending",
-  },
-  {
-    key: "3",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    request: "Pending",
-  },
-  {
-    key: "4",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-    request: "Approved",
-  },
-  {
-    key: "5",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    request: "Pending",
-  },
-  {
-    key: "6",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-    request: "Rejected",
-  },
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    request: "Approved",
-  },
-  {
-    key: "2",
-    name: "Joe Black",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    request: "Rejected",
-  },
-  {
-    key: "3",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    request: "Rejected",
-  },
-  {
-    key: "4",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-    request: "Approved",
-  },
-  {
-    key: "5",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    request: "Rejected",
-  },
-  {
-    key: "6",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-    request: "Approved",
-  },
-  {
-    key: "7",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    request: "Pending",
-  },
-  {
-    key: "8",
-    name: "Joe Black",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    request: "Pending",
-  },
-  {
-    key: "9",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    request: "Rejected",
-  },
-  {
-    key: "10",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-    request: "Approved",
-  },
-  {
-    key: "11",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    request: "Rejected",
-  },
-  {
-    key: "12",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-    request: "Rejected",
-  },
-  {
-    key: "21",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    request: "Approved",
-  },
-  {
-    key: "22",
-    name: "Joe Black",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    request: "Rejected",
-  },
-  {
-    key: "23",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    request: "Pending",
-  },
-
-  {
-    key: "24",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-    request: "Rejected",
-  },
-  {
-    key: "25",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    request: "Rejected",
-  },
-  {
-    key: "26",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-    request: "Approved",
-  },
-  {
-    key: "31",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    request: "Rejected",
-  },
-  {
-    key: "32",
-    name: "Joe Black",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    request: "Pending",
-  },
-  {
-    key: "33",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    request: "Rejected",
-  },
-  {
-    key: "34",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-    request: "Approved",
-  },
-  {
-    key: "35",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    request: "Rejected",
-  },
-  {
-    key: "36",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-    request: "Pending",
-  },
-
-  {
-    key: "37",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    request: "Rejected",
-  },
-];
-
 
 const EventDetailsForUser: React.FC = () => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
+  const { data, error, isLoading } = useGetEventsForUserQuery(undefined);
 
-
+  console.log(data);
+  
   const handleSearch = (
     selectedKeys: string[],
     confirm: FilterDropdownProps["confirm"],
@@ -332,37 +116,51 @@ const EventDetailsForUser: React.FC = () => {
 
   const columns: TableColumnsType<DataType> = [
     {
-      title: "Organizer",
-      dataIndex: "name",
-      key: "name",
-      width: "30%",
-      ...getColumnSearchProps("name"),
+      title: "Event Name",
+      dataIndex: "title",
+      key: "title",
+      width: 200,
+      ...getColumnSearchProps("title"),
     },
+
     {
-      title: "Date",
-      dataIndex: "age",
-      key: "age",
-      width: "20%",
-      ...getColumnSearchProps("age"),
+      title: "start Date",
+      dataIndex: "event_start_date_time",
+      key: "event_start_date_time",
+      width: 200,
+      render: (text) => new Date(text).toLocaleString(),
     },
+
+    {
+      title: "End Date",
+      dataIndex: "event_end_date_time",
+      key: "event_end_date_time",
+      width: 200,
+      render: (text) => new Date(text).toLocaleString(),
+    },
+
+    {
+      title: "Venue",
+      dataIndex: "venue_name",
+      key: "venue_name",
+      width: 200,
+    },
+
     {
       title: "Address",
       dataIndex: "address",
       key: "address",
-      ...getColumnSearchProps("address"),
-      sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ["descend", "ascend"],
+      width: 200,
     },
 
     {
       title: "Approved / Declined / Pending",
-      dataIndex: "request",
-      key: "request",
-      ...getColumnSearchProps("request"),
+      dataIndex: "event_status",
+      key: "event_status",
+      ...getColumnSearchProps("event_status"),
       render: (text: string) => {
-        let color = "red"; 
+        let color = "red";
         let label = text;
-
         if (text === "Approved") {
           color = "green";
         } else if (text === "Declined") {
@@ -370,7 +168,6 @@ const EventDetailsForUser: React.FC = () => {
         } else if (text === "Pending") {
           color = "orange";
         }
-
         return <span style={{ color }}>{label}</span>;
       },
     },
@@ -382,7 +179,7 @@ const EventDetailsForUser: React.FC = () => {
         <Table
           scroll={{ x: 1200, y: 400 }}
           columns={columns}
-          dataSource={data}
+          dataSource={data?.data}
         />
       </div>
     </div>

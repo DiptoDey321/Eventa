@@ -15,7 +15,7 @@ import UsersTickets from "./UsersTickets";
 
 const Navbar = () => {
 
-  const user = useSelector((state: RootState) => state.auth.user);
+  const user = useSelector((state: RootState) => state?.auth?.user);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const router = useRouter();
 
