@@ -113,7 +113,7 @@
 /* homepage hero starts here  */
 
 .dep-hero-sectiom {
-  padding: 60px 0px 60px 0px;
+  padding: 160px 0px 160px 0px;
 }
 
 .dep-hero-right-side .title {
@@ -1009,6 +1009,10 @@
     font-size: 40px;
     line-height: 42px;
   }
+
+  .dep-hero-sectiom {
+    padding: 60px 0px 60px 0px;
+  }
   .desktop-menu {
     display: none;
   }
@@ -1145,6 +1149,11 @@
   .home-page-basic-mx {
     padding: 50px 50px 0px 50px;
   }
+
+  .dep-hero-sectiom {
+    padding: 140px 0px 140px 0px;
+  }
+
   .dep-hero-right-side .title {
     font-size: 70px;
     line-height: 72px;

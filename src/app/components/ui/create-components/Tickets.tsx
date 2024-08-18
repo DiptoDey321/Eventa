@@ -48,7 +48,7 @@ const Tickets: React.FC<TicketsExtraProps> = ({
         <div className="tickets-show-edit">
           <Row gutter={[20, 20]}>
             {tickets.map((ticket) => (
-              <Col key={ticket.id} span={12}>
+              <Col key={ticket.id} xs={24} sm={24} md={12}>
                 <TicketCard ticket={ticket} showEditModal={showEditModal} />
               </Col>
             ))}

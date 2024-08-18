@@ -3,7 +3,6 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  width: 100vw;
   height: 100vh;
 }
 
@@ -16,23 +15,26 @@
 .sell-tickets-side-bg {
   position: relative;
   /* width: 600px; */
-  height: 650px;
+  width: 100%;
+  height: 650px !important;
 }
 
 .right-img-property {
-  width: 100%;
   height: 100%;
-  margin-left: 30px !important;
+  /* margin-left: 30px !important; */
+  /* width: calc(100%-30px); */
+  width: 100%;
   border-radius: 20px;
 }
 
 .img-blur-effect {
   position: absolute;
   top: 0px;
-  left: 30px;
-  backdrop-filter: blur(5px);
+  /* left: 30px; */
+  backdrop-filter: blur(3px);
   width: 100%;
   height: 100%;
+  border-radius: 20px !important;
 }
 .upload-options {
   position: absolute;
@@ -46,18 +48,29 @@
 }
 
 .main-container {
+  max-width: 1600px;
+  margin: auto !important;
   padding: 10px 100px 50px 100px;
 }
 
 .tickets-container-components {
   padding: 0px 100px;
+  max-width: 1600px;
+  margin: auto !important;
 }
 
 .tickets-btn-container {
+  /* max-width: 1600px; */
+  /* margin: auto !important; */
   position: sticky;
   top: 0px;
   z-index: 99;
   background-color: #8383831e;
+}
+
+.create-cancel-btn.btn2 {
+  max-width: 1600px;
+  margin: auto !important;
 }
 
 .cell-ticket-container .btn2 {
@@ -67,7 +80,7 @@
 }
 
 .cell-ticket-container .create-cancel-btn {
-  padding: 20px 50px;
+  padding: 20px 20px;
 }
 
 .cell-ticket-container .create-cancel-btn .custom-btn {
@@ -377,4 +390,39 @@ input::placeholder {
 
 .ant-upload-list-item.ant-upload-list-item-error {
   display: none !important;
+}
+
+@media (min-width: 320px) {
+  .main-container {
+    padding: 10px 10px 50px 10px;
+  }
+  .right-img-property {
+    margin-left: 0px !important;
+  }
+  .img-blur-effect {
+    left: 0px;
+  }
+  .tickets-container-components {
+    padding: 0px 20px;
+  }
+}
+@media (min-width: 576px) {
+}
+@media (min-width: 768px) {
+}
+@media (min-width: 992px) {
+  .main-container {
+    padding: 10px 50px 50px 50px;
+  }
+  .tickets-container-components {
+    padding: 0px 50px;
+  }
+}
+@media (min-width: 1200px) {
+  .main-container {
+    padding: 10px 100px 50px 100px;
+  }
+  .tickets-container-components {
+    padding: 0px 50px;
+  }
 }

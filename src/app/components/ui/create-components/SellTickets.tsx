@@ -119,7 +119,6 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
 
   try {
     const resultOfEventCreate = await postEvent(formData);
-    console.log(resultOfEventCreate?.data?.data?._id);
     
     if (resultOfEventCreate?.data?.data?._id != undefined){
        const resultOfTicketsCreate = await createTickets({
@@ -130,15 +129,10 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
         message.success("Event Created successfully!");
         router.push("/explore");
        }
-         console.log(
-           "ticekts posted successfully:",
-           resultOfTicketsCreate?.data?.is_success
-         );
     }else{
       message.error("Please fill required field")
     }
-     
-    console.log("Event posted successfully:", resultOfEventCreate?.data?.data?._id);
+
     
   } catch (error) {
     console.error("Failed to post event:", error);
@@ -217,7 +211,7 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
                 icon={<CloseOutlined />}
                 className="custom-btn"
               >
-                Exit Event Creation
+                Exit Creation
               </Button>
 
               <Button
@@ -230,8 +224,8 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
             </div>
           </div>
           <div className="main-container">
-            <Row>
-              <Col span={12}>
+            <Row gutter={[32,32]}>
+              <Col xs={24} sm={24} md={12} lg={12}>
                 <div className="form-cotainer">
                   <Form
                     form={form}
@@ -417,7 +411,7 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
                   </Form>
                 </div>
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={24} md={12} lg={12}>
                 <div className="sell-tickets-side-bg">
                   <Image
                     className="right-img-property"
