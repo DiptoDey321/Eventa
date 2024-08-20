@@ -44,6 +44,15 @@ export const authApi = baseApi.injectEndpoints({
       invalidatesTags: ["user"],
     }),
 
+    verifyOtpResetPassword: build.mutation({
+      query: (resetData) => ({
+        url: `${AUTH_URL}/verify-otp-reset-password`,
+        method: "PUT",
+        data: resetData,
+      }),
+      invalidatesTags: ["user"],
+    }),
+
     getDashboardTotalCount: build.query<any, void>({
       query: () => ({
         url: `${REPORT_URL}/dashboard-total-count`,
@@ -54,4 +63,4 @@ export const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useUserLoginMutation, useUserSignupMutation, useSendOtpMutation ,useGetDashboardTotalCountQuery, useSendForgetOtpMutation} = authApi;
+export const { useUserLoginMutation, useUserSignupMutation, useSendOtpMutation ,useGetDashboardTotalCountQuery, useSendForgetOtpMutation , useVerifyOtpResetPasswordMutation} = authApi;

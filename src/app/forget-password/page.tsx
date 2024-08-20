@@ -4,48 +4,108 @@ import { Form, Input, Button, message, Space, Card } from "antd";
 import { MailOutlined, PhoneOutlined } from "@ant-design/icons";
 import './forgetpassword.css'
 import { useRouter } from "next/navigation";
-import { useSendForgetOtpMutation } from "@/redux/api/authApi";
+import { useSendForgetOtpMutation, useVerifyOtpResetPasswordMutation } from "@/redux/api/authApi";
 
 const ForgetPasswordForm: React.FC = () => {
   const [isEmailSelected, setIsEmailSelected] = useState(true);
   const [isVerified, setIsVerified] = useState(false);
   const router = useRouter();
   const [sendForgetOtp] = useSendForgetOtpMutation();
+  const [verifyOtpResetPassword] = useVerifyOtpResetPasswordMutation();
+  const [value, setValue] = useState("");
+
+  // const onFinish = async (values: any) => {
+  //   // {otp: '123456', newPassword: 'qwer123@', confirmNewPassword: 'qwer123@'}
+  //   console.log(values);
+  //   if(!isVerified){
+  //     setValue(values.emailOrPhone);
+  //       if (isEmailSelected) {
+  //         const res = await sendForgetOtp({
+  //           iso_code: "BD",
+  //           is_phone_selected: false,
+  //           email: values.emailOrPhone,
+  //         });
+  //         if (res?.data?.data?.is_success) {
+  //           message.success("Please check your email!");
+  //           setIsVerified(true);
+  //         } else {
+  //           message.warning("Something Went Wrong !");
+  //         }
+  //       } else {
+  //         const res = await sendForgetOtp({
+  //           iso_code: "BD",
+  //           is_phone_selected: true,
+  //           phone: values.emailOrPhone,
+  //         });
+  //         if (res?.data?.data?.is_success) {
+  //           message.success("Please check your Phone!");
+  //           setIsVerified(true);
+  //         } else {
+  //           message.warning("Something Went Wrong !");
+  //         }
+  //       }
+  //   }
+
+  //   if(isVerified){
+  //      const data = {
+  //        otp: values.otp,
+  //        phone: isEmailSelected == false ? value : "",
+  //        iso_code: "BD",
+  //        email: isEmailSelected == true ? value : "",
+  //        is_phone_selected: !isEmailSelected,
+  //        password: values.newPassword,
+  //        confirm_password: values.confirmNewPassword,
+  //      };
+
+  //       const res = await useVerifyOtpResetPasswordMutation();
+       
+  //   }
+     
+  // };
 
   const onFinish = async (values: any) => {
-    // // console.log(values);
-    
-    // // const response = { success: true }; 
-    // {otp: '123456', newPassword: 'qwer123@', confirmNewPassword: 'qwer123@'}
-    console.log(values);
-    if (isEmailSelected){
-       const res = await sendForgetOtp({
-         iso_code: "BD",
-         is_phone_selected: false,
-         email: values.emailOrPhone,
-       }); 
-       setIsVerified(true);
-       if (res?.data?.data?.is_success) {
-        message.success("Please check your email!");
-        setIsVerified(true);
+    if (!isVerified) {
+      setValue(values.emailOrPhone);
+      try {
+        const res = await sendForgetOtp({
+          iso_code: "BD",
+          is_phone_selected: !isEmailSelected,
+          [isEmailSelected ? "email" : "phone"]: values.emailOrPhone,
+        }).unwrap();
 
-
-       } else {
-         message.warning("Something Went Wrong !");
-       } 
-       
-    }else{
-      const res = await sendForgetOtp({
+        if (res.data?.is_success) {
+          message.success(
+            `Please check your ${isEmailSelected ? "email" : "phone"}!`
+          );
+          setIsVerified(true);
+        } else {
+          message.warning("Something Went Wrong!");
+        }
+      } catch (error) {
+        message.error("Failed to send OTP. Please try again.");
+      }
+    } else {
+      const data = {
+        otp: values.otp,
+        phone: !isEmailSelected ? value : "",
         iso_code: "BD",
-        is_phone_selected: false,
-        email: values.emailOrPhone,
-      }); 
-       if (res?.data?.data?.is_success) {
-         message.success("Please check your Phone!");
-         setIsVerified(true);
-       } else {
-         message.warning("Something Went Wrong !");
-       } 
+        email: isEmailSelected ? value : "",
+        is_phone_selected: !isEmailSelected,
+        password: values.newPassword,
+        confirm_password: values.confirmNewPassword,
+      };
+
+      try {
+        const res = await verifyOtpResetPassword(data).unwrap();
+        if (res.data?.is_success) {
+          message.success("Password reset successful!");
+          router.push("/login")
+        } else {
+          message.warning("Failed to reset the password!");
+        }
+      } catch (error) {
+        message.error("Failed to reset the password. Please try again.");
+      }
     }
   };
 

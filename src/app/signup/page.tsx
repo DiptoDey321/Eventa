@@ -48,6 +48,7 @@ function SignUpPage() {
         iso_code: "BD",
         phone: values.phone,
         email: values.email,
+        is_phone_selected: true,
       }); 
       if (res?.data?.data?.is_success){
         setIsOtpFormVisible(true);
