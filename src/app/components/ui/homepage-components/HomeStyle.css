@@ -35,9 +35,9 @@
   align-items: center;
 }
 
-.dep-menu-container ul li:not(:last-child) {
+.dep-menu-container ul li {
   list-style: none;
-  color: #fc0;
+  color: #fc0 !important;
   text-decoration: none;
   position: relative;
   font-size: 16px;
@@ -68,18 +68,20 @@
   transition: width 1s;
 }
 
-.btn {
-  font-family: Arial;
-  font-weight: 500;
-  font-size: 1em;
-  text-transform: uppercase;
-  padding: 18px 50px;
+.create-hover-btn {
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 15px;
+  width: 180px;
   background: transparent;
-  border: none;
+  border: 1px solid #fc0 !important;
   cursor: pointer;
   transition: 0.4s all cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: relative;
   z-index: 2;
+  border-radius: 5px;
+  color: #fc0 !important;
   &:after {
     content: "";
     position: absolute;
@@ -87,20 +89,21 @@
   }
 }
 
-.btn-2 {
-  border: 2px solid #0e0e16;
-  color: #0e0e16;
+.create-hover-btn-2 {
+  border: 1px solid #fc0 !important;
+  color: black !important;
   &:after {
     width: 0;
     height: 100%;
-    background: #0e0e16;
+    background: #fc0 !important;
     top: 0;
     left: 0;
     z-index: -1;
     transition: 0.4s all cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   &:hover {
-    color: whitesmoke;
+    color: black !important;
+    font-weight: 500;
     &:after {
       width: 100%;
     }
@@ -961,7 +964,7 @@
 .home-footer-container .social-icons {
   display: flex;
   gap: 10px;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 /* footer part end here  */

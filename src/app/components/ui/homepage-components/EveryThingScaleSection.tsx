@@ -255,9 +255,9 @@ const EveryThingScaleSection = () => {
                           transform="translate(-5.5 -6.142)"
                           fill="none"
                           stroke="#ffbf00"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1"
                         />
                         <path
                           id="d"
@@ -265,9 +265,9 @@ const EveryThingScaleSection = () => {
                           transform="translate(-5.5 -3.184)"
                           fill="none"
                           stroke="#ffbf00"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1"
                         />
                         <path
                           id="e"
@@ -275,9 +275,9 @@ const EveryThingScaleSection = () => {
                           transform="translate(3.016 -3.184)"
                           fill="none"
                           stroke="#ffbf00"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1"
                         />
                         <path
                           id="f"
@@ -285,9 +285,9 @@ const EveryThingScaleSection = () => {
                           transform="translate(-1.242 -3.153)"
                           fill="none"
                           stroke="#ffbf00"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1"
                         />
                       </g>
                     </svg>
@@ -919,7 +919,7 @@ const EveryThingScaleSection = () => {
                         d="M28.411,5A13.2,13.2,0,0,0,22.4,29.958l7.176,5.571,9.3-9.279A13.2,13.2,0,0,0,28.411,5Z"
                         transform="translate(-9.773 -4.109)"
                         fill="#f2d865"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                       />
                       <path
                         id="Path_2767"
@@ -927,7 +927,7 @@ const EveryThingScaleSection = () => {
                         d="M29.84,5a11.573,11.573,0,0,0-1.48.089,13.2,13.2,0,0,1,8.985,21.161l-8,7.978,1.667,1.292,9.3-9.279A13.2,13.2,0,0,0,29.849,4.99h0Z"
                         transform="translate(-11.201 -4.108)"
                         fill="#f2d865"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                       />
                       <path
                         id="Path_2768"
@@ -935,7 +935,7 @@ const EveryThingScaleSection = () => {
                         d="M13.97,33a3.86,3.86,0,0,0,0,7.719v7.728a3.864,3.864,0,0,0,0,7.728H32.064a3.851,3.851,0,0,0,2.371-.811L32.724,38.49l-6.15-5.5H13.97Z"
                         transform="translate(-9.219 -7.149)"
                         fill="#f2d865"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                       />
                       <path
                         id="Path_2769"
@@ -943,7 +943,7 @@ const EveryThingScaleSection = () => {
                         d="M24.309,49.389H13.979a3.86,3.86,0,1,1,0-7.719h8.86L24.309,49.4Z"
                         transform="translate(-9.219 -8.092)"
                         fill="#e9c03d"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                       />
                       <circle
                         id="Ellipse_2944"
@@ -978,7 +978,7 @@ const EveryThingScaleSection = () => {
                         d="M38.862,28.579a13.083,13.083,0,0,0-1.774.125,13.194,13.194,0,0,1-.018,26.144,13.451,13.451,0,0,0,1.792.125,13.2,13.2,0,1,0,0-26.4Z"
                         transform="translate(-12.147 -6.669)"
                         fill="#f2d865"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                       />
                       <path
                         id="Path_2771"
@@ -986,7 +986,7 @@ const EveryThingScaleSection = () => {
                         d="M38.934,35.27a7.534,7.534,0,0,0-1.194.1,7.238,7.238,0,0,1,0,14.28,7.448,7.448,0,0,0,1.194.1,7.238,7.238,0,1,0,0-14.476Z"
                         transform="translate(-12.22 -7.397)"
                         fill="#e6a361"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                       />
                       <path
                         id="Path_2772"
@@ -994,7 +994,7 @@ const EveryThingScaleSection = () => {
                         d="M29.88,11.69a8.115,8.115,0,0,0-1.15.089,7.241,7.241,0,0,1,0,14.3,6.984,6.984,0,0,0,1.15.089,7.238,7.238,0,0,0,0-14.476Z"
                         transform="translate(-11.241 -4.835)"
                         fill="#e6a361"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                       />
                       <path
                         id="Path_2773"
@@ -1260,7 +1260,7 @@ const EveryThingScaleSection = () => {
                           d="M222.456,202.042H202.32a2.32,2.32,0,0,1-2.32-2.32v-37.4a2.32,2.32,0,0,1,2.32-2.32h37.4a2.32,2.32,0,0,1,2.32,2.32v37.4a2.32,2.32,0,0,1-2.32,2.32H229.008V185.761h5.465l.818-6.345h-6.283v-4.051c0-1.838.511-3.089,3.144-3.089l3.36,0V166.6a45,45,0,0,0-4.9-.25c-4.844,0-8.161,2.957-8.161,8.386v4.68h-5.479v6.345h5.479v16.281Z"
                           transform="translate(-200 -160)"
                           fill="#5980da"
-                          fill-rule="evenodd"
+                          fillRule="evenodd"
                         />
                       </g>
                     </svg>
