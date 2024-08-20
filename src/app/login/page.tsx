@@ -60,7 +60,7 @@ const Login = () => {
     <div className="login-form-parent-container">
       <div className="login-style-cotainer">
         <Row>
-          <Col span={12}>
+          <Col xs={24} md={12}>
             <div className="login-form-child-container">
               {/* logo container  */}
 
@@ -232,7 +232,7 @@ const Login = () => {
             </div>
           </Col>
 
-          <Col span={12}>
+          <Col xs={24} md={12}>
             <div className="right-side">
               <div className="logo-container" style={{ cursor: "pointer" }}>
                 <a href="/">

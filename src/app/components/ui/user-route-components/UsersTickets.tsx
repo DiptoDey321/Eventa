@@ -127,21 +127,21 @@ const UsersTickets = () => {
       key: "event_name",
       dataIndex: "event_id",
       width: 200,
-      render: (event_id) => `${event_id.title}`,
+      render: (event_id) => `${event_id?.title}`,
     },
     {
       title: "Event Address",
       key: "address",
       dataIndex: "event_id",
       width: 200,
-      render: (event_id) => `${event_id.address}`,
+      render: (event_id) => `${event_id?.address}`,
     },
     {
       title: "Event venue",
       key: "venue",
       dataIndex: "event_id",
       width: 200,
-      render: (event_id) => `${event_id.venue_name}`,
+      render: (event_id) => `${event_id?.venue_name}`,
     },
     {
       title: "Token Number",
@@ -170,7 +170,7 @@ const UsersTickets = () => {
       width: 200,
       fixed: "right",
       render: (text, record) => (
-        <Button type="primary" onClick={() => handleDownload(record)}>
+        <Button style={{padding:"0px 10px"}} type="primary" onClick={() => handleDownload(record)}>
           Download Ticket
         </Button>
       ),

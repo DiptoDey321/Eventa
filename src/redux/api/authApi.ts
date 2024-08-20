@@ -1,5 +1,6 @@
 import { baseApi } from "./baseApi";
 const AUTH_URL = "/auth"
+const REPORT_URL = "/reports";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -32,7 +33,25 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["user"],
     }),
+
+    sendForgetOtp: build.mutation({
+      query: (otpData) => ({
+        url: `${AUTH_URL}/forgot-password-send-otp`,
+        method: "POST",
+        data: otpData,
+        requiresAuth: false,
+      }),
+      invalidatesTags: ["user"],
+    }),
+
+    getDashboardTotalCount: build.query<any, void>({
+      query: () => ({
+        url: `${REPORT_URL}/dashboard-total-count`,
+        method: "GET",
+      }),
+      providesTags: ["DashboardTotalCount"],
+    }),
   }),
 });
 
-export const { useUserLoginMutation, useUserSignupMutation, useSendOtpMutation } = authApi;
+export const { useUserLoginMutation, useUserSignupMutation, useSendOtpMutation ,useGetDashboardTotalCountQuery, useSendForgetOtpMutation} = authApi;

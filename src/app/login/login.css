@@ -13,7 +13,6 @@
 
 .login-style-cotainer {
   width: 1000px;
-  /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
   border-radius: 10px;
 }
 
@@ -99,7 +98,6 @@ input::placeholder {
 }
 
 /* for active class  */
-
 .icon-active-color path {
   fill: #ffbf00 !important;
 }
@@ -112,4 +110,49 @@ input::placeholder {
 }
 .common-style {
   margin-top: 15px !important;
+}
+
+@media (min-width: 320px) {
+  .login-form-parent-container .right-side {
+    display: none;
+  }
+  .login-style-cotainer {
+    width: fit-content;
+  }
+  .login-form-child-container {
+    border-radius: 10px 10px 10px 10px;
+  }
+  .input-field-login {
+    width: 100% !important;
+  }
+}
+@media (min-width: 576px) {
+}
+@media (min-width: 768px) {
+  .login-style-cotainer {
+    width: 700px;
+  }
+  .login-form-parent-container .right-side {
+    display: flex;
+  }
+}
+@media (min-width: 992px) {
+  .login-style-cotainer {
+    width: 880px;
+  }
+  .login-form-child-container {
+    border-radius: 10px 0 0px 10px;
+  }
+  .input-field-login {
+    width: 300px !important;
+    border: none;
+    height: 40px;
+    background-color: rgb(106 109 116 / 0%) !important;
+    color: white !important;
+  }
+}
+@media (min-width: 1200px) {
+  .login-style-cotainer {
+    width: 1000px;
+  }
 }

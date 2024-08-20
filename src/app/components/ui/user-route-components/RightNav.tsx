@@ -44,7 +44,7 @@ const RightNav:React.FC<MenuProps> =({ isOpen, closeMenu })=> {
         <div className="dep-organization-name-pic">
           <Select
             className="dep-custom-select"
-            style={{ width: 230, height: "45px" }}
+            style={{ width: 180, height: "45px" }}
             placeholder="Eventa"
             defaultValue="Organization 1"
             onChange={handleChange}
@@ -96,9 +96,9 @@ const RightNav:React.FC<MenuProps> =({ isOpen, closeMenu })=> {
         </div>
 
         <ul>
-          <li>Organization Dashboard</li>
-          <li>My Orders</li>
+          <li>My Dashboard</li>
           <li>My Account</li>
+          <li>My Orders</li>
           <li onClick={() => handleLogOut()}>Logout</li>
         </ul>
       </div>

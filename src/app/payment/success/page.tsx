@@ -3,11 +3,12 @@
 import React from 'react'
 import './success.css'
 import generatePDF, { Resolution, Margin, Options } from "react-to-pdf";
+import { QRCode } from 'antd';
 
 function PaymentSuccess({ ticketData }:any) {
 
   const options: Options = {
-    filename: "advanced-example.pdf",
+    filename: "Eventa-tickets.pdf",
     method: "save",
     resolution: Resolution.EXTREME,
     page: {
@@ -17,7 +18,7 @@ function PaymentSuccess({ ticketData }:any) {
     },
     canvas: {
       mimeType: "image/jpeg",
-      qualityRatio: 1,
+      qualityRatio: 0.5,
     },
     overrides: {
       pdf: {
@@ -101,10 +102,7 @@ function PaymentSuccess({ ticketData }:any) {
             </div>
             <div className="left">
               <div className="img-container">
-                <img
-                  src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb"
-                  alt=""
-                />
+                <img src="https://i.ibb.co/pJFj3Q2/party-on.webp" alt="" />
               </div>
               <div className="image">
                 <p className="admit-one">
@@ -146,10 +144,20 @@ function PaymentSuccess({ ticketData }:any) {
                 </p> */}
                   </div>
                   <div className="barcode">
-                    <img
+                    <QRCode
+                      size={66}
+                      style={{
+                        height: "auto",
+                        maxWidth: "100%",
+                        width: "100%",
+                      }}
+                      type="svg"
+                      value={ticketData?.ticket_number}
+                    />
+                    {/* <img
                       src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb"
                       alt="QR code"
-                    />
+                    /> */}
                   </div>
                 </div>
 

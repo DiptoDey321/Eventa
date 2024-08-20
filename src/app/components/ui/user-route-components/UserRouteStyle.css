@@ -80,8 +80,8 @@
 .dep-menu {
   position: fixed;
   top: 0;
-  right: -350px;
-  width: 350px;
+  right: -300px;
+  width: 300px;
   height: 100%;
   background: linear-gradient(180deg, #1c1d1f 0%, #0d0e10 100%);
   color: white;
@@ -242,4 +242,21 @@
   .submit-custom-btn:hover {
     background: transparent !important;
   }
+}
+
+@media (min-width: 320px) {
+  .user-main-layout {
+    padding: 30px 20px;
+  }
+}
+@media (min-width: 576px) {
+}
+@media (min-width: 768px) {
+  .user-main-layout {
+    padding: 30px 50px;
+  }
+}
+@media (min-width: 992px) {
+}
+@media (min-width: 1200px) {
 }

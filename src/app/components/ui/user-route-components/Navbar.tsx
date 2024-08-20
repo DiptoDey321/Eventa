@@ -12,6 +12,7 @@ import EventDetailsForUser from "./EventDetailsForUser";
 import UserProfile from "./UserProfile";
 import { useRouter } from "next/navigation";
 import UsersTickets from "./UsersTickets";
+import UserDashboard from "./UserDashboard";
 
 const Navbar = () => {
 
@@ -31,7 +32,7 @@ const Navbar = () => {
     {
       key: "1",
       label: "Overview",
-      children: <BarChart />,
+      children: <UserDashboard />,
     },
     {
       key: "2",
@@ -116,7 +117,7 @@ const Navbar = () => {
           </svg>
         </div>
         <div className="dep-user-menu">
-          <p>Welcome, {user?.first_name} {}</p>
+          <p>{user?.first_name} {}</p>
           {/* <Badge count={5}>
             <Button
               type="primary"

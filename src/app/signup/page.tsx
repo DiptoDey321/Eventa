@@ -44,7 +44,11 @@ function SignUpPage() {
         values.notifications = false;
       }
       setDatas(values);
-      const res = await sendOtp({ iso_code: "BD", phone: values.phone }); 
+      const res = await sendOtp({
+        iso_code: "BD",
+        phone: values.phone,
+        email: values.email,
+      }); 
       if (res?.data?.data?.is_success){
         setIsOtpFormVisible(true);
       }else{
@@ -134,10 +138,10 @@ function SignUpPage() {
   return (
     <div>
       <Row>
-        <Col span={12}>
+        <Col xs={24} sm={24} lg={12}>
           <div className="registration-bg"></div>
         </Col>
-        <Col span={12}>
+        <Col xs={24} sm={24} lg={12}>
           <div className="form-parent-container">
             <div className="">
               <div
@@ -211,7 +215,7 @@ function SignUpPage() {
                     >
                       {/* for first name and last name  */}
                       <Row>
-                        <Col span={12}>
+                        <Col xs={24} sm={12} md={12}>
                           <Form.Item
                             className="common-style1"
                             name="firstName"
@@ -224,7 +228,7 @@ function SignUpPage() {
                             />
                           </Form.Item>
                         </Col>
-                        <Col span={12}>
+                        <Col xs={24} sm={12} md={12}>
                           <Form.Item
                             className="common-style2"
                             name="lastName"
@@ -246,7 +250,7 @@ function SignUpPage() {
                         className="common-style"
                       >
                         <Input
-                          className="input-field-login input-login-common input-login-common"
+                          className="input-field-login input-login-common"
                           placeholder="Email"
                           prefix={<MailOutlined />}
                         />
