@@ -71,18 +71,19 @@ const NavBar = () => {
           )}
 
           {loggedIn && (
-            <li
-              onClick={() => handleNavigation("/user")}
-              className="cool-link"
-            >
+            <li onClick={() => handleNavigation("/user")} className="cool-link">
               Profile
             </li>
           )}
+
+          <li onClick={() => router.push("/create")} className="dep-btn-0">
+            Lunch An Event
+          </li>
         </ul>
 
-        <a className="dep-btn-0" href="/create">
+        {/* <a className="dep-btn-0" href="/create">
           Lunch An Event
-        </a>
+        </a> */}
       </div>
 
       <div className="mobile-menu">

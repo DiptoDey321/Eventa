@@ -32,9 +32,10 @@
 
 .dep-menu-container ul {
   display: flex;
+  align-items: center;
 }
 
-.dep-menu-container ul li {
+.dep-menu-container ul li:not(:last-child) {
   list-style: none;
   color: #fc0;
   text-decoration: none;
@@ -47,7 +48,7 @@
   cursor: pointer;
 }
 
-.dep-menu-container ul li::after {
+.dep-menu-container ul li:not(:last-child)::after {
   position: absolute;
   top: 26px;
   content: "";
@@ -60,7 +61,7 @@
   left: initial;
 }
 
-.dep-menu-container ul li:hover::after {
+.dep-menu-container ul li:not(:last-child):hover::after {
   width: 100%;
   right: initial;
   left: 0;
@@ -82,6 +83,7 @@
   font-size: 15px;
   text-decoration: none;
   margin-left: 20px !important;
+  cursor: pointer;
 }
 
 .dep-btn-0 {
