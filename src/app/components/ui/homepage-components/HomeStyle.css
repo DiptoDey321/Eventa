@@ -35,7 +35,7 @@
   align-items: center;
 }
 
-.dep-menu-container ul li {
+.dep-menu-container ul li:not(:last-child) {
   list-style: none;
   color: #fc0;
   text-decoration: none;
@@ -48,7 +48,7 @@
   cursor: pointer;
 }
 
-.dep-menu-container ul li::after {
+.dep-menu-container ul li:not(:last-child)::after {
   position: absolute;
   top: 26px;
   content: "";
@@ -61,7 +61,7 @@
   left: initial;
 }
 
-.dep-menu-container ul li:hover::after {
+.dep-menu-container ul li:not(:last-child):hover::after {
   width: 100%;
   right: initial;
   left: 0;
@@ -70,7 +70,7 @@
 
 .dep-btn-0 {
   position: relative;
-  display: block;
+  /* display: block; */
   overflow: hidden;
   width: 100%;
   width: 200px;
