@@ -76,8 +76,11 @@ const NavBar = () => {
             </li>
           )}
 
-          <li onClick={() => router.push("/create")} className="dep-btn-0">
-            Lunch An Event
+          <li
+            onClick={() => router.push("/create")}
+            className="btn btn-2"
+          >
+            <span>Lunch An Event</span>
           </li>
         </ul>
 
