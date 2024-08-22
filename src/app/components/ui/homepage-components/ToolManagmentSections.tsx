@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import "./HomeStyle.css";
-import { Col, Row } from "antd";
+import { Col, message, Row } from "antd";
 import { motion, useAnimation } from "framer-motion";
 import Image from "next/image";
 import { useEffect } from "react";
@@ -13,7 +13,8 @@ const ToolManagmentSections = () => {
    const controls = useAnimation();
 
    const { ref, inView } = useInView({
-     threshold: 0.1,
+     threshold: 0.2,
+    //  triggerOnce: true,
    });
 
   const listVariants = {
@@ -26,7 +27,7 @@ const ToolManagmentSections = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.15,
-        duration: 0.5,
+        duration: 0.2,
         ease: "linear",
       },
     },
@@ -42,8 +43,8 @@ const ToolManagmentSections = () => {
 
 
   return (
-    <div className="tools-max-width">
-      <div className="tool-management-container">
+    <div className="tool-management-container">
+      <div className="tools-max-width ">
         <Row align="middle">
           <Col md={24} lg={24} xl={12}>
             <motion.div
@@ -66,7 +67,7 @@ const ToolManagmentSections = () => {
                 </span>
               </div>
               <div className="btn">
-                <a href="">Get Started</a>
+                <a onClick={() => message.info("comign soon..")}>Get Started</a>
               </div>
             </motion.div>
           </Col>

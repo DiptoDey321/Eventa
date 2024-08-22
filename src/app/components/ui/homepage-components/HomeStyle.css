@@ -110,65 +110,18 @@
   }
 }
 
-/* .dep-btn-0 {
-  width: 180px;
-  border: 1px solid #fc0;
-  border-radius: 5px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  font-size: 15px;
-  color: #fc0;
-  cursor: pointer;
-  transition: transform 0.4s ease-in-out;
-}
-
-.dep-btn-0:hover {
-  background-color: #fc0;
-  color: black;
-} */
-
-/* .dep-btn-0 {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
+.loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  width: 200px;
-  margin: 1rem auto;
-  border: 1px solid #fc0;
-  border-radius: 5px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  font-size: 15px;
-  text-decoration: none;
-  margin-left: 20px !important;
-  cursor: pointer;
-} */
-
-/* .dep-btn-0 {
-  color: #fc0;
-  &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: #fc0;
-    transform: translateX(-100%);
-    transition: transform 0.4s ease-in-out;
-    z-index: -1;
-  }
-  &:hover {
-    color: black;
-    font-weight: 600;
-
-    &:before {
-      transform: translateX(0);
-    }
-  }
-} */
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
 
 /* homepage nav ends here  */
 
@@ -313,8 +266,10 @@
 /* RSVP-sections starts here */
 
 .RSVP-Section {
-  padding-top: 40px;
-  padding-bottom: 69px;
+  padding-top: 100px;
+  padding-bottom: 120px;
+  max-width: 1400px;
+  margin: auto !important;
 }
 .tool-management-container .RSVP-description,
 .RSVP-Section .RSVP-description {
@@ -358,13 +313,11 @@
 .cau-parent-div {
   background-image: url(./../../../../../public/caurosolebg.png);
   border-radius: 25px;
-  box-shadow: 10px 10px 5px 0px rgba(45, 39, 39, 0.75);
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(45, 39, 39, 0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(45, 39, 39, 0.75);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   padding: 0px 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 10.95px 10.95px 10.6px;
 }
 
 .cau-parent-div .cau-content-parent {
@@ -395,17 +348,18 @@
 /* tool-management starts here */
 
 .tools-max-width {
-  max-width: 1600px !important;
+  max-width: 1400px !important;
   margin: auto !important;
 }
 
 .tool-management-container {
-  background-image: url(./../../../../../public/tool-managment-bg.webp);
+  /* background-image: url(./../../../../../public/tool-managment-bg.webp); */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  padding: 150px 100px 150px 100px;
+  padding: 50px 100px 50px 100px;
   margin-top: -2px !important;
+  background-color: #322f30;
 }
 
 .tool-management-container .RSVP-description {
@@ -456,7 +410,6 @@
 .everyting-scale-section {
   padding: 30px 100px 0px 100px;
   background-color: #ffbf00;
-  max-width: 1400px !important;
   margin: auto !important;
   margin-top: -4px !important;
 }
@@ -730,15 +683,19 @@
 
 .clients-section {
   background-color: #ffbf00;
-  padding: 50px 100px 0px 100px;
-  max-width: 1400px !important;
-  margin: auto !important;
+  padding: 100px 100px 0px 100px;
   margin-top: 100px !important;
 }
+
+.what-clients-say {
+  max-width: 1400px !important;
+  margin: auto !important;
+}
+
 .what-clients-say .heading {
   font-size: 30px;
   font-weight: 700;
-  margin-bottom: 20px !important;
+  margin-bottom: 40px !important;
 }
 
 .what-clients-say .mySwiper {
@@ -1108,7 +1065,6 @@
   .tool-management-container {
     padding: 50px 10px 180px 10px;
     background-image: none;
-    background-color: #322f30;
   }
   .tool-management-container .RSVP-description span:first-child,
   .RSVP-Section .RSVP-description span:first-child {
@@ -1248,8 +1204,8 @@
     flex-direction: row;
   }
   .tool-management-container {
-    padding: 250px 100px 240px 100px;
-    background-image: url(./../../../../../public/tool-managment-bg.webp);
+    padding: 150px 100px 150px 100px;
+    /* background-image: url(./../../../../../public/tool-managment-bg.webp); */
   }
   .everyting-scale-section {
     padding: 30px 100px 0px 100px;

@@ -1,6 +1,6 @@
 "use client";
 import "./HomeStyle.css";
-import { Col, Input, Row } from "antd";
+import { Col, Input, message, Row } from "antd";
 
 const LearnFromBest = () => {
   return (
@@ -154,7 +154,7 @@ const LearnFromBest = () => {
                     className="input-field"
                     placeholder="Enter your email"
                   />
-                  <span>
+                  <span onClick={() => message.info("comign soon..")}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="28"

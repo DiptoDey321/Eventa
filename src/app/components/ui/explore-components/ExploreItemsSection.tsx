@@ -1,8 +1,5 @@
 "use client"
 import ExploreItemsCard from "../../resuable-component/ExploreItemsCard";
-import itemOne from '../../../../../public/item1.webp'
-import itemTwo from '../../../../../public/items2.webp'
-import itemThree from '../../../../../public/item3.webp'
 import itemFour from "../../../../../public/item4.webp";
 import orgIcon from "../../../../../public/org_icon.png";
 import { Button, Col, Row, Select } from "antd";
@@ -75,45 +72,6 @@ const ExploreItemsSection =({data}:any) => {
                 />
               </Col>
             ))}
-
-            <Col sm={24} md={12} lg={8}>
-              <ExploreItemsCard
-                id="6697b09fd05d8e76ce183f9c"
-                imageSrc={itemTwo}
-                organizerName="Organizer Name"
-                organizerIcon={orgIcon}
-                heading="Event Heading Event Heading"
-                fromDate="June 28, 2024"
-                toDate="June 30, 2024"
-                location="Bozeman, MT Street 59718, USA"
-              />
-            </Col>
-
-            <Col sm={24} md={12} lg={8}>
-              <ExploreItemsCard
-                id="6697b09fd05d8e76ce183f9c"
-                imageSrc={itemThree}
-                organizerName="Organizer Name"
-                organizerIcon={orgIcon}
-                heading="Event Heading Event Heading"
-                fromDate="June 28, 2024"
-                toDate="June 30, 2024"
-                location="Bozeman, MT Street 59718, USA"
-              />
-            </Col>
-
-            <Col sm={24} md={12} lg={8}>
-              <ExploreItemsCard
-                id="6697b09fd05d8e76ce183f9c"
-                imageSrc={itemOne}
-                organizerName="Organizer Name"
-                organizerIcon={orgIcon}
-                heading="Event Heading Event Heading"
-                fromDate="June 28, 2024"
-                toDate="June 30, 2024"
-                location="Bozeman, MT Street 59718, USA"
-              />
-            </Col>
           </Row>
         </div>
       </div>

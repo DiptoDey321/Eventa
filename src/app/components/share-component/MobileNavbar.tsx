@@ -18,8 +18,8 @@ const MobileNavbar: React.FC = () => {
 
   const menuItems = [
     { key: "/explore", label: "Explore Events" },
-    { key: "/demo", label: "Request A Demo" },
-    { key: "/magazine", label: "Magazine" },
+    { key: "/demo", label: "Tutorials" },
+    { key: "/magazine", label: "About us" },
     {
       key: `${loggedIn == false ? "/login" : "/user"} `,
       label: `${loggedIn == false ? "Login" : "Profile"} `,

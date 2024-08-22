@@ -1,7 +1,8 @@
 "use client";
 import "./HomeStyle.css";
-import { Col, Row } from "antd";
+import { Col, message, Row } from "antd";
 import { motion, useAnimation } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -14,33 +15,35 @@ const EveryThingScaleSection = () => {
   const controls6 = useAnimation();
   const controls7 = useAnimation();
 
+  const router = useRouter();
+
   const { ref: ref1, inView: inView1 } = useInView({
     triggerOnce: false, 
-    threshold: 0.1, 
+    threshold: 0.2, 
   });
   const { ref: ref2, inView: inView2 } = useInView({
     triggerOnce: false,
-    threshold: 0.1,
+    threshold: 0.2,
   });
   const { ref: ref3, inView: inView3 } = useInView({
     triggerOnce: false,
-    threshold: 0.1,
+    threshold: 0.2,
   });
   const { ref: ref4, inView: inView4 } = useInView({
     triggerOnce: false,
-    threshold: 0.1,
+    threshold: 0.2,
   });
   const { ref: ref5, inView: inView5 } = useInView({
     triggerOnce: false,
-    threshold: 0.1,
+    threshold: 0.2,
   });
   const { ref: ref6, inView: inView6 } = useInView({
     triggerOnce: false,
-    threshold: 0.1,
+    threshold: 0.2,
   });
   const { ref: ref7, inView: inView7 } = useInView({
     triggerOnce: false,
-    threshold: 0.1,
+    threshold: 0.2,
   });
 
   useEffect(() => {
@@ -106,7 +109,7 @@ const EveryThingScaleSection = () => {
         x: 0,
         // y: 0,
         transition: {
-          duration: 1,
+          duration: 0.4,
           delay: 0.2,
         },
       },
@@ -122,7 +125,7 @@ const EveryThingScaleSection = () => {
         x: 0,
         y: 0,
         transition: {
-          duration: 1,
+          duration: 0.4,
           delay: 0.2,
         },
       },
@@ -138,7 +141,7 @@ const EveryThingScaleSection = () => {
         x: 0,
         y: 0,
         transition: {
-          duration: 1,
+          duration: 0.4,
           delay: 0.2,
         },
       },
@@ -153,7 +156,7 @@ const EveryThingScaleSection = () => {
         x: 0,
         scale: 1,
         transition: {
-          duration: 1,
+          duration: 0.4,
           delay: 0.2,
         },
       },
@@ -169,7 +172,7 @@ const EveryThingScaleSection = () => {
         x: 0,
         y: 0,
         transition: {
-          duration: 1,
+          duration: 0.4,
           delay: 0.2,
         },
       },
@@ -180,9 +183,9 @@ const EveryThingScaleSection = () => {
     hidden: {
       scale: 1.5,
       opacity: 0,
-      rotate: 45,
+      rotate: 25,
       transition: {
-        duration: 2,
+        duration: 0.4,
         ease: "easeInOut",
       },
     },
@@ -191,7 +194,7 @@ const EveryThingScaleSection = () => {
       rotate: 0,
       opacity: 1,
       transition: {
-        duration: 2,
+        duration: 0.4,
         ease: "easeInOut",
       },
     },
@@ -222,7 +225,9 @@ const EveryThingScaleSection = () => {
               </span>
             </div>
             <div className="btn">
-              <a href="">Lunch an event</a>
+              <a onClick={() =>router.push("/create")}>
+                Lunch an event
+              </a>
             </div>
           </motion.div>
         </Col>

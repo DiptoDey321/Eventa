@@ -215,7 +215,7 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
               </Button>
 
               <Button
-                style={{ width: "200px" }}
+                
                 onClick={onSubmitAllData}
                 className="custom-btn sub-btn"
               >

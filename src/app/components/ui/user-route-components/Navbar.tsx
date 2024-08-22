@@ -45,11 +45,11 @@ const Navbar = () => {
       children: <EventDetailsForUser />,
     },
 
-    {
-      key: "4",
-      label: "Profile",
-      children: <UserProfile />,
-    },
+    // {
+    //   key: "4",
+    //   label: "Profile",
+    //   children: <UserProfile />,
+    // },
   ];
 
   const toggleMenu = () => {

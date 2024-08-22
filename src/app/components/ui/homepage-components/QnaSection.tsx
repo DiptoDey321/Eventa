@@ -19,12 +19,12 @@ const QnaSection = () => {
    const controls = useAnimation();
 
   const { ref, inView } = useInView({
-    threshold: 0.1,
+    threshold: 0.2,
   });
 
   const listVariants = {
     hidden: {
-      y: 60,
+      y: 40,
       opacity: 0,
     },
     visible: {
@@ -32,7 +32,7 @@ const QnaSection = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.15,
-        duration: 2,
+        duration: 0.4,
         ease: "linear",
       },
     },
@@ -96,7 +96,7 @@ const QnaSection = () => {
             animate={{ y: ["0px", "20px", "0px", "-20px", "0px"] }}
             transition={{
               y: {
-                duration: 8,
+                duration: 4,
                 repeat: Infinity,
                 ease: "easeInOut",
               },

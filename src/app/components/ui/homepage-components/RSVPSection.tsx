@@ -1,16 +1,15 @@
 "use client";
 import "./HomeStyle.css";
-import {motion, useAnimation } from "framer-motion";
-import { useInView } from 'react-intersection-observer';
-import { Carousel, Col, Row } from "antd";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { Carousel, Col, message, Row } from "antd";
 import { useEffect } from "react";
 
 const RSVPSection = () => {
-
   const controls = useAnimation();
 
   const { ref, inView } = useInView({
-    threshold: 0.1,
+    threshold: 0.2,
   });
 
   const listVariants = {
@@ -23,7 +22,7 @@ const RSVPSection = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.15,
-        duration: 2,
+        duration: 0.4,
         ease: "linear",
       },
     },
@@ -33,9 +32,9 @@ const RSVPSection = () => {
     hidden: {
       scale: 1.4,
       opacity: 0,
-      rotate: 35,
+      rotate: 25,
       transition: {
-        duration: 2,
+        duration: 0.4,
         ease: "easeInOut",
       },
     },
@@ -44,7 +43,7 @@ const RSVPSection = () => {
       opacity: 1,
       rotate: 0,
       transition: {
-        duration: 2,
+        duration: 0.4,
         ease: "easeInOut",
       },
     },
@@ -80,7 +79,7 @@ const RSVPSection = () => {
               </span>
             </div>
             <div className="btn">
-              <a href="">Lunch an event</a>
+              <a onClick={()=>message.info("comign soon..")}>Lunch an event</a>
             </div>
           </motion.div>
         </Col>

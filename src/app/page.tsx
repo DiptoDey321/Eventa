@@ -18,7 +18,7 @@ export default function Home() {
       <div className="home-page-basic-mx">
         <HeroSection></HeroSection>
       </div>
-      <div className="home-page-basic-mx bg-yellows">
+      <div className="bg-yellows">
         <RSVPSection></RSVPSection>
       </div>
       <div className="">

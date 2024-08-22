@@ -78,8 +78,6 @@ function EventDetails({ params }: { params: { id: string } }) {
   };
 
   const handleRemoveTicket = (id: string, eventId: string) => {
-    console.log("comed here");
-
     dispatch(removeTicket({ id, eventId }));
   };
 
@@ -90,6 +88,8 @@ function EventDetails({ params }: { params: { id: string } }) {
   const paymentPage = () =>{
     router.push("/payment");
   }
+  
+  console.log(data?.data?.tickets);
   
 
   return (
@@ -125,7 +125,7 @@ function EventDetails({ params }: { params: { id: string } }) {
                           id={tickets?._id}
                           eventId={tickets?.event_id}
                           price={tickets.price}
-                          qty={tickets.qty}
+                          qty={tickets.available_qty}
                           ticketTitle={tickets.title}
                           details={tickets?.description}
                           eventName={data?.data?.title}
@@ -276,7 +276,9 @@ function EventDetails({ params }: { params: { id: string } }) {
 
             <div className="payment-btn">
               {totalItems > 0 && (
-                <Button onClick={()=>paymentPage()}  className="custom-btn">Process to Payment</Button>
+                <Button onClick={() => paymentPage()} className="custom-btn">
+                  Process to Payment
+                </Button>
               )}
             </div>
           </Modal>

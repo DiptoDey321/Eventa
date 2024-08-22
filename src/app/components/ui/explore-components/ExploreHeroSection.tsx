@@ -5,13 +5,14 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import ExploreCard from "../../resuable-component/ExploreCard";
 import album from '../../../../../public/album.webp'
+import { useRouter } from "next/navigation";
 
 const ExploreHeroSection = ({ data}:any) => {
 
-  console.log(data.data);
+  const router = useRouter();
   
-  const handleButtonClick = () => {
-    console.log("Button clicked!");
+  const handleButtonClick = (id:any) => {
+    router.push(`/explore/event-details/${id}`);
   };
 
   return (
@@ -37,7 +38,7 @@ const ExploreHeroSection = ({ data}:any) => {
                 heading={data?.title}
                 location={data?.address}
                 date={data?.event_start_date_time}
-                onButtonClick={handleButtonClick}
+                onButtonClick={() => handleButtonClick(data?.id)}
               ></ExploreCard>
             </div>
           </SwiperSlide>

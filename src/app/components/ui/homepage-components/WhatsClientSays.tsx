@@ -14,12 +14,12 @@ const WhatsClientSays = () => {
    const controls = useAnimation();
 
    const { ref, inView } = useInView({
-     threshold: 0.1,
+     threshold: 0.2,
    });
 
    const listVariants = {
      hidden: {
-       y: 60,
+       y: 40,
        opacity: 0,
      },
      visible: {
@@ -27,7 +27,7 @@ const WhatsClientSays = () => {
        opacity: 1,
        transition: {
          staggerChildren: 0.15,
-         duration: 2,
+         duration: 0.4,
          ease: "linear",
        },
      },

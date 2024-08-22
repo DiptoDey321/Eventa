@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { Col, Input, Row } from "antd";
+import { Col, Input, message, Row } from "antd";
 import "./../ui/homepage-components/HomeStyle.css";
 
 const FooterSection = () => {
@@ -26,7 +26,7 @@ const FooterSection = () => {
 
               <div className="input-container">
                 <Input className="input-field" placeholder="Enter your email" />
-                <span>
+                <span onClick={() => message.info("comign soon..")}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="28"

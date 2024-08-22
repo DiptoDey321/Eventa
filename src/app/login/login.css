@@ -1,8 +1,4 @@
 .login-form-parent-container {
-  /* background-image: url(../../../public/login-backlground.webp);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover; */
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -125,6 +121,11 @@ input::placeholder {
   .input-field-login {
     width: 100% !important;
   }
+  .for-mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 @media (min-width: 576px) {
 }
@@ -134,6 +135,9 @@ input::placeholder {
   }
   .login-form-parent-container .right-side {
     display: flex;
+  }
+  .for-mobile {
+    display: none !important;
   }
 }
 @media (min-width: 992px) {

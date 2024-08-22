@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
+import { message } from "antd";
 import "./HomeStyle.css";
 
 const UserCountSection = () => {
@@ -13,7 +14,7 @@ const UserCountSection = () => {
         </div>
 
         <div className="btns">
-          <a className="sec-btn" href="">
+          <a style={{cursor:"pointer"}} className="sec-btn" onClick={() => message.info("comign soon..")}>
             CTA-Request a demo
           </a>
           {/* <a className="first-btn" href="">
