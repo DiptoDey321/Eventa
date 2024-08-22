@@ -1,3 +1,8 @@
+.user-width {
+  max-width: 1440px;
+  margin: auto !important;
+}
+
 .user-main-layout {
   padding: 30px 50px;
 }

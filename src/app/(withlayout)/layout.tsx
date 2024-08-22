@@ -26,11 +26,13 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div>
-      <div className="user-main-layout">
-        <Navbar></Navbar>
-      </div>
-      <div style={{ paddingTop: "50px" }}>
-        <Contents>{children}</Contents>
+      <div className="user-width">
+        <div className="user-main-layout">
+          <Navbar></Navbar>
+        </div>
+        <div style={{ paddingTop: "50px" }}>
+          <Contents>{children}</Contents>
+        </div>
       </div>
       <FooterSection></FooterSection>
     </div>
