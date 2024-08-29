@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 
 "use client";
-import "./HomeStyle.css";
-import { useEffect, useState } from "react";
-import { PlusOutlined ,MinusOutlined} from "@ant-design/icons";
+import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Col, Row } from "antd";
 import { motion, useAnimation } from "framer-motion";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import "./HomeStyle.css";
 
 interface HiddenText {
     label: string;
@@ -24,7 +24,7 @@ const QnaSection = () => {
 
   const listVariants = {
     hidden: {
-      y: 40,
+      y: 20,
       opacity: 0,
     },
     visible: {

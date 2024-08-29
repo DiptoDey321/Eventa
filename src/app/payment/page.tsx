@@ -1,16 +1,14 @@
 
 "use client";
-import React, { useEffect } from "react";
-import { DeleteOutlined, PlusOutlined, MinusOutlined } from "@ant-design/icons";
-import { Button, Col, List, Row, Form, Input, Radio } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { usePaymentMutation } from "@/redux/api/paymentApi";
 import { initializeCart, removeTicket, updateTicketQuantity } from "@/redux/slice/cartSlice";
 import { RootState } from "@/redux/store";
-import type { RadioChangeEvent } from "antd";
-import { RollbackOutlined } from "@ant-design/icons";
-import "./payment.css"
-import { usePaymentMutation } from "@/redux/api/paymentApi";
+import { DeleteOutlined, MinusOutlined, PlusOutlined, RollbackOutlined } from "@ant-design/icons";
+import { Button, Col, Form, Input, List, message, Radio, Row } from "antd";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import "./payment.css";
 
 const Payment = () => {
   const dispatch = useDispatch();
@@ -50,8 +48,6 @@ const Payment = () => {
   };
 
   const handleRemoveTicket = (id: string, eventId: string) => {
-    console.log("comed here");
-
     dispatch(removeTicket({ id, eventId }));
   };
 
@@ -93,6 +89,11 @@ const Payment = () => {
   }
 
   const handleSubmit = async(values: any) => {
+
+    if(transformData(tickets).length == 0){
+      message.error("Opps ! You Don't Have Any Tickets")
+      return
+    }
     const data = {
       payment_method_id: "66ae060cd0dc1b0211a355c9",
       address: values.address,

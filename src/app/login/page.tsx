@@ -1,15 +1,15 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import "./login.css";
-import { useState } from "react";
-import { Form, Input, Button, message, Row, Col } from "antd";
-import { MailOutlined, LockOutlined, PhoneOutlined } from "@ant-design/icons";
 import { useUserLoginMutation } from "@/redux/api/authApi";
-import { storeUserInfo } from "@/services/auth.service";
-import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
 import { forUserLoggedIn } from "@/redux/slice/authSlice";
+import { storeUserInfo } from "@/services/auth.service";
+import { LockOutlined, MailOutlined, PhoneOutlined } from "@ant-design/icons";
+import { Button, Col, Form, Input, message, Row } from "antd";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import "./login.css";
 
 const Login = () => {
   const [useEmail, setUseEmail] = useState(true);
@@ -33,7 +33,10 @@ const Login = () => {
               user: res.data.user,
             })
           );
-          router.push("/user");
+          const redirectUrl = localStorage.getItem('redirectAfterLogin') || '/dashboard';
+          localStorage.removeItem('redirectAfterLogin'); // Clean up
+          router.push(redirectUrl);
+          // router.push("/user");
         }
       } else {
         const res = await userLogin({
@@ -48,7 +51,10 @@ const Login = () => {
               user: res.data.user,
             })
           );
-          router.push("/user");
+          const redirectUrl = localStorage.getItem('redirectAfterLogin') || '/dashboard';
+          localStorage.removeItem('redirectAfterLogin'); // Clean up
+          router.push(redirectUrl);
+          // router.push("/user");
         }
       }
     } catch (error) {
@@ -213,7 +219,7 @@ const Login = () => {
                       name="phone"
                       rules={[
                         {
-                          pattern: /^\d{10}$/,
+                          pattern: /^\d{11}$/,
                           message: "The input is not valid phone number!",
                         },
                         {
@@ -282,6 +288,28 @@ const Login = () => {
                     }}
                   >
                     Reset
+                  </span>
+                </span>
+              </div>
+
+              <div
+                style={{
+                  flex: "start",
+                  paddingTop:"5px"
+                }}
+                className="sign-up-mobile" 
+              >
+                <span style={{ color: "#9399A3", fontSize: "14px" }}>
+                  Don't Have Account?{" "}
+                  <span
+                    onClick={() => router.push("/signup")}
+                    style={{
+                      color: "#FFBF00",
+                      cursor: "pointer",
+                      textDecoration: "underline",
+                    }}
+                  >
+                    Sign up
                   </span>
                 </span>
               </div>

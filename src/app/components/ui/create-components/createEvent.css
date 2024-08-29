@@ -38,12 +38,14 @@
 }
 .upload-options {
   position: absolute;
-  top: 20px;
-  left: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   .cutsom-btn {
     background-color: #ffbf00;
     color: black;
     border: none;
+    height: 45px;
   }
 }
 

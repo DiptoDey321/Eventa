@@ -1,13 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { usePathname, useRouter } from "next/navigation";
-import "./../ui/homepage-components/HomeStyle.css";
-import { message, Spin } from "antd";
-import MobileNavbar from "./MobileNavbar";
-import "./../ui/homepage-components/HomeStyle.css";
-import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import { message, Spin } from "antd";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import "./../ui/homepage-components/HomeStyle.css";
+import MobileNavbar from "./MobileNavbar";
 
 const NavBar = () => {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -146,10 +145,10 @@ const NavBar = () => {
 
             {loggedIn && (
               <li
-                onClick={() => handleNavigation("/user")}
+                
                 className="cool-link"
               >
-                Profile
+                <a style={{textDecoration :"none", color:"inherit" }} href="/user">Profile</a>
               </li>
             )}
 

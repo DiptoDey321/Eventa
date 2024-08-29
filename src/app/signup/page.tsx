@@ -1,18 +1,18 @@
 "use client";
-import "./signup.css";
-import { Form, Input, Button, Row, Col, message } from "antd";
+import { useSendOtpMutation, useUserSignupMutation } from "@/redux/api/authApi";
 import {
-  UserOutlined,
+  LockOutlined,
   MailOutlined,
   PhoneOutlined,
-  LockOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
+import { Button, Col, Form, Input, message, Row } from "antd";
+import Checkbox, { CheckboxChangeEvent } from "antd/es/checkbox";
+import { useRouter } from "next/navigation";
 import { RuleObject } from "rc-field-form/lib/interface";
 import { useState } from "react";
-import Checkbox, { CheckboxChangeEvent } from "antd/es/checkbox";
 import OtpInput from "react-otp-input";
-import { useSendOtpMutation, useUserSignupMutation } from "@/redux/api/authApi";
-import { useRouter } from "next/navigation";
+import "./signup.css";
 
 
 interface SignUpFormValues {
@@ -65,14 +65,13 @@ function SignUpPage() {
   };
 
   const passwordValidator = (_: RuleObject, value: any): Promise<void> => {
-    const passwordRegex =
-      /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordRegex =  /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
     if (!value) {
       return Promise.reject("Password is required");
     }
     if (!passwordRegex.test(value)) {
       return Promise.reject(
-        "Password must be at least 8 characters, contain 1 uppercase letter, 1 number, and 1 special character"
+        "Password must be at least 8 characters, contain 1 uppercase letter, 1 number, and 1 special character (@#$!%*?&)"
       );
     }
     return Promise.resolve();
@@ -105,6 +104,10 @@ function SignUpPage() {
   };
 
   const handleOtpSubmit = async() => {
+    if(otp==""){
+      message.warning("Please Enter the OTP")
+      return;
+    }
     const data = {
       first_name: datas?.firstName,
       last_name: datas?.lastName,
@@ -120,18 +123,25 @@ function SignUpPage() {
     
     try {
       const res = await userSignup(data);
+
+      if (res.error) {
+        message.error("Invaid OTP");
+      }
+      
       if(res?.data.is_success){
         message.success("registration successfully !")
         router.push("/login");
       }
-      console.log(res);
+
     } catch (error:any) {
-      console.log(error.message);
+      // message.error(error)
+      console.log(error);
+      
     }
   };
 
   const handleSendAgain = async() => {
-     const res = await sendOtp({ iso_code: "BD", phone: datas?.phone });
+     const res = await sendOtp({ iso_code: "BD", phone: datas?.phone , email : datas?.email,  is_phone_selected: true,});
      console.log(res?.data);
      message.success("OTP sended, Please check your inbox")
   };

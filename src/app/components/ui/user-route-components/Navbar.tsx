@@ -1,18 +1,16 @@
 "use client";
-import "./UserRouteStyle.css";
-import { Button, Tabs } from "antd";
+import { RootState } from "@/redux/store";
 import { BarsOutlined } from "@ant-design/icons";
 import type { TabsProps } from "antd";
-import BarChart from "./BarChart";
-import { useState } from "react";
-import RightNav from "./RightNav";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
-import EventDetailsForUser from "./EventDetailsForUser";
-import UserProfile from "./UserProfile";
+import { Button, Tabs } from "antd";
 import { useRouter } from "next/navigation";
-import UsersTickets from "./UsersTickets";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import EventDetailsForUser from "./EventDetailsForUser";
+import RightNav from "./RightNav";
 import UserDashboard from "./UserDashboard";
+import "./UserRouteStyle.css";
+import UsersTickets from "./UsersTickets";
 
 const Navbar = () => {
 
@@ -63,7 +61,7 @@ const Navbar = () => {
   return (
     <>
       <div className="dep-user-header">
-        <div onClick={()=>router.push("/")} className="logo">
+        <div style={{cursor:"pointer"}} onClick={()=>router.push("/")} className="logo">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="180"

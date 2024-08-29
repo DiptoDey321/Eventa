@@ -112,6 +112,9 @@ input::placeholder {
   .login-form-parent-container .right-side {
     display: none;
   }
+  .sign-up-mobile{
+    display: flex;
+  }
   .login-style-cotainer {
     width: fit-content;
   }
@@ -129,9 +132,13 @@ input::placeholder {
 }
 @media (min-width: 576px) {
 }
+
 @media (min-width: 768px) {
   .login-style-cotainer {
     width: 700px;
+  }
+  .sign-up-mobile{
+    display: none !important;
   }
   .login-form-parent-container .right-side {
     display: flex;

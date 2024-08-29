@@ -1,11 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client"
-import { useEffect, useState } from "react";
-import './createPageStyle.css'
-import { Button, message } from "antd";
-import SellTickets from "../components/ui/create-components/SellTickets";
-import { useRouter } from "next/navigation";
 import { isUserLoggedIn } from "@/services/auth.service";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import SellTickets from "../components/ui/create-components/SellTickets";
+import './createPageStyle.css';
 
 const CreatePage = () => {
    const router = useRouter();
@@ -33,6 +32,7 @@ const CreatePage = () => {
 
     useEffect(() => {
       if (!userLoggedIn) {
+        localStorage.setItem('redirectAfterLogin', '/create');
         router.push("/login");
       }
       setIsLoading(true);

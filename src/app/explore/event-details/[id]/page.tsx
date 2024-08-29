@@ -1,23 +1,23 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import imgSrc from "./../../../../../public/party-2.png";
 import EventDetailsHero from "@/app/components/resuable-component/EventDetailsHero";
-import "./../eventDetails.css";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
 import TicktesSell from "@/app/components/resuable-component/TicktesSell";
-import { Button, Col, List, Row, Typography } from "antd";
-import Modal from "antd/es/modal/Modal";
+import FooterSection from "@/app/components/share-component/FooterSection";
+import Loading from "@/app/loading";
+import { useGetEventDetailsQuery } from "@/redux/api/ticketsApi";
 import {
   initializeCart,
   removeTicket,
   updateTicketQuantity,
 } from "@/redux/slice/cartSlice";
-import { DeleteOutlined, PlusOutlined, MinusOutlined } from "@ant-design/icons";
-import FooterSection from "@/app/components/share-component/FooterSection";
-import { useGetEventDetailsQuery } from "@/redux/api/ticketsApi";
-import Loading from "@/app/loading";
+import { RootState } from "@/redux/store";
+import { DeleteOutlined, MinusOutlined, PlusOutlined } from "@ant-design/icons";
+import { Button, Col, List, Row, Typography } from "antd";
+import Modal from "antd/es/modal/Modal";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import imgSrc from "./../../../../../public/party-2.png";
+import "./../eventDetails.css";
 
 const { Text } = Typography;
 
@@ -89,7 +89,7 @@ function EventDetails({ params }: { params: { id: string } }) {
     router.push("/payment");
   }
   
-  console.log(data?.data?.tickets);
+  console.log(data?.data);
   
 
   return (
@@ -162,41 +162,10 @@ function EventDetails({ params }: { params: { id: string } }) {
                 Description
               </h2>
               <div style={{ height: "1px", backgroundColor: "white" }}></div>
-              <p style={{ color: "white", paddingTop: "20px" }}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Doloribus laboriosam veritatis nihil consequatur, dolor aperiam.
-                Saepe iste voluptatibus vel aliquam, officia assumenda quae,
-                commodi asperiores modi culpa accusantium quod quos ad molestiae
-                fugiat rem repudiandae corrupti doloribus, facilis veritatis!
-                Eos quasi aperiam voluptatibus aspernatur itaque velit sequi
-                repellat vitae voluptatem, illo, at molestias tempora
-                consectetur. Illum itaque perferendis, ad amet culpa eveniet,
-                officia totam perspiciatis nobis labore provident earum, aliquam
-                doloribus quidem. Corporis maiores dolore cupiditate fuga qui
-                modi consequatur non voluptatum earum, minima pariatur, sit
-                corrupti voluptates unde recusandae! Temporibus tempora magni
-                quae neque commodi, deleniti repellat in? Consectetur.
-              </p>
-
-              <p style={{ color: "white", paddingTop: "20px" }}>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere
-                at illo repellat numquam, porro vel officia sapiente corporis
-                sit ab quam quidem accusantium officiis voluptates voluptatum
-                sint autem cum nisi hic reiciendis sunt totam, delectus
-                necessitatibus enim. Delectus qui neque, labore quia consequatur
-                minus culpa ratione aut porro dolorem voluptatem?
-              </p>
-
-              <p style={{ color: "white", paddingTop: "20px" }}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                harum, iusto, eum aliquam necessitatibus, amet quaerat esse
-                saepe nulla iste tempora deserunt dolorum ipsam quam tenetur
-                officia aut. Mollitia, maxime.
-              </p>
-
-              <p style={{ color: "white", paddingTop: "20px" }}>
-                Location : 6 St Johns Ln, Bosundhara, BS 10013, Bangladesh
-              </p>
+              <p 
+                style={{ color: "white", paddingTop: "20px" }}
+                dangerouslySetInnerHTML={{ __html: data?.data?.description }} 
+              />
             </div>
           </div>
 

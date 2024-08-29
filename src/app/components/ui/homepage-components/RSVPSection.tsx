@@ -1,9 +1,9 @@
 "use client";
-import "./HomeStyle.css";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import { Carousel, Col, message, Row } from "antd";
+import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import "./HomeStyle.css";
 
 const RSVPSection = () => {
   const controls = useAnimation();
@@ -30,21 +30,16 @@ const RSVPSection = () => {
 
   const containerVariants = {
     hidden: {
-      scale: 1.4,
+      y: 60,
       opacity: 0,
-      rotate: 25,
-      transition: {
-        duration: 0.4,
-        ease: "easeInOut",
-      },
     },
     visible: {
-      scale: 1,
+      y: 0,
       opacity: 1,
-      rotate: 0,
       transition: {
+        staggerChildren: 0.15,
         duration: 0.4,
-        ease: "easeInOut",
+        ease: "linear",
       },
     },
   };

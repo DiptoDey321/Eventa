@@ -651,7 +651,7 @@
 }
 
 .events-list-container .left-side .text-space-container .input-container input {
-  width: 250px !important;
+  width: 220px !important;
   border: none;
   height: 40px;
 }
@@ -1091,7 +1091,7 @@
     width: 90%;
   }
   .events-list-container .left-side .text-space-container .input-container {
-    width: 95% !important;
+    width: 100% !important;
   }
 
   .events-list-container
@@ -1099,7 +1099,7 @@
     .text-space-container
     .input-container
     input {
-    width: 95%;
+    width: 100%;
   }
 
   .events-list-container

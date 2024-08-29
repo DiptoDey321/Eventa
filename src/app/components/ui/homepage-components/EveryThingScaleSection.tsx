@@ -1,10 +1,10 @@
 "use client";
-import "./HomeStyle.css";
-import { Col, message, Row } from "antd";
+import { Col, Row } from "antd";
 import { motion, useAnimation } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import "./HomeStyle.css";
 
 const EveryThingScaleSection = () => {
   const controls1 = useAnimation();
@@ -85,8 +85,8 @@ const EveryThingScaleSection = () => {
     div1: {
       hidden: {
         opacity: 0,
-        x: -50,
-        y: -50,
+        x: -20,
+        y: -20,
       },
       visible: {
         opacity: 1,
@@ -101,8 +101,8 @@ const EveryThingScaleSection = () => {
     div2: {
       hidden: {
         opacity: 0,
-        x: -50,
-        // y: -50,
+        x: -20,
+        // y: -20,
       },
       visible: {
         opacity: 1,
@@ -117,8 +117,8 @@ const EveryThingScaleSection = () => {
     div3: {
       hidden: {
         opacity: 0,
-        x: -50,
-        y: 50,
+        x: -20,
+        y: 20,
       },
       visible: {
         opacity: 1,
@@ -133,8 +133,8 @@ const EveryThingScaleSection = () => {
     div4: {
       hidden: {
         opacity: 0,
-        x: 50,
-        y: -50,
+        x: 20,
+        y: -20,
       },
       visible: {
         opacity: 1,
@@ -149,7 +149,7 @@ const EveryThingScaleSection = () => {
     div5: {
       hidden: {
         opacity: 0,
-        x: 50,
+        x: 20,
       },
       visible: {
         opacity: 1,
@@ -164,8 +164,8 @@ const EveryThingScaleSection = () => {
     div6: {
       hidden: {
         opacity: 0,
-        x: 50,
-        y: 50,
+        x: 20,
+        y: 20,
       },
       visible: {
         opacity: 1,
@@ -181,21 +181,16 @@ const EveryThingScaleSection = () => {
 
   const containerVariants = {
     hidden: {
-      scale: 1.5,
+      y: 40,
       opacity: 0,
-      rotate: 25,
-      transition: {
-        duration: 0.4,
-        ease: "easeInOut",
-      },
     },
     visible: {
-      scale: 1,
-      rotate: 0,
+      y: 0,
       opacity: 1,
       transition: {
+        staggerChildren: 0.15,
         duration: 0.4,
-        ease: "easeInOut",
+        ease: "linear",
       },
     },
   };

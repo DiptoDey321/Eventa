@@ -1,29 +1,28 @@
 "use client";
-import "./createEvent.css";
-import React, { useState } from "react";
+import { useCreateTicketsMutation, useGetEventCategoryQuery, usePostEventMutation } from "@/redux/api/ticketsApi";
+import { TicketType } from "@/types/ticketsInterfece";
+import { CloseOutlined, MailOutlined, UploadOutlined } from "@ant-design/icons";
 import {
+  Button,
+  Col,
+  DatePicker,
   Form,
   Input,
-  Button,
-  DatePicker,
+  Row,
   Select,
   Switch,
-  Row,
-  Col,
   Upload,
   message,
 } from "antd";
-import { MailOutlined } from "@ant-design/icons";
-import "react-quill/dist/quill.snow.css";
-import { CloseOutlined, UploadOutlined } from "@ant-design/icons";
-import Tickets from "./Tickets";
-import { TicketType } from "@/types/ticketsInterfece";
 import moment from "moment";
-import initialBackground from '../../../../../public/selltickets-sidebg.webp'
-import Image, { StaticImageData } from "next/image";
-import { useCreateTicketsMutation, useGetEventCategoryQuery, usePostEventMutation } from "@/redux/api/ticketsApi";
 import dynamic from "next/dynamic";
+import Image, { StaticImageData } from "next/image";
 import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import "react-quill/dist/quill.snow.css";
+import initialBackground from '../../../../../public/selltickets-sidebg.webp';
+import "./createEvent.css";
+import Tickets from "./Tickets";
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
 });
@@ -97,46 +96,48 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
     }));
   };
 
-  const onSubmitAllData = async() => {
-   const formData = new FormData();
-   formData.append("title", formValues.title);
-   formData.append("event_start_date_time", formValues.event_start_date_time);
-   formData.append("event_end_date_time", formValues.event_end_date_time);
-   formData.append("venue_name", formValues.venue_name);
-   formData.append("address", formValues.address);
-   formData.append("category_id", formValues.category_id);
-   formData.append("description", formValues.description);
-   if (formValues.event_phone == undefined){
-    formData.append("event_email", formValues.event_email);
-    formData.append("is_phone_selected", "false");
-   }else{
-    formData.append("iso_code", "BD");
-    formData.append("phone", formValues.event_phone);
-    formData.append("is_phone_selected", "true");
-   } 
-   formData.append("event_image_url", img == null ? "" : img.uid);
-   
+  const onSubmitAllData = async () => {
+    try {
+      const validFields = await form.validateFields();
+      
+      const formData = new FormData();
+      formData.append("title", validFields.title);
+      formData.append("event_start_date_time", validFields.event_start_date_time);
+      formData.append("event_end_date_time", validFields.event_end_date_time);
+      formData.append("venue_name", validFields.venue_name);
+      formData.append("address", validFields.address);
+      formData.append("category_id", validFields.category_id);
+      formData.append("description", validFields.description);
+      
+      if (validFields.event_phone) {
+        formData.append("iso_code", "BD");
+        formData.append("phone", validFields.event_phone);
+        formData.append("is_phone_selected", "true");
+      } else {
+        formData.append("event_email", validFields.event_email);
+        formData.append("is_phone_selected", "false");
+      }
 
-  try {
-    const resultOfEventCreate = await postEvent(formData);
-    
-    if (resultOfEventCreate?.data?.data?._id != undefined){
-       const resultOfTicketsCreate = await createTickets({
-         event_id: resultOfEventCreate?.data?.data?._id,
-         tickets: transformTickets(tickets),
-       });
-       if (resultOfTicketsCreate?.data?.is_success){
-        message.success("Event Created successfully!");
-        router.push("/explore");
-       }
-    }else{
-      message.error("Please fill required field")
+      formData.append("event_image_url", img == null ? "" : img.uid);
+
+      const resultOfEventCreate = await postEvent(formData);
+
+      if (resultOfEventCreate?.data?.data?._id) {
+        const resultOfTicketsCreate = await createTickets({
+          event_id: resultOfEventCreate?.data?.data?._id,
+          tickets: transformTickets(tickets),
+        });
+        if (resultOfTicketsCreate?.data?.is_success) {
+          message.success("Event Created successfully!");
+          router.push("/explore");
+        }
+      } else {
+        message.error("Please fill required field");
+      }
+
+    } catch (error) {
+      console.error("Failed to post event:", error);
     }
-
-    
-  } catch (error) {
-    console.error("Failed to post event:", error);
-  }
   };
 
   const cancelEventCreate = () =>{
@@ -162,7 +163,7 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
   };
 
   const validatePhoneNumber = (_: any, value: string) => {
-    const phonePattern = /^[0-9]{10}$/;
+    const phonePattern = /^[0-9]{11}$/;
     if (value && !phonePattern.test(value)) {
       return Promise.reject(new Error("Invalid phone number!"));
     }
@@ -178,12 +179,21 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
   };
 
    const handleChange = (info: any) => {
-     if (info.file.status === "uploading") {
-       setImg(info.file.originFileObj);
-       const url = URL.createObjectURL(info.file.originFileObj);
-       setBackgroundImage(url);
-       message.success(`${info.file.name} file uploaded successfully`);
-     }
+
+    if (info.file.status === "done") {
+      setImg(info.file.originFileObj);
+      const url = URL.createObjectURL(info.file.originFileObj);
+      setBackgroundImage(url);
+      message.success(`${info.file.name} file uploaded successfully`);
+    } else if (info.file.status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+    //  if (info.file.status === "uploading") {
+    //    setImg(info.file.originFileObj);
+    //    const url = URL.createObjectURL(info.file.originFileObj);
+    //    setBackgroundImage(url);
+    //    message.success(`${info.file.name} file uploaded successfully`);
+    //  }
    };
 
    const uploadProps = {
@@ -265,6 +275,7 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
                             style={{ width: "100%" }}
                             showTime
                             format="YYYY-MM-DD HH:mm:ss"
+                            placeholder="Enter Start Date"
                           />
                         </Form.Item>
                       </Col>
@@ -285,6 +296,7 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
                             style={{ width: "100%" }}
                             showTime
                             format="YYYY-MM-DD HH:mm:ss"
+                            placeholder="Enter End Date"
                           />
                         </Form.Item>
                       </Col>
@@ -408,6 +420,8 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
                         />
                       </Form.Item>
                     )}
+
+
                   </Form>
                 </div>
               </Col>

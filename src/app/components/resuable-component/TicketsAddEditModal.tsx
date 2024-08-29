@@ -1,5 +1,5 @@
 import { EditModalProps, TicketType } from "@/types/ticketsInterfece";
-import { Form, Input, InputNumber, DatePicker, Button, Row, Col } from "antd";
+import { Button, Col, DatePicker, Form, Input, InputNumber, Row } from "antd";
 import moment from "moment";
 import { useEffect, useState } from "react";
 
@@ -63,18 +63,30 @@ const TicketsAddEditModal: React.FC<EditModalProps> = ({
     }
   }, [ticket, form, resetTrigger]);
 
-  const validatePurchase = (_: any, value: any) => {
+   // Updated validatePurchase function to check against ticket quantity
+   const validatePurchase = (_: any, value: any) => {
+    const minPurchase = form.getFieldValue("minPurchase");
+    const maxPurchase = form.getFieldValue("maxPurchase");
+    const quantity = form.getFieldValue("quantity");
+
+    if (minPurchase !== undefined && maxPurchase !== undefined) {
+      if (minPurchase > maxPurchase) {
+        return Promise.reject(new Error("Max Purchase must be greater than Min Purchase!"));
+      }
+      if (minPurchase > quantity || maxPurchase > quantity) {
+        return Promise.reject(new Error("Min/Max Purchase cannot be greater than the ticket quantity!"));
+      }
+    }
+    return Promise.resolve();
+  };
+
+  // New validation for the quantity field to ensure it doesn't invalidate min/max purchase
+  const validateQuantity = (_: any, value: any) => {
     const minPurchase = form.getFieldValue("minPurchase");
     const maxPurchase = form.getFieldValue("maxPurchase");
 
-    if (
-      minPurchase !== undefined &&
-      maxPurchase !== undefined &&
-      minPurchase > maxPurchase
-    ) {
-      return Promise.reject(
-        new Error("Max > Min!")
-      );
+    if ((minPurchase && value < minPurchase) || (maxPurchase && value < maxPurchase)) {
+      return Promise.reject(new Error("Quantity cannot be less than Min/Max Purchase!"));
     }
     return Promise.resolve();
   };
@@ -114,6 +126,7 @@ const TicketsAddEditModal: React.FC<EditModalProps> = ({
               className="common-style label-row quantity common-left"
               rules={[
                 { required: true, message: "Please enter the ticket quantity" },
+                { validator: validateQuantity },
               ]}
             >
               <InputNumber
