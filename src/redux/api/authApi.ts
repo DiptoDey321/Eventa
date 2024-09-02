@@ -26,7 +26,7 @@ export const authApi = baseApi.injectEndpoints({
 
     sendOtp: build.mutation({
       query: (otpData) => ({
-        url: `${AUTH_URL}/send-otp-sms`,
+        url: `${AUTH_URL}/signup-send-otp-sms`,
         method: "POST",
         data: otpData,
         requiresAuth: false,

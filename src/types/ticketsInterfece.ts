@@ -1,11 +1,13 @@
+import { Dayjs } from "dayjs";
+
 export interface TicketType {
   id: number;
   name: string;
   price: number;
   quantity: number;
   description: string;
-  salePeriod: [string, string];
-  validPeriod: [string, string];
+  salePeriod: [Dayjs, Dayjs];    // Updated to Dayjs objects
+  validPeriod: [Dayjs, Dayjs];    // Updated to Dayjs objects
   minPurchase: number;
   maxPurchase: number;
 }

@@ -1,6 +1,6 @@
 import { EditModalProps, TicketType } from "@/types/ticketsInterfece";
 import { Button, Col, DatePicker, Form, Input, InputNumber, Row } from "antd";
-import moment from "moment";
+import dayjs, { Dayjs } from "dayjs";
 import { useEffect, useState } from "react";
 
 const { RangePicker } = DatePicker;
@@ -18,12 +18,12 @@ const TicketsAddEditModal: React.FC<EditModalProps> = ({
   const onFinish = (values: any) => {
     const newTicket = {
       ...values,
-      salePeriod: values.salePeriod.map((date: moment.Moment) =>
-        date.toISOString()
-      ),
-      validPeriod: values.validPeriod.map((date: moment.Moment) =>
-        date.toISOString()
-      ),
+      salePeriod: values.salePeriod.map((date: Dayjs) => // Changed from moment.Moment to Dayjs
+      date
+    ),
+    validPeriod: values.validPeriod.map((date: Dayjs) => // Changed from moment.Moment to Dayjs
+      date
+    ),
     };
     if (isEditing) {
       updateTicket({ ...ticket, ...newTicket });
@@ -39,7 +39,9 @@ const TicketsAddEditModal: React.FC<EditModalProps> = ({
 
   useEffect(() => {
     if (ticket) {
-      console.log("Calling from there");
+      console.log("Calling from there")
+      console.log(ticket);
+      
 
       form.setFieldsValue({
         name: ticket.name,
@@ -47,12 +49,12 @@ const TicketsAddEditModal: React.FC<EditModalProps> = ({
         description: ticket.description,
         quantity: ticket.quantity,
         salePeriod: [
-          moment(ticket.salePeriod[0]),
-          moment(ticket.salePeriod[1]),
+          dayjs(ticket.salePeriod[0]), // Changed from moment to dayjs
+          dayjs(ticket.salePeriod[1]), // Changed from moment to dayjs
         ],
         validPeriod: [
-          moment(ticket.validPeriod[0]),
-          moment(ticket.validPeriod[1]),
+          dayjs(ticket.validPeriod[0]), // Changed from moment to dayjs
+          dayjs(ticket.validPeriod[1]), // Changed from moment to dayjs
         ],
         minPurchase: ticket.minPurchase,
         maxPurchase: ticket.maxPurchase,

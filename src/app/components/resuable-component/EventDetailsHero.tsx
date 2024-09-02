@@ -1,9 +1,10 @@
-import { Row, Col, Typography, Space, Button } from "antd";
 import {
-  HeatMapOutlined,
   CheckCircleOutlined,
+  HeatMapOutlined,
   RollbackOutlined,
 } from "@ant-design/icons";
+import { Button, Col, Row, Space, Typography } from "antd";
+import moment from "moment";
 import Image, { StaticImageData } from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -61,8 +62,8 @@ const EventDetailsHero: React.FC<EventCardProps> = ({
             <span>{eventTitle}</span>
           </div>
           <div className="place-time">
-            <p>{place}</p>
-            <p>{time}</p>
+            <p style={{color : "black"}}>{place}</p>
+            <p style={{color : "black"}}>{moment(time).format("MMMM D, YYYY")}</p>
           </div>
           <div style={{ marginBottom: "20px" }}>
             <div className="location">

@@ -25,24 +25,24 @@ const Payment = () => {
     }
   }, [dispatch]);
 
-  const increaseQuantity = (id: string, eventId: string) => {
+  const increaseQuantity = (id: string, eventId: string , qty:number) => {
     const ticket = tickets.find(
       (ticket:any) => ticket.id === id && ticket.eventId === eventId
     );
     if (ticket) {
       dispatch(
-        updateTicketQuantity({ id, eventId, quantity: ticket.quantity + 1 })
+        updateTicketQuantity({ id, eventId, quantity: ticket.quantity + 1, qty })
       );
     }
   };
 
-  const decreaseQuantity = (id: string, eventId: string) => {
+  const decreaseQuantity = (id: string, eventId: string , qty:number) => {
     const ticket = tickets.find(
       (ticket: any) => ticket.id === id && ticket.eventId === eventId
     );
     if (ticket && ticket.quantity > 1) {
       dispatch(
-        updateTicketQuantity({ id, eventId, quantity: ticket.quantity - 1 })
+        updateTicketQuantity({ id, eventId, quantity: ticket.quantity - 1 , qty})
       );
     }
   };
@@ -100,6 +100,8 @@ const Payment = () => {
       cart: transformData(tickets),
     };
     const res = await payment(data);
+    console.log("res",res);
+    
 
     if (res?.data?.is_success){
       router.push(res?.data?.data);
@@ -150,7 +152,7 @@ const Payment = () => {
                           key={1}
                           icon={<MinusOutlined />}
                           onClick={() =>
-                            decreaseQuantity(ticket.id, ticket.eventId)
+                            decreaseQuantity(ticket.id, ticket.eventId, ticket.qty)
                           }
                         />,
                         <span key={2} style={{ margin: "0 10px" }}>
@@ -161,7 +163,7 @@ const Payment = () => {
                           key={3}
                           icon={<PlusOutlined />}
                           onClick={() =>
-                            increaseQuantity(ticket.id, ticket.eventId)
+                            increaseQuantity(ticket.id, ticket.eventId , ticket.qty)
                           }
                         />,
                         <Button
@@ -221,44 +223,6 @@ const Payment = () => {
                     layout="vertical"
                     onFinish={handleSubmit}
                   >
-                    {/* <Form.Item
-                      name="customerName"
-                      label={
-                        <span style={{ color: "#fff" }}>Customer Name</span>
-                      }
-                      rules={[
-                        { required: true, message: "Please enter your name" },
-                      ]}
-                    >
-                      <Input placeholder="Enter your name" />
-                    </Form.Item>
-
-                    <Form.Item
-                      className="common-style"
-                      name="email"
-                      label={<span style={{ color: "#fff" }}>Email</span>}
-                      rules={[
-                        { required: true, message: "Please enter your email" },
-                      ]}
-                    >
-                      <Input type="email" placeholder="Enter your email" />
-                    </Form.Item>
-
-                    <Form.Item
-                      className="common-style"
-                      name="phoneNumber"
-                      label={
-                        <span style={{ color: "#fff" }}>Phone Number</span>
-                      }
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please enter your phone number",
-                        },
-                      ]}
-                    >
-                      <Input placeholder="Enter your phone number" />
-                    </Form.Item> */}
 
                     <Form.Item
                       className="common-style"

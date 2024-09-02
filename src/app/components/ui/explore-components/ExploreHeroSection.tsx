@@ -1,11 +1,11 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { useRouter } from "next/navigation";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import album from '../../../../../public/album.webp';
 import ExploreCard from "../../resuable-component/ExploreCard";
-import album from '../../../../../public/album.webp'
-import { useRouter } from "next/navigation";
 
 const ExploreHeroSection = ({ data}:any) => {
 
@@ -14,6 +14,9 @@ const ExploreHeroSection = ({ data}:any) => {
   const handleButtonClick = (id:any) => {
     router.push(`/explore/event-details/${id}`);
   };
+
+  console.log(data?.data);
+  
 
   return (
     <div className="explore-slider-cotainer">
@@ -28,13 +31,13 @@ const ExploreHeroSection = ({ data}:any) => {
           <SwiperSlide key={index}>
             <div
               style={{
-                // height: "480px",
+                height: "430px",
                 display: "flex",
                 justifyContent: "center",
               }}
             >
               <ExploreCard
-                imageSrc={album}
+                imageSrc={data?.event_image_url ?`https://link.storjshare.io/raw/jw2ydrl6k3ff65py2xpvvgm3qseq/${data?.event_image_url}` : album}
                 heading={data?.title}
                 location={data?.address}
                 date={data?.event_start_date_time}

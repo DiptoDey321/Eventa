@@ -1,10 +1,11 @@
 "use client"
-import React, { useState } from "react";
-import { Form, Input, Button, message, Space, Card } from "antd";
-import { MailOutlined, PhoneOutlined } from "@ant-design/icons";
-import './forgetpassword.css'
-import { useRouter } from "next/navigation";
 import { useSendForgetOtpMutation, useVerifyOtpResetPasswordMutation } from "@/redux/api/authApi";
+import { MailOutlined, PhoneOutlined } from "@ant-design/icons";
+import { Button, Card, Form, Input, message, Space } from "antd";
+import { useRouter } from "next/navigation";
+import { RuleObject } from "rc-field-form/lib/interface";
+import React, { useState } from "react";
+import './forgetpassword.css';
 
 const ForgetPasswordForm: React.FC = () => {
   const [isEmailSelected, setIsEmailSelected] = useState(true);
@@ -14,53 +15,24 @@ const ForgetPasswordForm: React.FC = () => {
   const [verifyOtpResetPassword] = useVerifyOtpResetPasswordMutation();
   const [value, setValue] = useState("");
 
-  // const onFinish = async (values: any) => {
-  //   // {otp: '123456', newPassword: 'qwer123@', confirmNewPassword: 'qwer123@'}
-  //   console.log(values);
-  //   if(!isVerified){
-  //     setValue(values.emailOrPhone);
-  //       if (isEmailSelected) {
-  //         const res = await sendForgetOtp({
-  //           iso_code: "BD",
-  //           is_phone_selected: false,
-  //           email: values.emailOrPhone,
-  //         });
-  //         if (res?.data?.data?.is_success) {
-  //           message.success("Please check your email!");
-  //           setIsVerified(true);
-  //         } else {
-  //           message.warning("Something Went Wrong !");
-  //         }
-  //       } else {
-  //         const res = await sendForgetOtp({
-  //           iso_code: "BD",
-  //           is_phone_selected: true,
-  //           phone: values.emailOrPhone,
-  //         });
-  //         if (res?.data?.data?.is_success) {
-  //           message.success("Please check your Phone!");
-  //           setIsVerified(true);
-  //         } else {
-  //           message.warning("Something Went Wrong !");
-  //         }
-  //       }
+  const passwordValidator = (_: RuleObject, value: any): Promise<void> => {
+    const passwordRegex =  /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+    if (!value) {
+      return Promise.reject("Password is required");
+    }
+    if (!passwordRegex.test(value)) {
+      return Promise.reject(
+        "Password must be at least 8 characters, contain 1 uppercase letter, 1 number, and 1 special character (@#$!%*?&)"
+      );
+    }
+    return Promise.resolve();
+  };
+  
+  // const confirmPasswordValidator = (_: RuleObject, value: any): Promise<void> => {
+  //   if (!value || form.getFieldValue("newPassword") === value) {
+  //     return Promise.resolve();
   //   }
-
-  //   if(isVerified){
-  //      const data = {
-  //        otp: values.otp,
-  //        phone: isEmailSelected == false ? value : "",
-  //        iso_code: "BD",
-  //        email: isEmailSelected == true ? value : "",
-  //        is_phone_selected: !isEmailSelected,
-  //        password: values.newPassword,
-  //        confirm_password: values.confirmNewPassword,
-  //      };
-
-  //       const res = await useVerifyOtpResetPasswordMutation();
-       
-  //   }
-     
+  //   return Promise.reject("The two passwords do not match!");
   // };
 
   const onFinish = async (values: any) => {
@@ -212,10 +184,10 @@ const ForgetPasswordForm: React.FC = () => {
                   },
                   {
                     type: isEmailSelected ? "email" : "string",
-                    len: isEmailSelected ? undefined : 10,
+                    len: isEmailSelected ? undefined : 11,
                     message: isEmailSelected
                       ? "Please enter a valid email!"
-                      : "Please enter a valid 10-digit phone number!",
+                      : "Please enter a valid 11-digit phone number!",
                   },
                 ]}
               >
@@ -259,10 +231,7 @@ const ForgetPasswordForm: React.FC = () => {
                     required: true,
                     message: "Please enter your new password!",
                   },
-                  {
-                    min: 8,
-                    message: "Password must be at least 8 characters!",
-                  },
+                  { validator: passwordValidator }
                 ]}
                 hasFeedback
               >

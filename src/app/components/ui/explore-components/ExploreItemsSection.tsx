@@ -1,14 +1,14 @@
 "use client"
-import ExploreItemsCard from "../../resuable-component/ExploreItemsCard";
+import { SearchOutlined } from "@ant-design/icons";
+import { Button, Col, Row, Select } from "antd";
 import itemFour from "../../../../../public/item4.webp";
 import orgIcon from "../../../../../public/org_icon.png";
-import { Button, Col, Row, Select } from "antd";
+import ExploreItemsCard from "../../resuable-component/ExploreItemsCard";
 const { Option } = Select;
-import { SearchOutlined } from "@ant-design/icons";
 
 const ExploreItemsSection =({data}:any) => {
 
-  console.log(data?.data?.rows);
+  
   return (
     <div className="">
       <div className="explore-items-sections">
@@ -62,7 +62,7 @@ const ExploreItemsSection =({data}:any) => {
               <Col sm={24} md={12} lg={8} key={index}>
                 <ExploreItemsCard
                   id={data._id}
-                  imageSrc={itemFour}
+                  imageSrc={data?.event_image_url ?`https://link.storjshare.io/raw/jw2ydrl6k3ff65py2xpvvgm3qseq/${data?.event_image_url}` : itemFour}
                   organizerName={`${data?.created_by.first_name} ${data?.created_by.last_name}`}
                   organizerIcon={orgIcon}
                   heading={data?.title}

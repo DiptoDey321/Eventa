@@ -3,11 +3,11 @@
 "use client";
 import { useUserLoginMutation } from "@/redux/api/authApi";
 import { forUserLoggedIn } from "@/redux/slice/authSlice";
-import { storeUserInfo } from "@/services/auth.service";
+import { isUserLoggedIn, storeUserInfo } from "@/services/auth.service";
 import { LockOutlined, MailOutlined, PhoneOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, message, Row } from "antd";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import "./login.css";
 
@@ -16,6 +16,13 @@ const Login = () => {
   const [userLogin] = useUserLoginMutation();
   const router = useRouter();
   const dispatch = useDispatch();
+  const userLoggedIn = isUserLoggedIn();
+
+  useEffect(() => {
+    if (userLoggedIn) {
+      router.push("/user");
+    }
+  }, [router, userLoggedIn]);
 
   const onFinish = async (values: any) => {
     try {
@@ -33,7 +40,7 @@ const Login = () => {
               user: res.data.user,
             })
           );
-          const redirectUrl = localStorage.getItem('redirectAfterLogin') || '/dashboard';
+          const redirectUrl = localStorage.getItem('redirectAfterLogin') || '/user';
           localStorage.removeItem('redirectAfterLogin'); // Clean up
           router.push(redirectUrl);
           // router.push("/user");
@@ -51,7 +58,7 @@ const Login = () => {
               user: res.data.user,
             })
           );
-          const redirectUrl = localStorage.getItem('redirectAfterLogin') || '/dashboard';
+          const redirectUrl = localStorage.getItem('redirectAfterLogin') || '/user';
           localStorage.removeItem('redirectAfterLogin'); // Clean up
           router.push(redirectUrl);
           // router.push("/user");

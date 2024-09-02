@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { message } from "antd";
 
 interface Ticket {
   id: string;
@@ -7,6 +8,7 @@ interface Ticket {
   eventId: string;
   eventName: string;
   ticketTitle: string;
+  qty: number;
 }
 
 interface CartState {
@@ -26,18 +28,32 @@ const cartSlice = createSlice({
     },
 
     addTicket: (state, action: PayloadAction<Ticket>) => {
-
+      const incomingTicket = action.payload;
       const existingTicket = state.tickets.find(
         (ticket) =>
-          ticket.id === action.payload.id &&
-          ticket.eventId === action.payload.eventId
+          ticket.id === incomingTicket.id &&
+          ticket.eventId === incomingTicket.eventId
       );
+
       if (existingTicket) {
-        existingTicket.quantity += action.payload.quantity;
+        // Check if adding more tickets exceeds available quantity
+        const newQuantity = existingTicket.quantity + incomingTicket.quantity;
+        if (newQuantity <= incomingTicket.qty) {
+          existingTicket.quantity = newQuantity;
+        } else {
+          // Show a notification to the user
+         message.warning(`Cannot add more than ${incomingTicket.qty} tickets.`)
+        }
       } else {
-        state.tickets.push(action.payload);
+        if (incomingTicket.quantity <= incomingTicket.qty) {
+          state.tickets.push(incomingTicket);
+        } else {
+          // Show a notification to the user
+          message.warning(`Cannot add more than ${incomingTicket.qty} tickets.`)
+          
+        }
       }
-      
+
       if (typeof window !== "undefined") {
         localStorage.setItem("cart", JSON.stringify(state.tickets));
       }
@@ -45,17 +61,25 @@ const cartSlice = createSlice({
 
     updateTicketQuantity: (
       state,
-      action: PayloadAction<{ id: string; eventId: string; quantity: number }>
+      action: PayloadAction<{ id: string; eventId: string; quantity: number; qty: number }>
     ) => {
-
+      const { id, eventId, quantity, qty } = action.payload;
       const ticket = state.tickets.find(
         (ticket) =>
-          ticket.id === action.payload.id &&
-          ticket.eventId === action.payload.eventId
+          ticket.id === id &&
+          ticket.eventId === eventId
       );
+
       if (ticket) {
-        ticket.quantity = action.payload.quantity;
+        // Update ticket quantity if it does not exceed available quantity
+        if (quantity <= qty) {
+          ticket.quantity = quantity;
+        } else {
+          // Show a notification to the user
+          message.warning(`Cannot add more than ${qty} tickets.`)
+        }
       }
+
       if (typeof window !== "undefined") {
         localStorage.setItem("cart", JSON.stringify(state.tickets));
       }

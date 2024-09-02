@@ -14,7 +14,7 @@ import {
   Upload,
   message,
 } from "antd";
-import moment from "moment";
+import dayjs from "dayjs";
 import dynamic from "next/dynamic";
 import Image, { StaticImageData } from "next/image";
 import { useRouter } from "next/navigation";
@@ -59,12 +59,12 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
       quantity: 10,
       description: "A great concert ticket",
       salePeriod: [
-        moment().toISOString(),
-        moment().add(1, "month").toISOString(),
+        dayjs(),                          // Current date
+        dayjs().add(1, 'month'),          // One month from now
       ],
       validPeriod: [
-        moment().toISOString(),
-        moment().add(1, "month").toISOString(),
+        dayjs(),                          // Current date
+        dayjs().add(1, 'month'),          // One month from now
       ],
       minPurchase: 1,
       maxPurchase: 10,
@@ -80,13 +80,13 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
       price: ticket.price,
       sale_period: true,
       sale_period_date_time: {
-        start: ticket.salePeriod[0],
-        end: ticket.salePeriod[1],
+        start: ticket.salePeriod[0].$d,
+        end: ticket.salePeriod[1].$d,
       },
       valid_from: true,
       valid_from_date_time: {
-        start: ticket.validPeriod[0],
-        end: ticket.validPeriod[1],
+        start: ticket.validPeriod[0].$d,
+        end: ticket.validPeriod[1].$d,
       },
       limit_purchase: true,
       limit_purchase_qty: {
@@ -95,7 +95,7 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
       },
     }));
   };
-
+  
   const onSubmitAllData = async () => {
     try {
       const validFields = await form.validateFields();
@@ -118,7 +118,8 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
         formData.append("is_phone_selected", "false");
       }
 
-      formData.append("event_image_url", img == null ? "" : img.uid);
+      // formData.append("event_image_url", img == null ? "" : img.uid);
+      formData.append("event_image_url", img == null ? "" : img);
 
       const resultOfEventCreate = await postEvent(formData);
 
@@ -129,7 +130,8 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
         });
         if (resultOfTicketsCreate?.data?.is_success) {
           message.success("Event Created successfully!");
-          router.push("/explore");
+          // router.push("/explore");
+           window.location.href = "/explore"
         }
       } else {
         message.error("Please fill required field");
@@ -188,12 +190,6 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
     } else if (info.file.status === "error") {
       message.error(`${info.file.name} file upload failed.`);
     }
-    //  if (info.file.status === "uploading") {
-    //    setImg(info.file.originFileObj);
-    //    const url = URL.createObjectURL(info.file.originFileObj);
-    //    setBackgroundImage(url);
-    //    message.success(`${info.file.name} file uploaded successfully`);
-    //  }
    };
 
    const uploadProps = {
@@ -233,6 +229,7 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
               </Button>
             </div>
           </div>
+
           <div className="main-container">
             <Row gutter={[32,32]}>
               <Col xs={24} sm={24} md={12} lg={12}>
@@ -284,11 +281,21 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
                         <Form.Item
                           className="common-class common-classTwo"
                           name="event_end_date_time"
+                          dependencies={['event_start_date_time']}
                           rules={[
                             {
                               required: true,
                               message: "Please select the end time!",
                             },
+                            ({ getFieldValue }) => ({
+                              validator(_, value) {
+                                const startDate = getFieldValue('event_start_date_time');
+                                if (!value || !startDate || value.isAfter(startDate)) {
+                                  return Promise.resolve();
+                                }
+                                return Promise.reject(new Error('End date must be later than start date!'));
+                              },
+                            }),
                           ]}
                         >
                           <DatePicker
@@ -425,13 +432,13 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
                   </Form>
                 </div>
               </Col>
+
               <Col xs={24} sm={24} md={12} lg={12}>
                 <div className="sell-tickets-side-bg">
                   <Image
                     className="right-img-property"
                     src={backgroundImage}
                     alt="Event image"
-                    // layout="responsive"
                     width={300}
                     height={660}
                   />

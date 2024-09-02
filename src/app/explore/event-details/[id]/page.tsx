@@ -55,24 +55,24 @@ function EventDetails({ params }: { params: { id: string } }) {
     setIsModalVisible(false);
   };
 
-  const increaseQuantity = (id: string, eventId: string) => {
+  const increaseQuantity = (id: string, eventId: string ,qty:number) => {
     const ticket = tickets.find(
       (ticket) => ticket.id === id && ticket.eventId === eventId
     );
     if (ticket) {
       dispatch(
-        updateTicketQuantity({ id, eventId, quantity: ticket.quantity + 1 })
+        updateTicketQuantity({ id, eventId, quantity: ticket.quantity + 1 , qty})
       );
     }
   };
 
-  const decreaseQuantity = (id: string, eventId: string) => {
+  const decreaseQuantity = (id: string, eventId: string , qty:number) => {
     const ticket = tickets.find(
       (ticket) => ticket.id === id && ticket.eventId === eventId
     );
     if (ticket && ticket.quantity > 1) {
       dispatch(
-        updateTicketQuantity({ id, eventId, quantity: ticket.quantity - 1 })
+        updateTicketQuantity({ id, eventId, quantity: ticket.quantity - 1 ,qty})
       );
     }
   };
@@ -89,7 +89,7 @@ function EventDetails({ params }: { params: { id: string } }) {
     router.push("/payment");
   }
   
-  console.log(data?.data);
+  console.log(tickets);
   
 
   return (
@@ -132,26 +132,6 @@ function EventDetails({ params }: { params: { id: string } }) {
                         />
                       </Col>
                     ))}
-
-                    {/* <Col span={12}>
-                      <TicktesSell
-                        id={`${params?.id}2`}
-                        price={150}
-                        details="Movie Ticket"
-                        eventId={params?.id}
-                        eventName={data?.data?.title}
-                      />
-                    </Col>
-
-                    <Col span={12}>
-                      <TicktesSell
-                        id={`${params?.id}3`}
-                        price={200}
-                        details="Theater Ticket"
-                        eventId={params?.id}
-                        eventName={data?.data?.title}
-                      />
-                    </Col> */}
                   </Row>
                 </div>
               </div>
@@ -208,7 +188,7 @@ function EventDetails({ params }: { params: { id: string } }) {
                       key={1}
                       icon={<MinusOutlined />}
                       onClick={() =>
-                        decreaseQuantity(ticket.id, ticket.eventId)
+                        decreaseQuantity(ticket.id, ticket.eventId , ticket.qty)
                       }
                     />,
                     <Text key={2} style={{ margin: "0 10px" }}>
@@ -219,7 +199,7 @@ function EventDetails({ params }: { params: { id: string } }) {
                       key={3}
                       icon={<PlusOutlined />}
                       onClick={() =>
-                        increaseQuantity(ticket.id, ticket.eventId)
+                        increaseQuantity(ticket.id, ticket.eventId ,ticket.qty)
                       }
                     />,
                     <Button

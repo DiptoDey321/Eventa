@@ -1,12 +1,12 @@
-import { FC } from "react";
 import { Card } from "antd";
+import moment from "moment";
 import Image, { StaticImageData } from "next/image";
 import { useRouter } from "next/navigation";
-import moment from "moment";
+import { FC } from "react";
 
 interface EventCardProps {
   id:string
-  imageSrc: StaticImageData;
+  imageSrc: string | StaticImageData;
   organizerIcon: StaticImageData;
   organizerName: string;
   heading: string;
@@ -38,19 +38,24 @@ const ExploreItemsCard: FC<EventCardProps> = ({
         onClick={() => goEventDetails(id)}
         className="card-container"
         style={{
-          // width: 400,
+          backgroundColor : "rgb(46, 46, 46)",
           borderRadius: "16px",
           overflow: "hidden",
           border: "0px",
           cursor: "pointer",
         }}
       >
+        <div style={{height:"200px",width:"100%" , overflow:"hidden" }}>
         <Image
           src={imageSrc}
           alt="Event Image"
           layout="responsive"
           objectFit="cover"
+          width={400}
+          height={200}
         />
+        </div>
+       
 
         <div className="organizer-details">
           <Image src={organizerIcon} alt="Event Image" height={25} width={30} />

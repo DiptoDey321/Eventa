@@ -38,7 +38,6 @@ function SignUpPage() {
 
   
   const onFinish = async(values: SignUpFormValues) => {
-
     try {
       if (values.notifications === undefined) {
         values.notifications = false;
@@ -48,12 +47,11 @@ function SignUpPage() {
         iso_code: "BD",
         phone: values.phone,
         email: values.email,
-        is_phone_selected: true,
       }); 
       if (res?.data?.data?.is_success){
         setIsOtpFormVisible(true);
       }else{
-        message.warning("Something Went Wrong !")
+        message.warning("user's crediential Exist")
       } 
     }catch(err:any) {
       console.log(err.message)
@@ -273,7 +271,7 @@ function SignUpPage() {
                         rules={[
                           { required: true },
                           {
-                            pattern: /^\d{11}$/,
+                            pattern: /^(013|014|015|016|017|018|019)\d{8}$/,
                             message: "Number must be Bangladeshi 11 digits",
                           },
                         ]}

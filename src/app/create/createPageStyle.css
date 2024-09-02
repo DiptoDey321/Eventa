@@ -147,3 +147,7 @@
 .create-page .cancel-btn a {
   color: white;
 }
+
+.ant-input{
+  font-size: 15px !important;
+}

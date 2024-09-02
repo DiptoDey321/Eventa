@@ -1,12 +1,13 @@
-import { Card, Button, Typography, Row, Col } from "antd";
-import Image, { StaticImageData }  from "next/image";
+import { Button, Card, Col, Row, Typography } from "antd";
+import moment from "moment";
+import Image, { StaticImageData } from "next/image";
 import { FC } from "react";
+import people from './../../../../public/users-list.webp';
+import './../ui/explore-components/explore.css';
 const { Title, Text } = Typography;
-import people from './../../../../public/users-list.webp'
-import './../ui/explore-components/explore.css'
 
 interface TransparentCardProps {
-  imageSrc: StaticImageData;
+  imageSrc: string | StaticImageData;
   heading: string;
   location: string;
   date: string;
@@ -20,6 +21,8 @@ const ExploreCard: FC<TransparentCardProps> = ({
   date,
   onButtonClick,
 }) => {
+  console.log(imageSrc);
+  
   return (
     <div className="explore-card-container">
       <Card
@@ -31,11 +34,11 @@ const ExploreCard: FC<TransparentCardProps> = ({
       >
         <Row align="middle" gutter={[16, 16]}>
           <Col xs={24} sm={24} md={12}>
-            <div className="album-image-container">
+            <div className="album-image-container"  style={{height:"350px",width:"100%" , overflow:"hidden" }}>
               <Image
                 src={imageSrc}
                 alt="Card Image"
-                layout="responsive"
+                // priority 
                 width={350}
                 height={500}
               />
@@ -93,8 +96,7 @@ const ExploreCard: FC<TransparentCardProps> = ({
                         </clipPath>
                       </defs>
                     </svg>
-
-                    <span>{date}</span>
+                    <span>{moment(date).format("MMMM D, YYYY")}</span>
                   </p>
                 </div>
 

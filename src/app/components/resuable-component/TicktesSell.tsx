@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Button, Card, Typography } from "antd";
-import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { addTicket, updateTicketQuantity } from "@/redux/slice/cartSlice";
-import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
+import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
+import { Button, Card, message, Typography } from "antd";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const { Text } = Typography;
 
@@ -43,24 +43,34 @@ const TicktesSell: React.FC<TicketProps> = ({
   }, [cartTicket]);
 
   const handleAddToCart = () => {
-    dispatch(
-      addTicket({ id, eventId, eventName, ticketTitle, price, quantity })
-    );
+    if(quantity <= qty){
+      dispatch(
+        addTicket({ id, eventId, eventName, ticketTitle, price, quantity ,qty})
+      );
+    }else{
+      message.warning(`Cannot add more than ${qty} tickets.`);
+    }
+   
   };
 
   const increaseQuantity = () => {
     const newQuantity = quantity + 1;
-    setQuantity(newQuantity);
-    if (cartTicket) {
-      dispatch(updateTicketQuantity({ id, eventId, quantity: newQuantity }));
+    if(newQuantity <= qty){
+      setQuantity(newQuantity);
+      if (cartTicket) {
+        dispatch(updateTicketQuantity({ id, eventId, quantity: newQuantity , qty }));
+      }
+    }else{
+      message.warning(`Cannot add more than ${qty} tickets.`);
     }
+    
   };
 
   const decreaseQuantity = () => {
     const newQuantity = Math.max(1, quantity - 1);
     setQuantity(newQuantity);
     if (cartTicket) {
-      dispatch(updateTicketQuantity({ id, eventId, quantity: newQuantity }));
+      dispatch(updateTicketQuantity({ id, eventId, quantity: newQuantity, qty }));
     }
   };
 
