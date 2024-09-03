@@ -49,7 +49,7 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
   const { data, error, isLoading } = useGetEventCategoryQuery(undefined);
   const [postEvent] = usePostEventMutation();
   const [createTickets] = useCreateTicketsMutation();
-  const [img, setImg] = useState<Image | null>(null);
+  const [img, setImg] = useState<File | null>(null);
   
   const [tickets, setTickets] = useState<TicketType[]>([
     {
@@ -118,8 +118,11 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
         formData.append("is_phone_selected", "false");
       }
 
-      // formData.append("event_image_url", img == null ? "" : img.uid);
-      formData.append("event_image_url", img == null ? "" : img);
+      if (img) {
+        formData.append("event_image_url", img);
+      } else {
+        formData.append("event_image_url", "");
+      }
 
       const resultOfEventCreate = await postEvent(formData);
 
@@ -183,7 +186,7 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
    const handleChange = (info: any) => {
 
     if (info.file.status === "done") {
-      setImg(info.file.originFileObj);
+      setImg(info.file.originFileObj as File);
       const url = URL.createObjectURL(info.file.originFileObj);
       setBackgroundImage(url);
       message.success(`${info.file.name} file uploaded successfully`);
