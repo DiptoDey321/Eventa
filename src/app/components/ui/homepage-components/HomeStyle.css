@@ -268,6 +268,7 @@
 .RSVP-Section {
   padding-top: 100px;
   padding-bottom: 120px;
+  padding: 100px 100px 120px 100px;
   max-width: 1400px;
   margin: auto !important;
 }
@@ -1063,7 +1064,7 @@
     flex-direction: column;
   }
   .tool-management-container {
-    padding: 50px 10px 180px 10px;
+    padding: 50px 20px 180px 20px;
     background-image: none;
   }
   .tool-management-container .RSVP-description span:first-child,
@@ -1077,8 +1078,11 @@
     line-height: 20px;
   }
   .everyting-scale-section {
-    padding: 30px 10px 20px 30px;
+    padding: 30px 10px 20px 10px;
     margin-top: -80px !important;
+  }
+  .RSVP-Section {
+    padding: 100px 20px 120px 20px;
   }
   .events-list-container .eventa-events-main {
     padding: 40px 0px 40px 40px;
@@ -1206,6 +1210,9 @@
   .tool-management-container {
     padding: 150px 100px 150px 100px;
     /* background-image: url(./../../../../../public/tool-managment-bg.webp); */
+  }
+  .RSVP-Section {
+    padding: 100px 100px 120px 100px;
   }
   .everyting-scale-section {
     padding: 30px 100px 0px 100px;
