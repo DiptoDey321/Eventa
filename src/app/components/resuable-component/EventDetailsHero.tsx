@@ -65,7 +65,7 @@ const EventDetailsHero: React.FC<EventCardProps> = ({
             <p style={{color : "black"}}>{place}</p>
             <p style={{color : "black"}}>{moment(time).format("MMMM D, YYYY")}</p>
           </div>
-          <div style={{ marginBottom: "20px" }}>
+          <div >
             <div className="location">
               <svg
                 id="place_1_"
@@ -102,7 +102,7 @@ const EventDetailsHero: React.FC<EventCardProps> = ({
                   </g>
                 </g>
               </svg>
-              <p>{location}</p>
+              <span>{location}</span>
             </div>
           </div>
           {/* <div className="details">
