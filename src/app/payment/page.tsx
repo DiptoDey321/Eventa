@@ -100,9 +100,9 @@ const Payment = () => {
       cart: transformData(tickets),
     };
     const res = await payment(data);
-    console.log("res",res);
-    
-
+    if(res.error){
+      message.error("Insufficients tickets, Please remove tickets and add again!")
+    }
     if (res?.data?.is_success){
       router.push(res?.data?.data);
     }
