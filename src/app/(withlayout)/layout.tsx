@@ -1,11 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Navbar from "../components/ui/user-route-components/Navbar";
-import Contents from "../components/ui/user-route-components/Contents";
 import { isUserLoggedIn } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import FooterSection from "../components/share-component/FooterSection";
-import '../components/ui/homepage-components/HomeStyle.css'
+import '../components/ui/homepage-components/HomeStyle.css';
+import Contents from "../components/ui/user-route-components/Contents";
+import Navbar from "../components/ui/user-route-components/Navbar";
+import Loading from "../loading";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
@@ -20,7 +21,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   }, [router, userLoggedIn]);
 
   if (!isLoading) {
-    return <div>loading ...</div>;
+    return <Loading></Loading>;
   }
 
 

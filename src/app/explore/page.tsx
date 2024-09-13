@@ -1,16 +1,18 @@
 "use client";
-import React from "react";
-import HomePageNav from "../components/share-component/NavBar";
+import { useGetEventsQuery } from "@/redux/api/ticketsApi";
 import FooterSection from "../components/share-component/FooterSection";
+import HomePageNav from "../components/share-component/NavBar";
 import ExploreHeroSection from "../components/ui/explore-components/ExploreHeroSection";
 import ExploreItemsSection from "../components/ui/explore-components/ExploreItemsSection";
-import { useGetEventsQuery } from "@/redux/api/ticketsApi";
+import Loading from "../loading";
 
 function Page() {
   const { data, error, isLoading } = useGetEventsQuery(undefined);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>
+      <Loading></Loading>
+    </div>;
   }
 
   if (error) {

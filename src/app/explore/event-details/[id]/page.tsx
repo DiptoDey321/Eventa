@@ -89,7 +89,7 @@ function EventDetails({ params }: { params: { id: string } }) {
     router.push("/payment");
   }
   
-  console.log(tickets);
+  console.log(data?.data?.tickets);
   
 
   return (

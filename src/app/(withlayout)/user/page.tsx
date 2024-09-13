@@ -2,7 +2,6 @@
 const LoggedUser = () => {
   return (
     <div>
-      <p></p>
     </div>
   );
 };

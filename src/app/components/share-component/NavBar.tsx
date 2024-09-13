@@ -24,7 +24,8 @@ const NavBar = () => {
         message.info("Coming Soon...");
         return;
       }
-      router.push(route);
+      // router.push(route);
+      window.location.href = route
       setLoading(false);
     } catch (error) {
       console.error("Navigation error:", error);
@@ -38,8 +39,6 @@ const NavBar = () => {
       setLoggedIn(true);
     };
   }, [user]);
-
-  console.log(loading);
   
   
 
@@ -56,7 +55,6 @@ const NavBar = () => {
           className="dep-menu-logo-container"
           style={{ cursor: "pointer" }}
         >
-          {/* <img src="https://i.ibb.co/Tm5thSk/logo.png" alt="" srcSet="" /> */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="248.001"

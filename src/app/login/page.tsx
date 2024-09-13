@@ -42,7 +42,8 @@ const Login = () => {
           );
           const redirectUrl = localStorage.getItem('redirectAfterLogin') || '/user';
           localStorage.removeItem('redirectAfterLogin'); // Clean up
-          router.push(redirectUrl);
+          window.location.href = redirectUrl
+          // router.push(redirectUrl);
           // router.push("/user");
         }
       } else {
@@ -60,8 +61,9 @@ const Login = () => {
           );
           const redirectUrl = localStorage.getItem('redirectAfterLogin') || '/user';
           localStorage.removeItem('redirectAfterLogin'); // Clean up
-          router.push(redirectUrl);
+          // router.push(redirectUrl);
           // router.push("/user");
+          window.location.href = redirectUrl
         }
       }
     } catch (error) {
