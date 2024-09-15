@@ -59,12 +59,12 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
       quantity: 10,
       description: "A great concert ticket",
       salePeriod: [
-        dayjs(),                          // Current date
-        dayjs().add(1, 'month'),          // One month from now
+        dayjs(),                         
+        dayjs().add(1, 'month'),          
       ],
       validPeriod: [
-        dayjs(),                          // Current date
-        dayjs().add(1, 'month'),          // One month from now
+        dayjs(),                         
+        dayjs().add(1, 'month'),         
       ],
       minPurchase: 1,
       maxPurchase: 10,
@@ -458,7 +458,6 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
             </Row>
           </div>
 
-          {/* tickets container  */}
           <div className="tickets-container-components">
             <Tickets
               tickets={tickets}

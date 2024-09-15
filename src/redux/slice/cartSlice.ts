@@ -41,33 +41,28 @@ const cartSlice = createSlice({
       );
     
       if (existingTicket) {
-        // Calculate new quantity
         const newQuantity = existingTicket.quantity + incomingTicket.quantity;
-    
-        // Check if new quantity exceeds the purchase limits
         if (newQuantity > limit_purchase_qty.max) {
           message.warning(`Cannot add more than ${limit_purchase_qty.max} tickets.`);
         } else if (newQuantity < limit_purchase_qty.min) {
           message.warning(`You must purchase at least ${limit_purchase_qty.min} tickets.`);
         } else if (newQuantity <= incomingTicket.qty) {
-          existingTicket.quantity = newQuantity; // Update if within limits
+          existingTicket.quantity = newQuantity; 
         } else {
           message.warning(`Cannot add more than ${incomingTicket.qty} tickets in stock.`);
         }
       } else {
-        // If ticket doesn't exist in cart, ensure quantity is valid
+
         if (incomingTicket.quantity > limit_purchase_qty.max) {
           message.warning(`Cannot add more than ${limit_purchase_qty.max} tickets.`);
         } else if (incomingTicket.quantity < limit_purchase_qty.min) {
           message.warning(`You must purchase at least ${limit_purchase_qty.min} tickets.`);
         } else if (incomingTicket.quantity <= incomingTicket.qty) {
-          state.tickets.push(incomingTicket); // Add new ticket if within limits
+          state.tickets.push(incomingTicket); 
         } else {
           message.warning(`Cannot add more than ${incomingTicket.qty} tickets in stock.`);
         }
       }
-    
-      // Save the cart state to localStorage
       if (typeof window !== "undefined") {
         localStorage.setItem("cart", JSON.stringify(state.tickets));
       }
@@ -75,29 +70,32 @@ const cartSlice = createSlice({
 
     updateTicketQuantity: (
       state,
-      action: PayloadAction<{ id: string; eventId: string; quantity: number; qty: number }>
+      action: PayloadAction<{ id: string; eventId: string; quantity: number; qty: number; limit_purchase_qty: { min: number; max: number } }>
     ) => {
-      const { id, eventId, quantity, qty } = action.payload;
+      const { id, eventId, quantity, qty, limit_purchase_qty } = action.payload;
       const ticket = state.tickets.find(
         (ticket) =>
           ticket.id === id &&
           ticket.eventId === eventId
       );
-
+    
       if (ticket) {
-        // Update ticket quantity if it does not exceed available quantity
-        if (quantity <= qty) {
+        if (quantity >= limit_purchase_qty.min && quantity <= limit_purchase_qty.max && quantity <= qty) {
           ticket.quantity = quantity;
-        } else {
-          // Show a notification to the user
-          message.warning(`Cannot add more than ${qty} tickets.`)
+        } else if (quantity > limit_purchase_qty.max) {
+          message.warning(`Cannot add more than ${limit_purchase_qty.max} tickets.`);
+        } else if (quantity < limit_purchase_qty.min) {
+          message.warning(`You must purchase at least ${limit_purchase_qty.min} tickets.`);
+        } else if (quantity > qty) {
+          message.warning(`Cannot add more than ${qty} tickets in stock.`);
         }
       }
-
+    
       if (typeof window !== "undefined") {
         localStorage.setItem("cart", JSON.stringify(state.tickets));
       }
     },
+    
 
     removeTicket: (
       state,
