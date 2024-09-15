@@ -129,6 +129,7 @@ function EventDetails({ params }: { params: { id: string } }) {
                           ticketTitle={tickets.title}
                           details={tickets?.description}
                           eventName={data?.data?.title}
+                          limit_purchase_qty={tickets?.limit_purchase_qty}
                         />
                       </Col>
                     ))}
@@ -171,7 +172,7 @@ function EventDetails({ params }: { params: { id: string } }) {
 
           <Modal
             title="Cart"
-            visible={isModalVisible}
+            open={isModalVisible}
             onOk={handleOk}
             onCancel={handleCancel}
             footer={null}
