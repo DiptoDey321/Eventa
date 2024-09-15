@@ -89,7 +89,7 @@ function EventDetails({ params }: { params: { id: string } }) {
     router.push("/payment");
   }
   
-  console.log(data?.data?.tickets);
+  console.log(data?.data);
   
 
   return (
@@ -103,7 +103,8 @@ function EventDetails({ params }: { params: { id: string } }) {
                 isAuthorized={true}
                 eventTitle={data?.data?.title}
                 place={data?.data?.venue_name}
-                time={data?.data?.event_start_date_time}
+                startTime={data?.data?.event_start_date_time}
+                endTime = {data?.data?.event_end_date_time}
                 location={data?.data?.address}
                 details={data?.data?.description}
                 imageUrl={imgSrc}

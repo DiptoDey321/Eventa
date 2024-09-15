@@ -16,7 +16,8 @@ interface EventCardProps {
   isAuthorized: boolean;
   eventTitle: string;
   place: string;
-  time : string,
+  startTime : string,
+  endTime : string
   location: string;
   details: string;
   imageUrl: StaticImageData;
@@ -28,8 +29,9 @@ const EventDetailsHero: React.FC<EventCardProps> = ({
   isAuthorized,
   eventTitle,
   place,
-  time,
+  startTime,
   location,
+  endTime,
   details,
   imageUrl,
   imageAlt,
@@ -63,7 +65,10 @@ const EventDetailsHero: React.FC<EventCardProps> = ({
           </div>
           <div className="place-time">
             <p style={{color : "black", paddingBottom:'10px'}}>{place}</p>
-            <p style={{color : "black"}}>{moment(time).format("MMMM D, YYYY")}</p>
+            <p style={{color : "black", fontSize:"17px"}}>{moment(startTime).format("MMMM D, YYYY")}
+              <span> - </span>  {moment(endTime).format("MMMM D, YYYY")}
+
+            </p>
           </div>
          
           <span style={{display:"flex", alignItems:"center", gap:"10px"}}>
