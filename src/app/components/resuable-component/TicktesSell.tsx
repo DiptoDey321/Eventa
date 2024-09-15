@@ -79,7 +79,7 @@ const TicktesSell: React.FC<TicketProps> = ({
     if (newQuantity <= limit_purchase_qty.max && newQuantity <= qty) {
       setQuantity(newQuantity);
       if (cartTicket) {
-        dispatch(updateTicketQuantity({ id, eventId, quantity: newQuantity, qty }));
+        dispatch(updateTicketQuantity({ id, eventId, quantity: newQuantity, qty ,limit_purchase_qty}));
       }
     } else if (newQuantity > qty) {
       message.warning(`You cannot add more than ${qty} tickets.`);
@@ -96,7 +96,7 @@ const TicktesSell: React.FC<TicketProps> = ({
     } else {
       setQuantity(newQuantity);
       if (cartTicket) {
-        dispatch(updateTicketQuantity({ id, eventId, quantity: newQuantity, qty }));
+        dispatch(updateTicketQuantity({ id, eventId, quantity: newQuantity, qty ,limit_purchase_qty}));
       }
     }
   };

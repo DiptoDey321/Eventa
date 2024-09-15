@@ -106,8 +106,25 @@
   height: 40px;
 }
 
+.exlore-filter .ant-input{
+  height: 40px;
+}
+
+.exlore-filter .ant-input::placeholder{
+  font-weight: 500;
+  color: black !important;
+}
+
 .exlore-filter .ant-select-arrow {
   top: 39% !important;
+}
+.exlore-filter .ant-picker-input{
+  height: 30px;
+}
+
+.exlore-filter .ant-picker-input input::placeholder {
+  font-weight: 500;
+  color: black !important;
 }
 
 .exlore-filter .custpm-btn {
