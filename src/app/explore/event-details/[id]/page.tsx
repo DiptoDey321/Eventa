@@ -55,28 +55,6 @@ function EventDetails({ params }: { params: { id: string } }) {
     setIsModalVisible(false);
   };
 
-  // const increaseQuantity = (id: string, eventId: string ,qty:number) => {
-  //   const ticket = tickets.find(
-  //     (ticket) => ticket.id === id && ticket.eventId === eventId
-  //   );
-  //   if (ticket) {
-  //     dispatch(
-  //       updateTicketQuantity({ id, eventId, quantity: ticket.quantity + 1 , qty})
-  //     );
-  //   }
-  // };
-
-  // const decreaseQuantity = (id: string, eventId: string , qty:number) => {
-  //   const ticket = tickets.find(
-  //     (ticket) => ticket.id === id && ticket.eventId === eventId
-  //   );
-  //   if (ticket && ticket.quantity > 1) {
-  //     dispatch(
-  //       updateTicketQuantity({ id, eventId, quantity: ticket.quantity - 1 ,qty})
-  //     );
-  //   }
-  // };
-
   const increaseQuantity = (id: string, eventId: string, qty: number, limit_purchase_qty: { min: number; max: number }) => {
     const ticket = tickets.find((ticket) => ticket.id === id && ticket.eventId === eventId);
     if (ticket) {

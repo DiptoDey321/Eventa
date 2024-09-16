@@ -25,25 +25,27 @@ const Payment = () => {
     }
   }, [dispatch]);
 
-  const increaseQuantity = (id: string, eventId: string , qty:number) => {
-    const ticket = tickets.find(
-      (ticket:any) => ticket.id === id && ticket.eventId === eventId
-    );
+  const increaseQuantity = (id: string, eventId: string, qty: number, limit_purchase_qty: { min: number; max: number }) => {
+    const ticket = tickets.find((ticket) => ticket.id === id && ticket.eventId === eventId);
     if (ticket) {
-      dispatch(
-        updateTicketQuantity({ id, eventId, quantity: ticket.quantity + 1, qty })
-      );
+      if (ticket.quantity < limit_purchase_qty.max && ticket.quantity < qty) {
+        dispatch(
+          updateTicketQuantity({ id, eventId, quantity: ticket.quantity + 1, qty, limit_purchase_qty })
+        );
+      } else {
+        message.warning(`Cannot add more than ${limit_purchase_qty.max} tickets.`);
+      }
     }
   };
 
-  const decreaseQuantity = (id: string, eventId: string , qty:number) => {
-    const ticket = tickets.find(
-      (ticket: any) => ticket.id === id && ticket.eventId === eventId
-    );
-    if (ticket && ticket.quantity > 1) {
+  const decreaseQuantity = (id: string, eventId: string, qty: number, limit_purchase_qty: { min: number; max: number }) => {
+    const ticket = tickets.find((ticket) => ticket.id === id && ticket.eventId === eventId);
+    if (ticket && ticket.quantity > limit_purchase_qty.min) {
       dispatch(
-        updateTicketQuantity({ id, eventId, quantity: ticket.quantity - 1 , qty})
+        updateTicketQuantity({ id, eventId, quantity: ticket.quantity - 1, qty, limit_purchase_qty })
       );
+    } else if (ticket && ticket.quantity <= limit_purchase_qty.min) {
+      message.warning(`You cannot purchase fewer than ${limit_purchase_qty.min} tickets.`);
     }
   };
 
@@ -152,7 +154,7 @@ const Payment = () => {
                           key={1}
                           icon={<MinusOutlined />}
                           onClick={() =>
-                            decreaseQuantity(ticket.id, ticket.eventId, ticket.qty)
+                            decreaseQuantity(ticket.id, ticket.eventId , ticket.qty , ticket.limit_purchase_qty)
                           }
                         />,
                         <span key={2} style={{ margin: "0 10px" }}>
@@ -163,7 +165,7 @@ const Payment = () => {
                           key={3}
                           icon={<PlusOutlined />}
                           onClick={() =>
-                            increaseQuantity(ticket.id, ticket.eventId , ticket.qty)
+                            increaseQuantity(ticket.id, ticket.eventId ,ticket.qty, ticket.limit_purchase_qty)
                           }
                         />,
                         <Button
