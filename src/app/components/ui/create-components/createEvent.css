@@ -407,10 +407,30 @@ input::placeholder {
   .tickets-container-components {
     padding: 0px 20px;
   }
+  .label-row .ant-row {
+    flex-flow:  column !important;
+  }
+  .common-style .ant-form-item-row {
+    flex-direction: column !important;
+    align-items: start !important;
+  }
+  .common-right {
+    margin-right: 0px !important;
+  }
+  
+  .common-left {
+    margin-left: 0px !important;
+  }
 }
 @media (min-width: 576px) {
 }
 @media (min-width: 768px) {
+  .common-right {
+    margin-right: 15px !important;
+  }
+  .common-left {
+    margin-left: 15px !important;
+  }
 }
 @media (min-width: 992px) {
   .main-container {
@@ -419,6 +439,14 @@ input::placeholder {
   .tickets-container-components {
     padding: 0px 50px;
   }
+  .label-row .ant-row {
+    flex-flow: row;
+  }
+  .common-style .ant-form-item-row {
+    flex-direction: row !important;
+    align-items: center !important;
+  }
+ 
 }
 @media (min-width: 1200px) {
   .main-container {

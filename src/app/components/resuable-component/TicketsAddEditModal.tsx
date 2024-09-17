@@ -103,7 +103,7 @@ const TicketsAddEditModal: React.FC<EditModalProps> = ({
         </Form.Item>
 
         <Row>
-          <Col span={12}>
+          <Col xs={24} sm={24} md={12} >
             <Form.Item
               name="price"
               label="Price"
@@ -119,7 +119,7 @@ const TicketsAddEditModal: React.FC<EditModalProps> = ({
               />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col xs={24} sm={24} md={12} >
             <Form.Item
               name="quantity"
               label="Quantity"
@@ -174,7 +174,7 @@ const TicketsAddEditModal: React.FC<EditModalProps> = ({
         </Form.Item>
 
         <Row>
-          <Col span={12}>
+          <Col  xs={24} sm={24} md={12}>
             <Form.Item
               name="minPurchase"
               label="Minimum Purchase"
@@ -195,7 +195,7 @@ const TicketsAddEditModal: React.FC<EditModalProps> = ({
             </Form.Item>
           </Col>
 
-          <Col span={12}>
+          <Col  xs={24} sm={24} md={12}>
             <Form.Item
               name="maxPurchase"
               label="Maximum Purchase"
