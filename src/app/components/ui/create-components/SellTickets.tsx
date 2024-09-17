@@ -163,6 +163,11 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
     setTickets([...tickets, newTicket]);
   };
 
+  const deleteTicket = (ticketId: number) =>{
+    const updatedTickets = tickets.filter((ticket) => ticket.id !== ticketId);
+    setTickets(updatedTickets);
+  }
+
   const handleFormChange = (changedValues: any, allValues: any) => {
     setFormValues({ ...allValues, description: editorValue });
   };
@@ -463,6 +468,7 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
               tickets={tickets}
               addTicket={addTicket}
               updateTicket={updateTicket}
+              deleteTicket={deleteTicket}
             ></Tickets>
           </div>
         </div>

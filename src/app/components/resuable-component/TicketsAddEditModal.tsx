@@ -18,10 +18,10 @@ const TicketsAddEditModal: React.FC<EditModalProps> = ({
   const onFinish = (values: any) => {
     const newTicket = {
       ...values,
-      salePeriod: values.salePeriod.map((date: Dayjs) => // Changed from moment.Moment to Dayjs
+      salePeriod: values.salePeriod.map((date: Dayjs) => 
       date
     ),
-    validPeriod: values.validPeriod.map((date: Dayjs) => // Changed from moment.Moment to Dayjs
+    validPeriod: values.validPeriod.map((date: Dayjs) => 
       date
     ),
     };
@@ -65,7 +65,6 @@ const TicketsAddEditModal: React.FC<EditModalProps> = ({
     }
   }, [ticket, form, resetTrigger]);
 
-   // Updated validatePurchase function to check against ticket quantity
    const validatePurchase = (_: any, value: any) => {
     const minPurchase = form.getFieldValue("minPurchase");
     const maxPurchase = form.getFieldValue("maxPurchase");
@@ -82,7 +81,6 @@ const TicketsAddEditModal: React.FC<EditModalProps> = ({
     return Promise.resolve();
   };
 
-  // New validation for the quantity field to ensure it doesn't invalidate min/max purchase
   const validateQuantity = (_: any, value: any) => {
     const minPurchase = form.getFieldValue("minPurchase");
     const maxPurchase = form.getFieldValue("maxPurchase");

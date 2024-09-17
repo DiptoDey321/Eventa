@@ -12,6 +12,7 @@ const Tickets: React.FC<TicketsExtraProps> = ({
   tickets,
   addTicket,
   updateTicket,
+  deleteTicket
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentTicket, setCurrentTicket] = useState<TicketType | null>(null);
@@ -49,7 +50,7 @@ const Tickets: React.FC<TicketsExtraProps> = ({
           <Row gutter={[20, 20]}>
             {tickets.map((ticket) => (
               <Col key={ticket.id} xs={24} sm={24} md={12}>
-                <TicketCard ticket={ticket} showEditModal={showEditModal} />
+                <TicketCard ticket={ticket} showEditModal={showEditModal} deleteTicket={deleteTicket} />
               </Col>
             ))}
           </Row>

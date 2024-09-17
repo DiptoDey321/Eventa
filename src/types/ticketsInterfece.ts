@@ -15,12 +15,14 @@ export interface TicketType {
 export interface TicketProps {
   ticket: TicketType;
   showEditModal: (ticket: TicketType) => void;
+  deleteTicket: (ticketId: number) => void;
 }
 
 export interface TicketsExtraProps {
   tickets: TicketType[];
   addTicket: (ticket: TicketType) => void;
   updateTicket: (ticket: TicketType) => void;
+  deleteTicket: (ticketId: number) => void;
 }
 
 export interface EditModalProps {

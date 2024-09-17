@@ -90,9 +90,6 @@ function EventDetails({ params }: { params: { id: string } }) {
   const paymentPage = () =>{
     router.push("/payment");
   }
-  
-  console.log(data?.data);
-  
 
   return (
     <>
