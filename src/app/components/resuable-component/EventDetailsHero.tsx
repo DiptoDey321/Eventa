@@ -20,8 +20,8 @@ interface EventCardProps {
   endTime : string
   location: string;
   details: string;
-  imageUrl: StaticImageData;
-  imageAlt: string;
+  imageUrl: string | StaticImageData;
+  imageAlt: string ;
 }
 
 const EventDetailsHero: React.FC<EventCardProps> = ({
@@ -36,9 +36,8 @@ const EventDetailsHero: React.FC<EventCardProps> = ({
   imageUrl,
   imageAlt,
 }) => {
-   const router = useRouter();
-
-
+  const router = useRouter();
+  
   return (
     <div className="event-details-hero-card">
       <div style={{display:"flex", justifyContent:"end", paddingBottom:"30px"}}>
@@ -115,13 +114,13 @@ const EventDetailsHero: React.FC<EventCardProps> = ({
           </div> */}
         </Col>
         <Col xs={24} sm={24} md={12}>
-          <div className="img-container">
+          <div style={{height:"350px",width:"100%" , overflow:"hidden" }} className="img-container">
             <Image
               src={imageUrl}
-              alt={imageAlt}
-              layout="responsive"
-              width={300}
-              height={200}
+              alt="Event Image"
+              objectFit="cover"
+              width={400}
+              height={350}
             />
           </div>
         </Col>

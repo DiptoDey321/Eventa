@@ -221,15 +221,18 @@
 @media (min-width: 576px) {
 }
 @media (min-width: 768px) {
-  .hero-section-container .blur {
-    padding: 50px 200px 100px 200px;
-  }
   .tickets-container .tickets-card {
     display: flex;
     flex-direction: row;
+  }
+  .hero-section-container .blur {
+    padding: 50px 100px 100px 100px;
   }
 }
 @media (min-width: 992px) {
 }
 @media (min-width: 1200px) {
+  .hero-section-container .blur {
+    padding: 50px 200px 100px 200px;
+  }
 }

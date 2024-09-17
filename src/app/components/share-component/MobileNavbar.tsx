@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { RootState } from "@/redux/store";
 import { MenuOutlined } from "@ant-design/icons";
 import { Button, Drawer, Menu, message, type MenuProps } from "antd";
-import "./../ui/homepage-components/HomeStyle.css";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import "./../ui/homepage-components/HomeStyle.css";
 
 const MobileNavbar: React.FC = () => {
 
@@ -38,7 +38,7 @@ const MobileNavbar: React.FC = () => {
       message.info("Coming Soon...");
       return;
     }
-    router.push(event.key);
+    location.href = "event.key"
   };
 
    useEffect(() => {

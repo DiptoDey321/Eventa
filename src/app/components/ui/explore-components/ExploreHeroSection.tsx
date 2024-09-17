@@ -15,9 +15,7 @@ const ExploreHeroSection = ({ data}:any) => {
     router.push(`/explore/event-details/${id}`);
   };
 
-  console.log(data?.data);
   
-
   return (
     <div className="explore-slider-cotainer">
       <Swiper

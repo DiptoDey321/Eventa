@@ -91,6 +91,9 @@ function EventDetails({ params }: { params: { id: string } }) {
     router.push("/payment");
   }
 
+  console.log(data?.data);
+  
+
   return (
     <>
       {data?.data && (
@@ -106,7 +109,7 @@ function EventDetails({ params }: { params: { id: string } }) {
                 endTime = {data?.data?.event_end_date_time}
                 location={data?.data?.address}
                 details={data?.data?.description}
-                imageUrl={imgSrc}
+                imageUrl={data?.data?.event_image_url ?`https://link.storjshare.io/raw/jw2ydrl6k3ff65py2xpvvgm3qseq/${data?.data?.event_image_url}` :imgSrc}
                 imageAlt="Event"
               ></EventDetailsHero>
             </div>

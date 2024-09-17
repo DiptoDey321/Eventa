@@ -45,14 +45,14 @@ const ExploreItemsCard: FC<EventCardProps> = ({
           cursor: "pointer",
         }}
       >
-        <div style={{height:"220px",width:"100%" , overflow:"hidden" }}>
+        <div style={{height:"200px",width:"100%" , overflow:"hidden", borderRadius:"5px" }}>
         <Image
           src={imageSrc}
           alt="Event Image"
-          layout="responsive"
+          // layout="responsive"
           objectFit="cover"
           width={400}
-          height={200}
+          height={250}
         />
         </div>
        
