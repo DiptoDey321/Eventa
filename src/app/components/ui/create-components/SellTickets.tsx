@@ -133,8 +133,7 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
         });
         if (resultOfTicketsCreate?.data?.is_success) {
           message.success("Event Created successfully!");
-          // router.push("/explore");
-           window.location.href = "/explore"
+          window.location.href = "/explore"
         }
       } else {
         message.error("Please fill required field");

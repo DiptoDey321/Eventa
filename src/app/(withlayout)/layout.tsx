@@ -31,7 +31,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="user-main-layout">
           <Navbar></Navbar>
         </div>
-        <div style={{ paddingTop: "50px" }}>
+        <div style={{padding:'0px 60px 50px 60px'}}>
           <Contents>{children}</Contents>
         </div>
       </div>

@@ -1,12 +1,12 @@
 "use client"
-import React, { useRef, useState } from "react";
-import { SearchOutlined } from "@ant-design/icons";
+import { useGetEventDetailsQuery, useGetEventsForUserQuery } from "@/redux/api/ticketsApi";
+import { EditOutlined, SearchOutlined } from "@ant-design/icons";
 import type { InputRef, TableColumnsType, TableColumnType } from "antd";
-import { Button, Input, Space, Table } from "antd";
+import { Button, Input, Modal, Space, Table } from "antd";
 import type { FilterDropdownProps } from "antd/es/table/interface";
+import React, { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
-import { DeleteOutlined } from "@ant-design/icons";
-import { useGetEventsForUserQuery } from "@/redux/api/ticketsApi";
+import EventEdit from "./event -edit/EventEdit";
 
 interface DataType {
   key: string;
@@ -25,8 +25,16 @@ const EventDetailsForUser: React.FC = () => {
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
   const { data, error, isLoading } = useGetEventsForUserQuery(undefined);
-
-  console.log(data);
+  const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  // const [eventData, setEventData] = useState({});
+  const {
+    data: eventDetails,
+    error: eventDetailsError,
+    isLoading: eventDetailsLoading,
+  } = useGetEventDetailsQuery(selectedEventId as string, {
+    skip: !selectedEventId,
+  });
   
   const handleSearch = (
     selectedKeys: string[],
@@ -171,7 +179,35 @@ const EventDetailsForUser: React.FC = () => {
         return <span style={{ color }}>{label}</span>;
       },
     },
+    {
+      title: "Action",
+      key: "action",
+      width: 100,
+      render: (_: any, record: any) => (
+        <div onClick={() => handleEdit(record)} className="">
+          <EditOutlined
+          
+          style={{ cursor: "pointer", color: "#1890ff" }}
+        />
+        <span style={{paddingLeft:"10px"}}>Edit</span>
+        </div>
+      ),
+    },
   ];
+
+  const handleEdit = (record: any) => {
+    setSelectedEventId(record._id);
+    setIsModalVisible(true);
+  };
+
+  const handleCloseModal = (data: any) => {
+    setIsModalVisible(false);
+  };
+
+  console.log("event details",eventDetails?.data);
+  
+
+  
 
   return (
     <div>
@@ -182,6 +218,17 @@ const EventDetailsForUser: React.FC = () => {
           dataSource={data?.data}
         />
       </div>
+
+      <Modal
+        title="Edit Event"
+        open={isModalVisible}
+        onCancel={handleCloseModal}
+        footer={null}
+        width={1000}
+        centered
+      >
+        <EventEdit eventData={eventDetails?.data}></EventEdit>
+      </Modal>
     </div>
   );
 };

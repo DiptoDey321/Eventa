@@ -4,6 +4,7 @@ import { isUserLoggedIn } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import SellTickets from "../components/ui/create-components/SellTickets";
+import Loading from "../loading";
 import './createPageStyle.css';
 
 const CreatePage = () => {
@@ -24,10 +25,8 @@ const CreatePage = () => {
     }, [router, userLoggedIn]);
 
     if (!isLoading) {
-      return <div>loading ...</div>;
+      return <><Loading></Loading></>;
     }
-
-
   return (
     <>
       <SellTickets activeComponents={activeComponents}></SellTickets>

@@ -1,13 +1,12 @@
-import React, { useRef, useState } from "react";
+import PaymentSuccess from "@/app/payment/success/page";
+import { useGetTicketsQuery } from "@/redux/api/paymentApi";
 import { SearchOutlined } from "@ant-design/icons";
 import type { InputRef, TableColumnsType, TableColumnType } from "antd";
 import { Button, Input, Modal, Space, Table } from "antd";
 import type { FilterDropdownProps } from "antd/es/table/interface";
+import { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
-import { DeleteOutlined } from "@ant-design/icons";
-import { useGetTicketsQuery } from "@/redux/api/paymentApi";
-import PaymentSuccess from "@/app/payment/success/page";
-import './../../../payment/success/success.css'
+import './../../../payment/success/success.css';
 
 interface DataType {
   eventName: string;
@@ -118,9 +117,6 @@ const UsersTickets = () => {
       ),
   });
 
-  // sorter: (a, b) => a.address.length - b.address.length,
-  // sortDirections: ["descend", "ascend"],
-
   const columns: TableColumnsType<DataType> = [
     {
       title: "Event Name",
@@ -185,7 +181,6 @@ const UsersTickets = () => {
   const handleDownload = (record: DataType) => {
     setTicketData(record);
     setIsModalVisible(true);
-    console.log("Downloading ticket for", record);
   };
 
   return (
@@ -198,7 +193,7 @@ const UsersTickets = () => {
 
       <Modal
         title="Ticket Details"
-        visible={isModalVisible}
+        open={isModalVisible}
         onCancel={handleCloseModal}
         footer={null}
         width={700}

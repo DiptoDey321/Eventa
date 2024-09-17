@@ -1,54 +1,19 @@
 "use client";
 import { RootState } from "@/redux/store";
 import { BarsOutlined } from "@ant-design/icons";
-import type { TabsProps } from "antd";
-import { Button, Tabs } from "antd";
+
+import { Button } from "antd";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import EventDetailsForUser from "./EventDetailsForUser";
 import RightNav from "./RightNav";
-import UserDashboard from "./UserDashboard";
 import "./UserRouteStyle.css";
-import UsersTickets from "./UsersTickets";
 
 const Navbar = () => {
 
   const user = useSelector((state: RootState) => state?.auth?.user);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const router = useRouter();
-
-  const openNotification = () => {
-    console.log("hello");
-  };
-
-  const onChange = (key: string) => {
-    console.log(key);
-  };
-
-  const items: TabsProps["items"] = [
-    {
-      key: "1",
-      label: "Overview",
-      children: <UserDashboard />,
-    },
-    {
-      key: "2",
-      label: "Tickets",
-      children: <UsersTickets />,
-    },
-    {
-      key: "3",
-      label: "Events",
-      children: <EventDetailsForUser />,
-    },
-
-    // {
-    //   key: "4",
-    //   label: "Profile",
-    //   children: <UserProfile />,
-    // },
-  ];
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -116,14 +81,6 @@ const Navbar = () => {
         </div>
         <div className="dep-user-menu">
           <p>{user?.first_name} {}</p>
-          {/* <Badge count={5}>
-            <Button
-              type="primary"
-              shape="circle"
-              icon={<BellOutlined />}
-              onClick={openNotification}
-            />
-          </Badge> */}
           <Button
             type="primary"
             shape="circle"
@@ -133,9 +90,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="dep-user-main-menu">
-        <Tabs centered defaultActiveKey="1" items={items} onChange={onChange} />
-      </div>
+      
 
       <div className="">
         <RightNav isOpen={menuOpen} closeMenu={closeMenu} />
