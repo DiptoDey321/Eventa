@@ -32,35 +32,29 @@ const TicketsAddEditModal: React.FC<EditModalProps> = ({
     }
     closeModal();
      form.resetFields();
-     console.log("Calling after reset ");
      
     setResetTrigger(resetTrigger+1);
   };
 
   useEffect(() => {
     if (ticket) {
-      console.log("Calling from there")
-      console.log(ticket);
-      
-
       form.setFieldsValue({
         name: ticket.name,
         price: ticket.price,
         description: ticket.description,
         quantity: ticket.quantity,
         salePeriod: [
-          dayjs(ticket.salePeriod[0]), // Changed from moment to dayjs
-          dayjs(ticket.salePeriod[1]), // Changed from moment to dayjs
+          dayjs(ticket.salePeriod[0]),
+          dayjs(ticket.salePeriod[1]), 
         ],
         validPeriod: [
-          dayjs(ticket.validPeriod[0]), // Changed from moment to dayjs
-          dayjs(ticket.validPeriod[1]), // Changed from moment to dayjs
+          dayjs(ticket.validPeriod[0]), 
+          dayjs(ticket.validPeriod[1]), 
         ],
         minPurchase: ticket.minPurchase,
         maxPurchase: ticket.maxPurchase,
       });
     } else {
-      console.log("calling from there !!!!");
       form.resetFields();
     }
   }, [ticket, form, resetTrigger]);

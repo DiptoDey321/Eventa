@@ -155,6 +155,10 @@
   background-color: rgb(46, 46, 46) !important;
 }
 
+.card-event-img img{
+  width: 100%;
+}
+
 .event-item-container .organizer-details {
   display: flex;
   align-items: center;

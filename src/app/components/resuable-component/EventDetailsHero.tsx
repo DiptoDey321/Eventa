@@ -36,6 +36,15 @@ const EventDetailsHero: React.FC<EventCardProps> = ({
   imageUrl,
   imageAlt,
 }) => {
+
+  function formatTimestampTo12Hour(timestamp:any) {
+    const [date, time] = timestamp.split('T');
+    let [hours, minutes, seconds] = time.split('.')[0].split(':');
+    const suffix = hours >= 12 ? 'PM' : 'AM';
+    hours = ((hours % 12) || 12); 
+    const formattedTime = `${hours}:${minutes} ${suffix}`;
+    return { date, time: formattedTime };
+  }
   const router = useRouter();
   
   return (
@@ -66,6 +75,11 @@ const EventDetailsHero: React.FC<EventCardProps> = ({
             <p style={{color : "black", paddingBottom:'10px'}}>{place}</p>
             <p style={{color : "black", fontSize:"17px"}}>{moment(startTime).format("MMMM D, YYYY")}
               <span> - </span>  {moment(endTime).format("MMMM D, YYYY")}
+
+            </p>
+
+            <p style={{color : "black", fontSize:"17px", paddingTop :'10px'}}>{(formatTimestampTo12Hour(startTime).time)}
+              <span> - </span>  {(formatTimestampTo12Hour(endTime).time)}
 
             </p>
           </div>

@@ -1,18 +1,17 @@
-import "./createEvent.css";
-import { Button, Col, Modal, Row } from "antd";
-import { RiseOutlined } from "@ant-design/icons";
-import { useState } from "react";
 import { TicketsExtraProps, TicketType } from "@/types/ticketsInterfece";
-import TicketCard from "../../resuable-component/TicktesCard";
+import { RiseOutlined } from "@ant-design/icons";
+import { Button, Col, Modal, Row } from "antd";
+import { useState } from "react";
 import TicketsAddEditModal from "../../resuable-component/TicketsAddEditModal";
-
-
+import TicketCard from "../../resuable-component/TicktesCard";
+import "./createEvent.css";
 
 const Tickets: React.FC<TicketsExtraProps> = ({
   tickets,
   addTicket,
   updateTicket,
-  deleteTicket
+  deleteTicket,
+  userEditTicket
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentTicket, setCurrentTicket] = useState<TicketType | null>(null);
@@ -34,6 +33,7 @@ const Tickets: React.FC<TicketsExtraProps> = ({
     setIsModalVisible(false);
     setCurrentTicket(null);
   };
+  
 
   return (
     <div>
@@ -55,7 +55,6 @@ const Tickets: React.FC<TicketsExtraProps> = ({
             ))}
           </Row>
 
-          {/* modal  */}
           <div>
             <Modal
               title={isEditing ? "Edit Ticket" : "Add Ticket"}

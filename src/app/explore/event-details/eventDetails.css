@@ -32,7 +32,7 @@
   /* padding-top: 10px; */
   font-size: 20px;
   color: rgb(70, 69, 69);
-  padding-bottom: 15px;
+  padding-bottom: 10px;
 }
 
 .event-details-hero-card .location {
@@ -49,8 +49,15 @@
   font-size: 16px;
 }
 
+.event-details-hero-card .img-container{
+  width: calc( 100% - 30px);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
 .event-details-hero-card .img-container img {
   border-radius: 10px;
+  width: fit-content;
 }
 
 .antd-custome-card .ant-card {

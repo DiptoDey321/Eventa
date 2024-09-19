@@ -31,6 +31,17 @@ const ExploreItemsCard: FC<EventCardProps> = ({
   const goEventDetails = (id:string)=>{
     router.push(`/explore/event-details/${id}`);
   }
+
+  function formatTimestampTo12Hour(timestamp:any) {
+    const [date, time] = timestamp.split('T');
+    let [hours, minutes, seconds] = time.split('.')[0].split(':');
+    const suffix = hours >= 12 ? 'PM' : 'AM';
+    hours = ((hours % 12) || 12); 
+    const formattedTime = `${hours}:${minutes} ${suffix}`;
+    return { date, time: formattedTime };
+  }
+
+  
   
   return (
     <div className="event-item-container">
@@ -45,7 +56,7 @@ const ExploreItemsCard: FC<EventCardProps> = ({
           cursor: "pointer",
         }}
       >
-        <div style={{height:"200px",width:"100%" , overflow:"hidden", borderRadius:"5px" }}>
+        <div className="card-event-img" style={{height:"250px",width:"100%" , overflow:"hidden", borderRadius:"5px" }}>
         <Image
           src={imageSrc}
           alt="Event Image"
@@ -198,13 +209,17 @@ const ExploreItemsCard: FC<EventCardProps> = ({
             <div className="from">
               <span>From:</span>{" "}
               <span className="format">
-                {moment(fromDate).format("MMMM D, YYYY")}
+                {moment(formatTimestampTo12Hour(fromDate).date).format("MMMM D, YYYY")}
+                <br />
+                {formatTimestampTo12Hour(fromDate).time}
               </span>
             </div>
             <div className="from">
               <span>To:</span>{" "}
               <span className="format">
-                {moment(toDate).format("MMMM D, YYYY")}
+              {moment(formatTimestampTo12Hour(toDate).date).format("MMMM D, YYYY")}
+              <br />
+              {formatTimestampTo12Hour(toDate).time}
               </span>
             </div>
           </div>

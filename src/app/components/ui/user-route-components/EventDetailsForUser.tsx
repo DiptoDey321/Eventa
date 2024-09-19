@@ -1,5 +1,5 @@
 "use client"
-import { useGetEventDetailsQuery, useGetEventsForUserQuery } from "@/redux/api/ticketsApi";
+import { useGetEventForUserQuery, useGetEventsForUserQuery } from "@/redux/api/ticketsApi";
 import { EditOutlined, SearchOutlined } from "@ant-design/icons";
 import type { InputRef, TableColumnsType, TableColumnType } from "antd";
 import { Button, Input, Modal, Space, Table } from "antd";
@@ -27,12 +27,12 @@ const EventDetailsForUser: React.FC = () => {
   const { data, error, isLoading } = useGetEventsForUserQuery(undefined);
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  // const [eventData, setEventData] = useState({});
+  // const { eventData, setEventData } = useState(undefined);
   const {
     data: eventDetails,
     error: eventDetailsError,
     isLoading: eventDetailsLoading,
-  } = useGetEventDetailsQuery(selectedEventId as string, {
+  } = useGetEventForUserQuery(selectedEventId as string, {
     skip: !selectedEventId,
   });
   
@@ -200,14 +200,11 @@ const EventDetailsForUser: React.FC = () => {
     setIsModalVisible(true);
   };
 
-  const handleCloseModal = (data: any) => {
+  const handleCloseModal = () => {
     setIsModalVisible(false);
+    setSelectedEventId(null)
   };
 
-  console.log("event details",eventDetails?.data);
-  
-
-  
 
   return (
     <div>
@@ -227,7 +224,9 @@ const EventDetailsForUser: React.FC = () => {
         width={1000}
         centered
       >
-        <EventEdit eventData={eventDetails?.data}></EventEdit>
+        <div style={{padding:'10px'}}>
+          <EventEdit eventData={eventDetails?.data} handleCloseModal={handleCloseModal}></EventEdit>
+        </div>
       </Modal>
     </div>
   );

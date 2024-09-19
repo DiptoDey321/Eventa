@@ -1,5 +1,6 @@
 "use client";
-import { useGetEventCategoryQuery } from "@/redux/api/ticketsApi";
+import { useGetEventCategoryQuery, useUpdateEventMutation, useUpdateTicketsMutation } from "@/redux/api/ticketsApi";
+import { TicketType } from "@/types/ticketsInterfece";
 import { UploadOutlined } from "@ant-design/icons";
 import {
   Button,
@@ -19,11 +20,48 @@ import Image, { StaticImageData } from "next/image";
 import { useEffect, useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import initialBackground from "../../../../../../public/selltickets-sidebg.webp";
+import Tickets from "../../create-components/Tickets";
 import "./eventEdit.css";
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
 });
 const { Option } = Select;
+
+const generateRandomString = (length: number) => Array.from({ length }, () => 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'.charAt(Math.floor(Math.random() * 62))).join('');
+
+
+interface Ticket {
+  _id: string | undefined;
+  title: string;
+  description: string;
+  qty: number;
+  price: number;
+  sale_period_date_time: {
+    start: string;
+    end: string;
+  };
+  valid_from_date_time: {
+    start: string; 
+    end: string;
+  };
+  limit_purchase_qty: {
+    min: number;
+    max: number;
+  };
+  newTickets ?: boolean;
+}
+
+interface TransformedTicket {
+  id: string | undefined;
+  name: string;
+  price: number;
+  quantity: number;
+  description: string;
+  salePeriod: [dayjs.Dayjs, dayjs.Dayjs];
+  validPeriod: [dayjs.Dayjs, dayjs.Dayjs];
+  minPurchase: number;
+  maxPurchase: number;
+}
 
 const EventEdit = ({ eventData }: any) => {
   const [form] = Form.useForm();
@@ -35,7 +73,55 @@ const EventEdit = ({ eventData }: any) => {
   const [backgroundImage, setBackgroundImage] = useState<
     string | StaticImageData
   >(initialBackground);
-  console.log("event details", eventData);
+  const [tickets, setTickets] = useState<TicketType[]>([]);
+  const [updateEvent] = useUpdateEventMutation();
+  const [updateTickets] = useUpdateTicketsMutation();
+
+  function transformTicketData(tickets: Ticket[]): TransformedTicket[] {
+    return tickets.map((ticket) => ({
+      id: ticket.newTickets ? undefined : ticket._id,
+      name: ticket.title,
+      price: ticket.price,
+      quantity: ticket.qty,
+      description: ticket.description,
+      salePeriod: [
+        dayjs(ticket.sale_period_date_time.start),
+        dayjs(ticket.sale_period_date_time.end),
+      ],
+      validPeriod: [
+        dayjs(ticket.valid_from_date_time.start),
+        dayjs(ticket.valid_from_date_time.end),
+      ],
+      minPurchase: ticket.limit_purchase_qty.min,
+      maxPurchase: ticket.limit_purchase_qty.max,
+    }));
+  }
+
+  const transformTickets = (tickets:any) => {
+    return tickets.map((ticket: any) => ({
+      _id : ticket.id,
+      title: ticket.name,
+      ticket_type_id: "668458900c4a7b1d8494880a",
+      description: ticket.description,
+      qty: ticket.quantity,
+      price: ticket.price,
+      sale_period: true,
+      sale_period_date_time: {
+        start: ticket.salePeriod[0].$d,
+        end: ticket.salePeriod[1].$d,
+      },
+      valid_from: true,
+      valid_from_date_time: {
+        start: ticket.validPeriod[0].$d,
+        end: ticket.validPeriod[1].$d,
+      },
+      limit_purchase: true,
+      limit_purchase_qty: {
+        min: ticket.minPurchase,
+        max: ticket.maxPurchase,
+      },
+    }));
+  };
 
   useEffect(() => {
     form.setFieldsValue({
@@ -56,6 +142,11 @@ const EventEdit = ({ eventData }: any) => {
         ? eventData?.event_image_url
         : initialBackground
     );
+    if (eventData?.tickets?.length) {
+      setTickets(transformTicketData(eventData.tickets));
+    } else {
+      setTickets([]);
+    }
   }, [eventData, form]);
 
   const validatePhoneNumber = (_: any, value: string) => {
@@ -101,192 +192,306 @@ const EventEdit = ({ eventData }: any) => {
     showUploadList: false,
   };
 
+  const updateTicket = (updatedTicket: TicketType) => {
+    setTickets(
+      tickets.map((ticket) =>
+        ticket.id === updatedTicket.id ? updatedTicket : ticket
+      )
+    );
+  };
+
+  const addTicket = (newTicket: Omit<TicketType, 'id'>) => {
+    const newTicketWithId: TicketType = {
+      ...newTicket,
+      id: generateRandomString(8) ,
+      newTickets : true,
+    };
+    setTickets([...tickets, newTicketWithId]);
+  };
+
+  const deleteTicket = (ticketId: string) => {
+    const updatedTickets = tickets.filter((ticket) => ticket.id !== ticketId);
+    setTickets(updatedTickets);
+  };
+
+  const onSubmitAllData = async () => {
+
+    if(tickets?.length == 0){
+      message.error("Oops ! Your forget to add tickets")
+      return;
+    }
+    
+    try {
+      const validFields = await form.validateFields();
+      const formData = new FormData();
+      formData.append("title", validFields.title);
+      formData.append("event_start_date_time", validFields.event_start_date_time);
+      formData.append("event_end_date_time", validFields.event_end_date_time);
+      formData.append("venue_name", validFields.venue_name);
+      formData.append("address", validFields.address);
+      formData.append("category_id", validFields.category_id);
+      formData.append("description", validFields.description);
+      if (validFields.event_phone) {
+        formData.append("iso_code", "BD");
+        formData.append("phone", validFields.event_phone);
+        formData.append("is_phone_selected", "true");
+      } else {
+        formData.append("event_email", validFields.event_email);
+        formData.append("is_phone_selected", "false");
+      }
+      if (img) {
+        formData.append("event_image_url", img);
+      } else {
+        formData.append("event_image_url", "");
+      }
+      const resultOfEventCreate = await updateEvent({ id: eventData._id, data: formData });
+
+      if (resultOfEventCreate?.data?.data?._id) {
+        const resultOfTicketsCreate = await updateTickets({
+          id: eventData._id,
+          tickets: transformTickets(tickets),
+        });
+        if (resultOfTicketsCreate?.data?.is_success) {
+          message.success("Event Created successfully!");
+          window.location.href = "/explore"
+        }
+      } else {
+        message.error("Please fill required field");
+      }
+    } catch (error) {
+      console.error("Failed to post event:", error);
+    }
+  };
+
+  console.log(transformTickets(tickets));
+  
+
   return (
     <div>
-      <Form form={form} layout="vertical" onValuesChange={handleFormChange}>
-        <Form.Item
-          name="title"
-          rules={[{ required: true, message: "Please input the event name!" }]}
-          label="Event name"
-        >
-          <Input
-            className="input-field-event-create"
-            placeholder="Enter event name"
-          />
-        </Form.Item>
-
-        {/* Start Date & End Date */}
-
-        <Row>
-          <Col span={12}>
-            <Form.Item
-              className="common-class "
-              name="event_start_date_time"
-              rules={[
-                { required: true, message: "Please select the start time!" },
-              ]}
-              label="Event start date"
-            >
-              <DatePicker
-                className="input-field-event-create"
-                style={{ width: "100%" }}
-                showTime
-                format="YYYY-MM-DD HH:mm:ss"
-                placeholder="Enter Start Date"
-              />
-            </Form.Item>
-
-            <Form.Item
-              className="common-class "
-              name="event_end_date_time"
-              label="Event end date"
-              dependencies={["event_start_date_time"]}
-              rules={[
-                { required: true, message: "Please select the end time!" },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    const startDate = getFieldValue("event_start_date_time");
-                    if (!value || !startDate || value.isAfter(startDate)) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(
-                      new Error("End date must be later than start date!")
-                    );
-                  },
-                }),
-              ]}
-            >
-              <DatePicker
-                className="input-field-event-create"
-                style={{ width: "100%" }}
-                showTime
-                format="YYYY-MM-DD HH:mm:ss"
-                placeholder="Enter End Date"
-              />
-            </Form.Item>
-
-            {/* Venue Name */}
-            <Form.Item
-              name="venue_name"
-              rules={[
-                { required: true, message: "Please input the venue name!" },
-              ]}
-              label="Venue name"
-              className="common-class"
-            >
-              <Input
-                className="input-field-event-create"
-                placeholder="Enter venue name"
-              />
-            </Form.Item>
-
-            {/* Address */}
-            <Form.Item
-              name="address"
-              className="common-class"
-              label="Address"
-              rules={[{ required: true, message: "Please input the address!" }]}
-            >
-              <Input
-                className="input-field-event-create"
-                placeholder="Enter address"
-              />
-            </Form.Item>
-
-            {/* Category */}
-            <Form.Item
-              className="common-class"
-              label="Category"
-              name="category_id"
-              rules={[{ required: true, message: "Please select a category!" }]}
-            >
-              <Select
-                className="input-field-event-create"
-                placeholder="Select a category"
+      <div className="modal-height-define">
+        <Form form={form} layout="vertical" onValuesChange={handleFormChange}>
+          <Row>
+            <Col span={12}>
+              <Form.Item
+                name="title"
+                rules={[
+                  { required: true, message: "Please input the event name!" },
+                ]}
+                label="Event name"
               >
-                {data?.data?.map((category: any) => (
-                  <Option key={category._id} value={category._id}>
-                    {category.title}
-                  </Option>
-                ))}
-              </Select>
-            </Form.Item>
-          </Col>
+                <Input
+                  className="input-field-event-create"
+                  placeholder="Enter event name"
+                />
+              </Form.Item>
 
-          <Col span={12}>
-            <Form.Item name="basic-style2">
-              <div className="event_image_url">
-                <div className="sell-tickets-side-bg">
-                  <Image
-                    className="right-img-property"
-                    src={backgroundImage} // Default or uploaded image
-                    alt="Event image"
-                    width={300}
-                    height={660}
-                  />
-                  <div className="img-blur-effect"></div>
-                  <div className="upload-options">
-                    <Upload {...uploadProps}>
-                      <Button className="cutsom-btn" icon={<UploadOutlined />}>
-                        Upload Image
-                      </Button>
-                    </Upload>
+              <Form.Item
+                className="common-class "
+                name="event_start_date_time"
+                rules={[
+                  { required: true, message: "Please select the start time!" },
+                ]}
+                label="Event start date"
+              >
+                <DatePicker
+                  className="input-field-event-create"
+                  style={{ width: "100%" }}
+                  showTime
+                  format="YYYY-MM-DD HH:mm:ss"
+                  placeholder="Enter Start Date"
+                />
+              </Form.Item>
+
+              <Form.Item
+                className="common-class "
+                name="event_end_date_time"
+                label="Event end date"
+                dependencies={["event_start_date_time"]}
+                rules={[
+                  { required: true, message: "Please select the end time!" },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      const startDate = getFieldValue("event_start_date_time");
+                      if (!value || !startDate || value.isAfter(startDate)) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        new Error("End date must be later than start date!")
+                      );
+                    },
+                  }),
+                ]}
+              >
+                <DatePicker
+                  className="input-field-event-create"
+                  style={{ width: "100%" }}
+                  showTime
+                  format="YYYY-MM-DD HH:mm:ss"
+                  placeholder="Enter End Date"
+                />
+              </Form.Item>
+
+              {/* Venue Name */}
+              <Form.Item
+                name="venue_name"
+                rules={[
+                  { required: true, message: "Please input the venue name!" },
+                ]}
+                label="Venue name"
+                className="common-class"
+              >
+                <Input
+                  className="input-field-event-create"
+                  placeholder="Enter venue name"
+                />
+              </Form.Item>
+
+              {/* Address */}
+              <Form.Item
+                name="address"
+                className="common-class"
+                label="Address"
+                rules={[{ required: true, message: "Please input the address!" }]}
+              >
+                <Input
+                  className="input-field-event-create"
+                  placeholder="Enter address"
+                />
+              </Form.Item>
+            </Col>
+
+            <Col span={12}>
+              <Form.Item name="basic-style2">
+                <div className="event_image_url">
+                  <div className="sell-tickets-side-bg">
+                    <Image
+                      className="right-img-property"
+                      src={backgroundImage} // Default or uploaded image
+                      alt="Event image"
+                      width={300}
+                      height={660}
+                    />
+                    <div className="img-blur-effect"></div>
+                    <div className="upload-options">
+                      <Upload {...uploadProps}>
+                        <Button className="cutsom-btn" icon={<UploadOutlined />}>
+                          Upload Image
+                        </Button>
+                      </Upload>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Form.Item>
-          </Col>
-        </Row>
-
-        {/* Description */}
-        <Form.Item
-          className="common-class"
-          label="Descriptions"
-          name="description"
-          rules={[{ required: true, message: "Please input the description!" }]}
-        >
-          <ReactQuill value={editorValue} onChange={setEditorValue} />
-        </Form.Item>
-
-        {/* Phone or Email Switch */}
-        <Form.Item>
-          <Row justify="end">
-            <Col>
-              <Switch
-                checkedChildren="Phone"
-                unCheckedChildren="Email"
-                checked={isPhone}
-                onChange={setIsPhone}
-              />
+              </Form.Item>
             </Col>
           </Row>
-        </Form.Item>
 
-        {/* Phone or Email based on Switch */}
-        {!isPhone ? (
-          <Form.Item
-            label="Phone Number"
-            name="event_phone"
-            rules={[
-              { required: true, message: "Please input your phone number!" },
-              { validator: validatePhoneNumber },
-            ]}
-          >
-            <Input placeholder="Enter phone number" />
-          </Form.Item>
-        ) : (
-          <Form.Item
-            name="event_email"
-            label="Email"
-            rules={[
-              { required: true, message: "Please input your email address!" },
-              { validator: validateEmail },
-            ]}
-          >
-            <Input placeholder="Enter email address" />
-          </Form.Item>
-        )}
-      </Form>
+          <Row>
+            <Col span={12}>
+              {/* Description */}
+              <Form.Item
+                className="common-class desc"
+                label="Descriptions"
+                name="description"
+                rules={[
+                  { required: true, message: "Please input the description!" },
+                ]}
+              >
+                <ReactQuill value={editorValue} onChange={setEditorValue} />
+              </Form.Item>
+            </Col>
+
+            <Col span={12}>
+              {/* Category */}
+              <Form.Item
+                className="common-class basic-style2"
+                label="Category"
+                name="category_id"
+                rules={[{ required: true, message: "Please select a category!" }]}
+                style={{ paddingTop: "20px" }}
+              >
+                <Select
+                  className="input-field-event-create"
+                  placeholder="Select a category"
+                >
+                  {data?.data?.map((category: any) => (
+                    <Option key={category._id} value={category._id}>
+                      {category.title}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+
+              {/* Phone or Email Switch */}
+              <Form.Item>
+                <Row justify="end">
+                  <Col>
+                    <Switch
+                      checkedChildren="Phone"
+                      unCheckedChildren="Email"
+                      checked={isPhone}
+                      onChange={setIsPhone}
+                    />
+                  </Col>
+                </Row>
+              </Form.Item>
+
+              {/* Phone or Email based on Switch */}
+              {!isPhone ? (
+                <Form.Item
+                  className="basic-style2"
+                  label="Phone Number"
+                  name="event_phone"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input your phone number!",
+                    },
+                    { validator: validatePhoneNumber },
+                  ]}
+                >
+                  <Input
+                    className="input-field-event-create"
+                    placeholder="Enter phone number"
+                  />
+                </Form.Item>
+              ) : (
+                <Form.Item
+                  name="event_email"
+                  label="Email"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input your email address!",
+                    },
+                    { validator: validateEmail },
+                  ]}
+                >
+                  <Input
+                    className="input-field-event-create"
+                    placeholder="Enter email address"
+                  />
+                </Form.Item>
+              )}
+            </Col>
+          </Row>
+        </Form>
+
+        <div className="tickets-container-components">
+          {tickets.length > 0 && (
+            <Tickets
+              tickets={tickets}
+              addTicket={addTicket}
+              updateTicket={updateTicket}
+              deleteTicket={deleteTicket}
+              userEditTicket={true}
+            ></Tickets>
+          )}
+        </div>
+      </div>
+
+      <div style={{paddingTop:'20px', display:'flex',justifyContent: 'flex-end'}}>
+        <Button onClick={onSubmitAllData}>Save Event</Button>
+      </div>
     </div>
   );
 };

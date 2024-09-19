@@ -62,7 +62,6 @@ const ExploreItemsSection = ({ data }: any) => {
     setFilteredData(data?.data); // Reset to original data
   };
 
-  console.log(data);
   
   return (
     <div className="">

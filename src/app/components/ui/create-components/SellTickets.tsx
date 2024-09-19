@@ -50,10 +50,13 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
   const [postEvent] = usePostEventMutation();
   const [createTickets] = useCreateTicketsMutation();
   const [img, setImg] = useState<File | null>(null);
+
+  const generateRandomString = (length: number) => Array.from({ length }, () => 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'.charAt(Math.floor(Math.random() * 62))).join('');
+
   
   const [tickets, setTickets] = useState<TicketType[]>([
     {
-      id: 1,
+      id:  generateRandomString(8),
       name: "Concert Ticket",
       price: 50,
       quantity: 10,
@@ -97,6 +100,12 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
   };
   
   const onSubmitAllData = async () => {
+
+    if(tickets?.length == 0){
+      message.error("Oops ! Your forget to add tickets")
+      return;
+    }
+
     try {
       const validFields = await form.validateFields();
       
@@ -108,7 +117,6 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
       formData.append("address", validFields.address);
       formData.append("category_id", validFields.category_id);
       formData.append("description", validFields.description);
-      
       if (validFields.event_phone) {
         formData.append("iso_code", "BD");
         formData.append("phone", validFields.event_phone);
@@ -117,13 +125,11 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
         formData.append("event_email", validFields.event_email);
         formData.append("is_phone_selected", "false");
       }
-
       if (img) {
         formData.append("event_image_url", img);
       } else {
         formData.append("event_image_url", "");
       }
-
       const resultOfEventCreate = await postEvent(formData);
 
       if (resultOfEventCreate?.data?.data?._id) {
@@ -138,7 +144,6 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
       } else {
         message.error("Please fill required field");
       }
-
     } catch (error) {
       console.error("Failed to post event:", error);
     }
@@ -148,7 +153,6 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
     router.push("/");
   }
 
-  
   const updateTicket = (updatedTicket: TicketType) => {
     setTickets(
       tickets.map((ticket) =>
@@ -157,15 +161,20 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
     );
   };
 
-  const addTicket = (newTicket: TicketType) => {
-    newTicket.id = tickets.length + 1;
-    setTickets([...tickets, newTicket]);
+  const addTicket = (newTicket: Omit<TicketType, 'id'>) => {
+    const newTicketWithId: TicketType = {
+      ...newTicket,
+      id: generateRandomString(8) // Generate a unique random string for the ID
+    };
+    setTickets([...tickets, newTicketWithId]);
   };
 
-  const deleteTicket = (ticketId: number) =>{
-    const updatedTickets = tickets.filter((ticket) => ticket.id !== ticketId);
+  const deleteTicket = (ticketId: number | string) => {
+    const updatedTickets = tickets.filter((ticket) => {
+      return String(ticket.id) !== String(ticketId);
+    });
     setTickets(updatedTickets);
-  }
+  };
 
   const handleFormChange = (changedValues: any, allValues: any) => {
     setFormValues({ ...allValues, description: editorValue });

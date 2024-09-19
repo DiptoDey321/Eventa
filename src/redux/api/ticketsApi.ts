@@ -47,6 +47,35 @@ export const ticketsApi = baseApi.injectEndpoints({
       }),
     }),
 
+    getEventForUser: build.query({
+      query: (id) => ({
+        url: `/events/${id}`,
+        method: "GET",
+        requiresAuth: true,
+      }),
+    }),
+
+    updateEvent: build.mutation({
+      query: ({ id, data }) => ({
+        url: `/events/${id}`,
+        method: "PUT",
+        data, 
+        contentType: "multipart/form-data", 
+        requiresAuth: true,
+      }),
+      invalidatesTags: ["event"], 
+    }),
+
+    updateTickets: build.mutation({
+      query: ({ id, data }) => ({
+        url: `/tickets/${id}`,
+        method: "PUT",
+        data, 
+        requiresAuth: true,
+      }),
+      invalidatesTags: ["tickets"],
+    }),
+
     getEventsForUser: build.query({
       query: () => ({
         url: `/events?page=1&limit=100`,
@@ -58,5 +87,5 @@ export const ticketsApi = baseApi.injectEndpoints({
 });
 
 export const {
-  usePostEventMutation, useGetEventCategoryQuery, useCreateTicketsMutation, useGetEventsQuery, useGetEventDetailsQuery, useGetEventsForUserQuery
+  usePostEventMutation, useGetEventCategoryQuery, useCreateTicketsMutation, useGetEventsQuery, useGetEventDetailsQuery, useGetEventsForUserQuery,useGetEventForUserQuery, useUpdateEventMutation, useUpdateTicketsMutation
 } = ticketsApi;
