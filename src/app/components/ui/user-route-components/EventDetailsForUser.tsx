@@ -1,6 +1,6 @@
 "use client"
 import { useGetEventForUserQuery, useGetEventsForUserQuery } from "@/redux/api/ticketsApi";
-import { EditOutlined, SearchOutlined } from "@ant-design/icons";
+import { SearchOutlined } from "@ant-design/icons";
 import type { InputRef, TableColumnsType, TableColumnType } from "antd";
 import { Button, Input, Modal, Space, Table } from "antd";
 import type { FilterDropdownProps } from "antd/es/table/interface";
@@ -179,20 +179,20 @@ const EventDetailsForUser: React.FC = () => {
         return <span style={{ color }}>{label}</span>;
       },
     },
-    {
-      title: "Action",
-      key: "action",
-      width: 100,
-      render: (_: any, record: any) => (
-        <div onClick={() => handleEdit(record)} className="">
-          <EditOutlined
+    // {
+    //   title: "Action",
+    //   key: "action",
+    //   width: 100,
+    //   render: (_: any, record: any) => (
+    //     <div style={{cursor:"pointer"}} onClick={() => handleEdit(record)} className="">
+    //       <EditOutlined
           
-          style={{ cursor: "pointer", color: "#1890ff" }}
-        />
-        <span style={{paddingLeft:"10px"}}>Edit</span>
-        </div>
-      ),
-    },
+    //       style={{ cursor: "pointer", color: "#1890ff" }}
+    //     />
+    //       <span style={{paddingLeft:"10px"}}>Edit</span>
+    //     </div>
+    //   ),
+    // },
   ];
 
   const handleEdit = (record: any) => {

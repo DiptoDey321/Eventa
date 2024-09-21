@@ -51,7 +51,7 @@ function SignUpPage() {
       if (res?.data?.data?.is_success){
         setIsOtpFormVisible(true);
       }else{
-        message.warning("user's crediential Exist")
+        message.warning("This Phone Number/Email is already registered.")
       } 
     }catch(err:any) {
       console.log(err.message)
@@ -127,12 +127,11 @@ function SignUpPage() {
       }
       
       if(res?.data.is_success){
-        message.success("registration successfully !")
+        message.success("Registration successfully done!")
         router.push("/login");
       }
 
     } catch (error:any) {
-      // message.error(error)
       console.log(error);
       
     }

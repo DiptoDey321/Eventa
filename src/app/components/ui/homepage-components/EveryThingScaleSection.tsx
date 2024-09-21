@@ -220,7 +220,7 @@ const EveryThingScaleSection = () => {
               </span>
             </div>
             <div className="btn">
-              <a onClick={() =>router.push("/create")}>
+              <a onClick={() => location.href = "/create"}>
                 Lunch an event
               </a>
             </div>

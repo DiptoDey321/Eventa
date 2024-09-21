@@ -1,14 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import "./HomeStyle.css";
-import { Col, Row } from "antd";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import hero from './../../../../../public/hero2.webp'
-import { useRouter } from "next/navigation";
 
 const HeroSection = ()=> {
-const router = useRouter();
 
   return (
     <div className="dep-hero-sectiom">
@@ -27,14 +21,14 @@ const router = useRouter();
         <div className="btns">
           <a
             style={{ cursor: "pointer" }}
-            onClick={() => router.push("/explore")}
+            onClick={() => location.href = "/explore"}
             className="sec-btn"
           >
             Explore Events
           </a>
           <a
             style={{ cursor: "pointer" }}
-            onClick={() => router.push("/create")}
+            onClick={() =>  location.href ="/create"}
             className="first-btn"
           >
             Lunch an event

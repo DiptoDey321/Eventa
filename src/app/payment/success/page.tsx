@@ -1,9 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import React from 'react'
-import './success.css'
-import generatePDF, { Resolution, Margin, Options } from "react-to-pdf";
 import { QRCode } from 'antd';
+import generatePDF, { Margin, Options, Resolution } from "react-to-pdf";
+import './success.css';
 
 function PaymentSuccess({ ticketData }:any) {
 
@@ -152,7 +151,7 @@ function PaymentSuccess({ ticketData }:any) {
                         width: "100%",
                       }}
                       type="svg"
-                      value={ticketData?.ticket_number}
+                      value={ticketData?.generated_ticket_number}
                     />
                     {/* <img
                       src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb"
