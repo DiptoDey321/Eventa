@@ -27,14 +27,14 @@
 }
 
 .explore-card-container .album-image-container img {
-  max-height: 400px;
-  width: 300px;
+  max-height: 350px;
+  width: fit-content;
   /* width: fit-content; */
 }
 
 .ex-card-details-container {
   color: white;
-  width: 400px;
+  /* width: 400px; */
   display: flex;
   justify-content: center;
 }
@@ -43,6 +43,9 @@
   font-size: 30px;
   font-weight: 700;
   line-height: 40px;
+  word-wrap: break-word; /* Allows breaking long words */
+  white-space: normal; 
+  max-width: fit-content;
 }
 
 .ex-card-details-container .location-date {
@@ -144,13 +147,6 @@
   color: black !important;
 }
 
-/* .explore-items-sections .card-lists {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-} */
-
 .card-container {
   background-color: rgb(46, 46, 46) !important;
 }
@@ -203,7 +199,8 @@
     padding: 40px 10px 100px 10px;
   }
   .explore-card-container .album-image-container img {
-    width: fit-content;
+    overflow: hidden;
+    width: 29dd0px !important;
   }
   .explore-items-sections {
     padding: 30px 10px 50px 10px;
@@ -211,8 +208,39 @@
   .exlore-filter {
     margin: 0px 10px 30px 10px !important;
   }
+  .ex-card-details-container .poeples-count {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .ex-card-details-container .card-heading {
+    font-size: 20px;
+    max-width: 300px;
+  }
+  .ex-card-details-container {
+    color: white;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+  }
 }
 @media (min-width: 576px) {
+  .ex-card-details-container .card-heading {
+    font-size: 30px;
+    font-weight: 700;
+    max-width: fit-content;
+  }
+  .explore-card-container .album-image-container img {
+    width: 500px;
+    overflow: hidden;
+  }
+  .ex-card-details-container {
+    color: white;
+    /* width: 400px; */
+    display: flex;
+    justify-content: center;
+  }
+  
 }
 @media (min-width: 768px) {
   .explore-slider-cotainer {
@@ -227,6 +255,11 @@
   }
   .exlore-filter {
     margin: 0px 80px 30px 80px !important;
+  }
+  .ex-card-details-container .poeples-count {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
   }
 }
 @media (min-width: 992px) {

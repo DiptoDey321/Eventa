@@ -24,6 +24,7 @@ const ExploreHeroSection = ({ data}:any) => {
         }}
         modules={[Pagination]}
         className="mySwiper"
+        slidesPerView={1} 
       >
         {data?.data?.map((data: any, index: number) => (
           <SwiperSlide key={index}>

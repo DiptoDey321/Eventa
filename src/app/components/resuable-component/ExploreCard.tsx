@@ -34,15 +34,17 @@ const ExploreCard: FC<TransparentCardProps> = ({
       >
         <Row align="middle" gutter={[16, 16]}>
           <Col xs={24} sm={24} md={12}>
-            <div className="album-image-container"  style={{height:"350px",width:"100%" , overflow:"hidden" }}>
+            <div className="album-image-container"  style={{height:"350px"}}>
               <Image
                 src={imageSrc}
                 alt="Card Image"
-                // priority 
-                width={350}
+                layout="responsive"
+                width={300}
                 height={500}
               />
             </div>
+
+            
           </Col>
           <Col xs={24} sm={24} md={12}>
             <div className="ex-card-details-container">
