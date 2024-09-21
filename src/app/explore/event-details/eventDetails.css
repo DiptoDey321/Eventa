@@ -224,8 +224,27 @@
     display: flex;
     flex-direction: column;
   }
+  .tickets-container .conditons-count {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+  }
+  .tickets-container {
+    padding: 50px 20px;
+  }
 }
 @media (min-width: 576px) {
+  .tickets-container .conditons-count {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .tickets-container {
+    padding: 50px 50px;
+  }
 }
 @media (min-width: 768px) {
   .tickets-container .tickets-card {

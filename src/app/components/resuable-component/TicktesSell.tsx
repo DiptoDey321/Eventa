@@ -20,7 +20,7 @@ interface TicketProps {
   eventName: string;
   qty: number;
   ticketTitle: string;
-  limit_purchase_qty: LimitPurchaseQty
+  limit_purchase_qty: LimitPurchaseQty;
 }
 
 const TicktesSell: React.FC<TicketProps> = ({
@@ -31,7 +31,7 @@ const TicktesSell: React.FC<TicketProps> = ({
   eventName,
   qty,
   ticketTitle,
-  limit_purchase_qty
+  limit_purchase_qty,
 }) => {
   const dispatch = useDispatch();
   const cartTicket = useSelector((state: RootState) =>
@@ -39,7 +39,7 @@ const TicktesSell: React.FC<TicketProps> = ({
   );
   const [quantity, setQuantity] = useState(
     cartTicket ? cartTicket.quantity : limit_purchase_qty.min
-  )
+  );
 
   useEffect(() => {
     if (cartTicket) {
@@ -49,27 +49,27 @@ const TicktesSell: React.FC<TicketProps> = ({
     }
   }, [cartTicket, limit_purchase_qty.min]);
 
-
-
-  // const handleAddToCart = () => {
-  //   if(quantity <= qty){
-  //     dispatch(
-  //       addTicket({ id, eventId, eventName, ticketTitle, price, quantity ,qty})
-  //     );
-  //   }else{
-  //     message.warning(`Cannot add more than ${qty} tickets.`);
-  //   }
-   
-  // };
-
   const handleAddToCart = () => {
     if (quantity < limit_purchase_qty.min) {
-      message.warning(`You must purchase at least ${limit_purchase_qty.min} tickets.`);
+      message.warning(
+        `You must purchase at least ${limit_purchase_qty.min} tickets.`
+      );
     } else if (quantity > Math.min(qty, limit_purchase_qty.max)) {
-      message.warning(`Cannot add more than ${Math.min(qty, limit_purchase_qty.max)} tickets.`);
+      message.warning(
+        `Cannot add more than ${Math.min(qty, limit_purchase_qty.max)} tickets.`
+      );
     } else {
       dispatch(
-        addTicket({ id, eventId, eventName, ticketTitle, price, quantity, qty , limit_purchase_qty})
+        addTicket({
+          id,
+          eventId,
+          eventName,
+          ticketTitle,
+          price,
+          quantity,
+          qty,
+          limit_purchase_qty,
+        })
       );
     }
   };
@@ -79,29 +79,47 @@ const TicktesSell: React.FC<TicketProps> = ({
     if (newQuantity <= limit_purchase_qty.max && newQuantity <= qty) {
       setQuantity(newQuantity);
       if (cartTicket) {
-        dispatch(updateTicketQuantity({ id, eventId, quantity: newQuantity, qty ,limit_purchase_qty}));
+        dispatch(
+          updateTicketQuantity({
+            id,
+            eventId,
+            quantity: newQuantity,
+            qty,
+            limit_purchase_qty,
+          })
+        );
       }
     } else if (newQuantity > qty) {
       message.warning(`You cannot add more than ${qty} tickets.`);
     } else {
-      message.warning(`You cannot add more than ${limit_purchase_qty.max} tickets`);
+      message.warning(
+        `You cannot add more than ${limit_purchase_qty.max} tickets`
+      );
     }
   };
 
   const decreaseQuantity = () => {
     const newQuantity = quantity - 1;
- 
+
     if (newQuantity < limit_purchase_qty.min) {
-      message.warning(`You cannot purchase fewer than ${limit_purchase_qty.min} tickets.`);
+      message.warning(
+        `You cannot purchase fewer than ${limit_purchase_qty.min} tickets.`
+      );
     } else {
       setQuantity(newQuantity);
       if (cartTicket) {
-        dispatch(updateTicketQuantity({ id, eventId, quantity: newQuantity, qty ,limit_purchase_qty}));
+        dispatch(
+          updateTicketQuantity({
+            id,
+            eventId,
+            quantity: newQuantity,
+            qty,
+            limit_purchase_qty,
+          })
+        );
       }
     }
   };
-  
-  
 
   return (
     <div className="antd-custome-card">
@@ -150,27 +168,24 @@ const TicktesSell: React.FC<TicketProps> = ({
             </div>
             <div style={{ backgroundColor: "black", height: "1px" }}></div>
             <div
-              className="conditons-count"
-              style={{
+              className="conditons-count">
+              <div className="">
+                <div  style={{
                 display: "flex",
                 justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <div className="">
-              <div className="">
-                <Text>
-                  <span>Available : {qty}</span>
-                </Text>
-              </div>
-              <div style={{display:"flex", gap :"30px"}}>
-              <Text>
-                <span>Min Purchase: {limit_purchase_qty.min}</span>
-              </Text>
-              <Text>
-                <span>Max Purchase: {limit_purchase_qty.max}</span>
-              </Text>
-              </div>
+                flexDirection:'column'
+              }}>
+                  <Text>
+                    <span>Available : {qty}</span>
+                  </Text>
+                  <Text>
+                    <span>Min Purchase: {limit_purchase_qty.min}</span>
+                  </Text>
+                  <Text>
+                    <span>Max Purchase: {limit_purchase_qty.max}</span>
+                  </Text>
+                </div>
+               
               </div>
               <div className="tickets-count">
                 <Button

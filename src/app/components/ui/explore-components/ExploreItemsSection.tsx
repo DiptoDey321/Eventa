@@ -24,7 +24,7 @@ const ExploreItemsSection = ({ data }: any) => {
     form.validateFields().then((values: any) => {
       const { title, timeFrame, city, category_id } = values;
   
-      let filtered: any[] = data?.data || []; // Use `any[]` for filtered data
+      let filtered: any[] = data?.data || [];
   
       if (title) {
         filtered = filtered.filter((event: any) =>
@@ -59,7 +59,7 @@ const ExploreItemsSection = ({ data }: any) => {
 
   const handleReset = () => {
     form.resetFields();
-    setFilteredData(data?.data); // Reset to original data
+    setFilteredData(data?.data); 
   };
 
   
