@@ -1,9 +1,7 @@
 "use client"
 
 import Image from "next/image";
-import React from "react";
-import imagePath from './../../public/404.webp'
-import { Button } from "antd";
+import imagePath from './../../public/404.webp';
 
 
 
@@ -18,7 +16,9 @@ const notFoundPage = () => {
             height={500}
             alt="Image description"
           />
+          <div style={{display:"flex", justifyContent:'center'}}>
           <a href="/" className="bt-home">Back to Home</a>
+          </div>
         </div>
       </div>
     </div>
