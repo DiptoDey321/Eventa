@@ -38,7 +38,7 @@ const MobileNavbar: React.FC = () => {
       message.info("Coming Soon...");
       return;
     }
-    location.href = "event.key"
+    location.href = event.key
   };
 
    useEffect(() => {
