@@ -192,7 +192,7 @@ const EventDetailsForUser: React.FC = () => {
             <EditOutlined style={{ cursor: "pointer", color: "#1890ff" }} />
             <span style={{ paddingLeft: "10px" }}>Edit</span>
           </div>
-        ) : <span>Not Available</span> // Do not render anything if event_status is not "Pending"
+        ) : <span>Not Available</span> 
       ),
     }
   ];
@@ -214,7 +214,7 @@ const EventDetailsForUser: React.FC = () => {
     <div>
       <div className="">
         <div style={{display:'flex', justifyContent:'flex-end', paddingBottom:'10px'}}>
-          <span style={{color:'white', textAlign:'end'}}>*** You can only edit when it's in Pending</span>
+          <span style={{color:'white', textAlign:'end'}}>*** You can edit only when it's in Pending</span>
         </div>
         <Table
           scroll={{ x: 1200, y: 400 }}

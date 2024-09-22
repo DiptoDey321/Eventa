@@ -280,7 +280,7 @@ const EventEdit =  ({ eventData, handleCloseModal,refetchEventDetails  }: EventE
       <div className="modal-height-define">
         <Form form={form} layout="vertical" onValuesChange={handleFormChange}>
           <Row>
-            <Col span={12}>
+            <Col xs={24} sm={12} md={12}>
               <Form.Item
                 name="title"
                 rules={[
@@ -369,7 +369,7 @@ const EventEdit =  ({ eventData, handleCloseModal,refetchEventDetails  }: EventE
               </Form.Item>
             </Col>
 
-            <Col span={12}>
+            <Col  xs={24} sm={12} md={12}>
               <Form.Item name="basic-style2">
                 <div className="event_image_url">
                   <div className="sell-tickets-side-bg">
@@ -395,7 +395,7 @@ const EventEdit =  ({ eventData, handleCloseModal,refetchEventDetails  }: EventE
           </Row>
 
           <Row>
-            <Col span={12}>
+            <Col  xs={24} sm={12} md={12}>
               {/* Description */}
               <Form.Item
                 className="common-class desc"
@@ -409,7 +409,7 @@ const EventEdit =  ({ eventData, handleCloseModal,refetchEventDetails  }: EventE
               </Form.Item>
             </Col>
 
-            <Col span={12}>
+            <Col  xs={24} sm={12} md={12}>
               {/* Category */}
               <Form.Item
                 className="common-class basic-style2"
@@ -485,7 +485,7 @@ const EventEdit =  ({ eventData, handleCloseModal,refetchEventDetails  }: EventE
           </Row>
         </Form>
 
-        <div className="tickets-container-components">
+        <div style={{paddingTop: '20px'}} className="tickets-container-components">
           {tickets.length > 0 && (
             <Tickets
               tickets={tickets}
