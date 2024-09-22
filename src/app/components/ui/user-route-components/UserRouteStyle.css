@@ -58,6 +58,10 @@
   justify-content: end;
 }
 
+.dashboard-container .ant-card{
+  background-color: white !important;
+}
+
 /* right nav code  */
 
 .menu-button {

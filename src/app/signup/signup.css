@@ -175,6 +175,10 @@ input::placeholder {
   .from-child-container {
     padding: 20px;
   }
+  .otp-input-container input {
+    width: 30px !important;
+    height: 30px  !important;
+  }
 }
 @media (min-width: 576px) {
   .from-child-container {
@@ -183,6 +187,11 @@ input::placeholder {
   .common-style2 {
     margin-left: 7px !important;
     margin-top: 0px !important;
+  }
+
+  .otp-input-container input {
+    width: 50px !important;
+    height: 50px  !important;
   }
 }
 @media (min-width: 768px) {

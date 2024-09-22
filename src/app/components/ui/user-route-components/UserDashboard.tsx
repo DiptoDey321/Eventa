@@ -1,11 +1,10 @@
-import { Card, Col, Row } from "antd";
-import {
-  DollarOutlined,
-  ShoppingOutlined,
-  UserOutlined,
-  CalendarOutlined,
-} from "@ant-design/icons";
 import { useGetDashboardTotalCountQuery } from "@/redux/api/authApi";
+import {
+  CalendarOutlined,
+  DollarOutlined,
+  ShoppingOutlined
+} from "@ant-design/icons";
+import { Card, Col, Row } from "antd";
 
 const UserDashboard = () => {
     const { data, error, isLoading } =
@@ -16,16 +15,28 @@ const UserDashboard = () => {
 
   return (
     <div>
-      <div style={{ paddingTop: "32px" }}>
+      <div className="dashboard-container" style={{ paddingTop: "32px" }}>
         <Row gutter={[32, 32]}>
           <Col xs={24} sm={24} md={12} lg={8}>
-            <Card bordered={false}>
+            <Card style={{backgroundColor:"white"}} bordered={false}>
               <ShoppingOutlined
                 style={{ fontSize: "24px", color: "#40a9ff" }}
               />
               <h3 style={{ paddingTop: "10px" }}>Total Orders</h3>
               <p>
                 {data?.data?.total_orders == "" ? 0 : data?.data?.total_orders}
+              </p>
+            </Card>
+          </Col>
+
+          <Col xs={24} sm={24} md={12} lg={8}>
+            <Card style={{backgroundColor:"white"}} bordered={false}>
+              <ShoppingOutlined
+                style={{ fontSize: "24px", color: "#40a9ff" }}
+              />
+              <h3 style={{ paddingTop: "10px" }}>Total Sell Tickets</h3>
+              <p>
+                {data?.data?.total_sell_ticket == "" ? 0 : data?.data?.total_sell_ticket}
               </p>
             </Card>
           </Col>

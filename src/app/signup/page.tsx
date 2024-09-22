@@ -210,7 +210,7 @@ function SignUpPage() {
                 </svg>
               </div>
 
-              {!isOtpFormVisible ? (
+              {isOtpFormVisible ? (
                 <div className="">
                   <div className="from-child-container">
                     <Form
