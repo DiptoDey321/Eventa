@@ -64,17 +64,14 @@ const RSVPSection = () => {
           >
             <div className="RSVP-description">
               <span>
-                Free RSVP & Ticketed Events: <br /> Customize Your Way
+              Your RSVP, Our Treat!
               </span>
               <span className="basic-descriptions">
-                Craft a unique event experience. Design your event page with
-                your brand in mind. Choose colors, fonts, and layouts that
-                reflect your style. Free RSVP and paid ticketing options
-                available.
+              Easily manage guest lists and attendance with Eventa’s Free RSVP service. Simplify the planning process, track responses in real time, and keep your event organized — all at no cost
               </span>
             </div>
             <div className="btn">
-              <a onClick={()=>message.info("comign soon..")}>Lunch an event</a>
+              <a onClick={()=>message.info("comign soon..")}>Launch an RSVP</a>
             </div>
           </motion.div>
         </Col>

@@ -63,7 +63,13 @@ interface TransformedTicket {
   maxPurchase: number;
 }
 
-const EventEdit = ({ eventData }: any) => {
+type EventEditProps = {
+  eventData: any;
+  handleCloseModal: () => void;
+  refetchEventDetails: () => void;
+};
+
+const EventEdit =  ({ eventData, handleCloseModal,refetchEventDetails  }: EventEditProps) => {
   const [form] = Form.useForm();
   const { data, error, isLoading } = useGetEventCategoryQuery(undefined);
   const [isPhone, setIsPhone] = useState(false);
@@ -79,7 +85,7 @@ const EventEdit = ({ eventData }: any) => {
 
   function transformTicketData(tickets: Ticket[]): TransformedTicket[] {
     return tickets.map((ticket) => ({
-      id: ticket.newTickets ? undefined : ticket._id,
+      id: ticket._id,
       name: ticket.title,
       price: ticket.price,
       quantity: ticket.qty,
@@ -99,7 +105,7 @@ const EventEdit = ({ eventData }: any) => {
 
   const transformTickets = (tickets:any) => {
     return tickets.map((ticket: any) => ({
-      _id : ticket.id,
+      _id : ticket.newTickets ? undefined : ticket._id,
       title: ticket.name,
       ticket_type_id: "668458900c4a7b1d8494880a",
       description: ticket.description,
@@ -246,14 +252,18 @@ const EventEdit = ({ eventData }: any) => {
       }
       const resultOfEventCreate = await updateEvent({ id: eventData._id, data: formData });
 
-      if (resultOfEventCreate?.data?.data?._id) {
+      const transformedTickets =  transformTickets(tickets)
+      if (resultOfEventCreate?.data?.data?._id && transformedTickets.length > 0 ) {
+        
         const resultOfTicketsCreate = await updateTickets({
           id: eventData._id,
-          tickets: transformTickets(tickets),
-        });
-        if (resultOfTicketsCreate?.data?.is_success) {
-          message.success("Event Created successfully!");
-          window.location.href = "/explore"
+          ticketObj: {tickets : transformTickets(tickets)},
+        }).unwrap();
+        
+        if (resultOfTicketsCreate?.is_success) {
+          message.success("Event edited successfully successfully!");
+          handleCloseModal()
+          refetchEventDetails();
         }
       } else {
         message.error("Please fill required field");
@@ -263,7 +273,6 @@ const EventEdit = ({ eventData }: any) => {
     }
   };
 
-  console.log(transformTickets(tickets));
   
 
   return (

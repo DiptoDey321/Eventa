@@ -1,16 +1,23 @@
-.home-page {
+ .home-page {
   font-family: "Poppins", sans-serif !important;
 }
 
 .home-page-basic-mx {
-  padding: 50px 100px 0px 100px;
+  
+  padding: 0px 100px 0px 100px;
   max-width: 1400px !important;
   margin: auto !important;
 }
 
+.hero-section-bg{
+  background-image: url(../../../../../public/home-hero-banner.webp);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
 .bg-yellows {
   background-color: #ffbf00;
-  margin-top: 70px !important;
 }
 
 /* homepage nav starts here  */
@@ -306,7 +313,8 @@
   font-size: 15px;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
-  color: black;
+  color: #ffbf00;
+  background-color: #000;
   border: 1px solid black;
   font-weight: 500;
 }
@@ -428,6 +436,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 5px 10px;
 }
 
 .scale-right-section .des {

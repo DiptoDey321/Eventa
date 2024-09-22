@@ -63,17 +63,22 @@ export const ticketsApi = baseApi.injectEndpoints({
         contentType: "multipart/form-data", 
         requiresAuth: true,
       }),
-      invalidatesTags: ["event"], 
+      invalidatesTags: ["event", "eventUpdate"], 
     }),
 
     updateTickets: build.mutation({
-      query: ({ id, data }) => ({
-        url: `/tickets/${id}`,
-        method: "PUT",
-        data, 
-        requiresAuth: true,
-      }),
-      invalidatesTags: ["tickets"],
+      query: ({ id, ticketObj }) => {
+        console.log(id);
+        
+        console.log("Ticket data being sent:", ticketObj); 
+        return {
+          url: `/tickets/event-tickets/${id}`,
+          method: "PUT",
+          data: ticketObj,
+          requiresAuth: true,
+        };
+      },
+      invalidatesTags: ["tickets","eventUpdate"],
     }),
 
     getEventsForUser: build.query({
@@ -85,6 +90,9 @@ export const ticketsApi = baseApi.injectEndpoints({
     }),
   }),
 });
+
+    // tickets/event-tickets
+
 
 export const {
   usePostEventMutation, useGetEventCategoryQuery, useCreateTicketsMutation, useGetEventsQuery, useGetEventDetailsQuery, useGetEventsForUserQuery,useGetEventForUserQuery, useUpdateEventMutation, useUpdateTicketsMutation

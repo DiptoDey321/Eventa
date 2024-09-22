@@ -12,11 +12,13 @@ import WhatsClientSays from "./components/ui/homepage-components/WhatsClientSays
 export default function Home() {
   return (
     <main className="home-page">
-      <div className="home-page-basic-mx">
-        <NavBar></NavBar>
-      </div>
-      <div className="home-page-basic-mx">
-        <HeroSection></HeroSection>
+      <div className="hero-section-bg">
+        <div className="home-page-basic-mx">
+          <NavBar></NavBar>
+        </div>
+        <div className="home-page-basic-mx">
+          <HeroSection></HeroSection>
+        </div>
       </div>
       <div className="bg-yellows">
         <RSVPSection></RSVPSection>

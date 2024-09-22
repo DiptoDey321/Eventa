@@ -9,10 +9,9 @@ const HeroSection = ()=> {
       {/* <Row> */}
       {/* <Col lg={24} xl={24}> */}
       <div className="dep-hero-right-side">
-        <p className="title">Stress-free events</p>
-        <p className="title gradient-color">Graranteed</p>
+        <p className="title">Your Partner In Perfect </p>
+        <p className="title gradient-color">Celebrations</p>
         <div className="dep-peoples-with-info">
-          <img src="https://i.ibb.co/VwNrq6h/users.png" alt="" />
           <span style={{ color: "white" }}>
             Connect, create, experience. <br /> The ultimate event platform.
           </span>
@@ -35,39 +34,6 @@ const HeroSection = ()=> {
           </a>
         </div>
       </div>
-      {/* </Col> */}
-      {/* <Col lg={24} xl={12}>
-          <div className="hero-image-container common-margin-top-mobile">
-            <motion.div
-              className="main-img"
-              animate={{ y: ["0px", "20px", "0px", "-20px", "0px"] }}
-              transition={{
-                y: {
-                  duration: 10,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                },
-              }}
-            >
-              <Image
-                src={hero}
-                width={600}
-                height={500}
-                alt="Picture of the author"
-              />
-            </motion.div>
-            <div className="">
-              <div className="horn-img">
-                <img
-                  src="https://i.ibb.co/nsrfDSP/horn-kickback.png"
-                  alt=""
-                  srcSet=""
-                />
-              </div>
-            </div>
-          </div>
-        </Col> */}
-      {/* </Row> */}
     </div>
   );
 }

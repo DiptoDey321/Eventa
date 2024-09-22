@@ -24,7 +24,7 @@ const NavBar = () => {
         message.info("Coming Soon...");
         return;
       }
-      // router.push(route);
+
       window.location.href = route
       setLoading(false);
     } catch (error) {
@@ -122,7 +122,7 @@ const NavBar = () => {
                   onClick={() => handleNavigation("/cs")}
                   className="cool-link"
                 >
-                  Tutorials
+                  Request A Demo
                 </li>
                 <li
                   onClick={() => handleNavigation("/cs")}
