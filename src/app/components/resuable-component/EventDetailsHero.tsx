@@ -59,7 +59,7 @@ const EventDetailsHero: React.FC<EventCardProps> = ({
         <Col xs={24} sm={24} md={12}>
           <div className="upper-part" style={{ marginBottom: "20px" }}>
             <Space>
-              <HeatMapOutlined style={{ fontSize: "24px", color: "Black" }} />
+              <HeatMapOutlined style={{ fontSize: "24px", color: "white" }} />
               <span className="conpany-name">{companyName}</span>
               {isAuthorized && (
                 <CheckCircleOutlined
@@ -72,13 +72,13 @@ const EventDetailsHero: React.FC<EventCardProps> = ({
             <span>{eventTitle}</span>
           </div>
           <div className="place-time">
-            <p style={{color : "black", paddingBottom:'10px'}}>{place}</p>
-            <p style={{color : "black", fontSize:"17px"}}>{moment(startTime).format("MMMM D, YYYY")}
+            <p style={{color : "white", paddingBottom:'10px'}}>{place}</p>
+            <p style={{color : "white", fontSize:"17px"}}>{moment(startTime).format("MMMM D, YYYY")}
               <span> - </span>  {moment(endTime).format("MMMM D, YYYY")}
 
             </p>
 
-            <p style={{color : "black", fontSize:"17px", paddingTop :'10px'}}>{(formatTimestampTo12Hour(startTime).time)}
+            <p style={{color : "white", fontSize:"17px", paddingTop :'10px'}}>{(formatTimestampTo12Hour(startTime).time)}
               <span> - </span>  {(formatTimestampTo12Hour(endTime).time)}
 
             </p>
@@ -120,7 +120,7 @@ const EventDetailsHero: React.FC<EventCardProps> = ({
                 </g>
               </g>
             </svg>
-            <span style={{fontSize:"18px", fontWeight:"400"}}>{location}</span>
+            <span style={{fontSize:"18px", fontWeight:"400", color : 'white'}}>{location}</span>
           </span>
           
           {/* <div className="details">

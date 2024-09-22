@@ -19,9 +19,9 @@ const ExploreHeroSection = ({ data}:any) => {
   return (
     <div className="explore-slider-cotainer">
       <Swiper
-        pagination={{
-          dynamicBullets: true,
-        }}
+        // pagination={{
+        //   dynamicBullets: true,
+        // }}
         modules={[Pagination]}
         className="mySwiper"
         slidesPerView={1} 

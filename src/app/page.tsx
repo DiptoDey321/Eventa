@@ -7,7 +7,6 @@ import QnaSection from "./components/ui/homepage-components/QnaSection";
 import RSVPSection from "./components/ui/homepage-components/RSVPSection";
 import ToolManagmentSections from "./components/ui/homepage-components/ToolManagmentSections";
 import UserCountSection from "./components/ui/homepage-components/UserCountSection";
-import WhatsClientSays from "./components/ui/homepage-components/WhatsClientSays";
 
 export default function Home() {
   return (
@@ -34,11 +33,11 @@ export default function Home() {
         <LearnFromBest></LearnFromBest>
       </div>
 
-      <div className="clients-section">
+      {/* <div className="clients-section">
         <WhatsClientSays></WhatsClientSays>
-      </div>
+      </div> */}
 
-      <div className="user-counting">
+      <div style={{paddingTop:'20px'}} className="user-counting">
         <UserCountSection></UserCountSection>
       </div>
 

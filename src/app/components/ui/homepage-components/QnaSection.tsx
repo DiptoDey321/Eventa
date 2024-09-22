@@ -4,19 +4,19 @@
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Col, Row } from "antd";
 import { motion, useAnimation } from "framer-motion";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import faqImage from "./../../../../../public/FAQ.png";
 import "./HomeStyle.css";
 
 interface HiddenText {
-    label: string;
-    value: string;
+  label: string;
+  value: string;
 }
 
-
 const QnaSection = () => {
-
-   const controls = useAnimation();
+  const controls = useAnimation();
 
   const { ref, inView } = useInView({
     threshold: 0.2,
@@ -38,7 +38,6 @@ const QnaSection = () => {
     },
   };
 
-  
   useEffect(() => {
     if (inView) {
       controls.start("visible");
@@ -47,51 +46,55 @@ const QnaSection = () => {
     }
   }, [controls, inView]);
 
-    const hiddenTexts: HiddenText[] = [
-      {
-        label: "How does Eventar platform handle payment processing?",
-        value:
-          "We integrate with various payment gateways to ensure secure and seamless payment processing. You can accept payments for tickets, registration fees, and other event-related costs directly through the platform.",
-      },
-      {
-        label:
-          "What are the latest and upcoming events that Eventa is planning to launch?",
-        value:
-          "We have various categories of events that are regularly launched on our platforms. Keep an eye on our App or website for the upcoming events",
-      },
-      {
-        label: "I am not willing to visit the event!! Will I get a refund?",
-        value:
-          " No but  you can always refer your friends as the condition applies",
-      },
-      {
-        label: "What are the events that are frequently launched on Eventa?",
-        value:
-          "From dinner party RSVPs to music festival tickets, our suite of tools optimize workflows and maximize sales for events of any size. Eventa is mostly used to scale the following communities, festivals, nightlife groups, fashion & wellness brands, startups/VCs, community organizations, and fraternities/sororities",
-      },
-      { label: " How often is the platform updated?", value: "We continuously update our platform to introduce new features, improve performance, and enhance security. We also listen to user feedback and make adjustments to ensure the platform meets your evolving needs." },
-    ];
+  const hiddenTexts: HiddenText[] = [
+    {
+      label: "How does Eventa  platform handle payment processing?",
+      value:
+        "We integrate with various payment gateways to ensure secure and seamless payment processing. You can retrieve payouts directly through the platform",
+    },
+    {
+      label:
+        "What is included in your free event consultancy?",
+      value:
+        "Our free event consultancy includes personalized advice on event planning, venue selection, and logistical support. We provide expert guidance to help you create a successful event tailored to your needs and budget",
+    },
+    {
+      label: "I am not willing to visit the event!! Will I get a refund?",
+      value:
+        "You will get the refund on an event based on the organizer's refund policy. Please refer to the refund policy page",
+    },
+    {
+      label: " What type of events can be launched on Eventa?",
+      value:
+      "From dinner party RSVPs to music festival tickets, our suite of tools optimize workflows and maximize sales for events of any size. Eventa is mostly used to scale the following communities, festivals, nightlife groups, fashion & wellness brands, startups/VCs, community organizations, and fraternities/sororities(trending,)",
+    },
+    {
+      label: "How do I request a quote for my Event?",
+      value:
+        "To request a quote, simply reach out to us via email or phone or whatsapp. Provide details about your event, including the type, date, and any specific requirements, and we’ll get back to you with a customized quote."
+    },
+  ];
 
-    const [visibility, setVisibility] = useState<boolean[]>(
-      hiddenTexts.map(() => false)
-    );
+  const [visibility, setVisibility] = useState<boolean[]>(
+    hiddenTexts.map(() => false)
+  );
 
-    const handleToggleVisibility = (index: number) => {
-      setVisibility((prevVisibility) => {
-        const newVisibility = [...prevVisibility];
-        newVisibility[index] = !newVisibility[index];
-        return newVisibility;
-      });
-    };
-    
+  const handleToggleVisibility = (index: number) => {
+    setVisibility((prevVisibility) => {
+      const newVisibility = [...prevVisibility];
+      newVisibility[index] = !newVisibility[index];
+      return newVisibility;
+    });
+  };
+
   return (
     <div className="hoempage-qna-section">
       <div className="heading">
-        <span>You have some questions?</span>
+        <span>Still have some questions?</span>
       </div>
 
       <Row align="middle">
-        <Col md={24} lg={10}>
+        <Col md={24} lg={12}>
           <motion.div
             animate={{ y: ["0px", "20px", "0px", "-20px", "0px"] }}
             transition={{
@@ -103,10 +106,16 @@ const QnaSection = () => {
             }}
             className="acc-image-container"
           >
-            <img src="https://i.ibb.co/bs8T11D/faq.png" alt="" srcSet="" />
+            {/* <img src="https://i.ibb.co/bs8T11D/faq.png" alt="" srcSet="" /> */}
+            <Image
+              src={faqImage}
+              width={500}
+              height={450}
+              alt="Picture of the author"
+            />
           </motion.div>
         </Col>
-        <Col md={24} lg={14}>
+        <Col md={24} lg={12}>
           <motion.div
             ref={ref}
             initial="hidden"
@@ -141,6 +150,6 @@ const QnaSection = () => {
       </Row>
     </div>
   );
-}
+};
 
-export default QnaSection
+export default QnaSection;

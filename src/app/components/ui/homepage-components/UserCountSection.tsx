@@ -9,13 +9,13 @@ const UserCountSection = () => {
       <div className="main-container">
         <img src="https://i.ibb.co/VwNrq6h/users.png" alt="" />
         <div className="heading">
-          <span>Curious to know more!!</span>
-          <span>Have more questions regarding our serivices?</span>
+          <span>Let’s Dive Deeper !</span>
+          {/* <span>Have more questions regarding our serivices?</span> */}
         </div>
 
         <div className="btns">
           <a style={{cursor:"pointer"}} className="sec-btn" onClick={() => message.info("comign soon..")}>
-            CTA-Request a demo
+          Request a Demo For Free
           </a>
           {/* <a className="first-btn" href="">
             Lunch an event
