@@ -452,7 +452,7 @@ const SellTickets: React.FC<SellTicketsProps> = ({ activeComponents }) => {
               <Col xs={24} sm={24} md={12} lg={12}>
                 <div className="sell-tickets-side-bg">
                   <Image
-                    className="right-img-property"
+                    className="right-img-property main-ticket-img"
                     src={backgroundImage}
                     alt="Event image"
                     width={300}

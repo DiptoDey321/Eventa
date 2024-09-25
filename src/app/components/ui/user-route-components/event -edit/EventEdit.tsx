@@ -295,7 +295,7 @@ const EventEdit =  ({ eventData, handleCloseModal,refetchEventDetails  }: EventE
               </Form.Item>
 
               <Form.Item
-                className="common-class "
+                className="common-class-edit-edit "
                 name="event_start_date_time"
                 rules={[
                   { required: true, message: "Please select the start time!" },
@@ -312,7 +312,7 @@ const EventEdit =  ({ eventData, handleCloseModal,refetchEventDetails  }: EventE
               </Form.Item>
 
               <Form.Item
-                className="common-class "
+                className="common-class-edit "
                 name="event_end_date_time"
                 label="Event end date"
                 dependencies={["event_start_date_time"]}
@@ -347,7 +347,7 @@ const EventEdit =  ({ eventData, handleCloseModal,refetchEventDetails  }: EventE
                   { required: true, message: "Please input the venue name!" },
                 ]}
                 label="Venue name"
-                className="common-class"
+                className="common-class-edit"
               >
                 <Input
                   className="input-field-event-create"
@@ -358,7 +358,7 @@ const EventEdit =  ({ eventData, handleCloseModal,refetchEventDetails  }: EventE
               {/* Address */}
               <Form.Item
                 name="address"
-                className="common-class"
+                className="common-class-edit"
                 label="Address"
                 rules={[{ required: true, message: "Please input the address!" }]}
               >
@@ -370,9 +370,9 @@ const EventEdit =  ({ eventData, handleCloseModal,refetchEventDetails  }: EventE
             </Col>
 
             <Col  xs={24} sm={12} md={12}>
-              <Form.Item name="basic-style2">
+              <Form.Item name="basic-style2-edit">
                 <div className="event_image_url">
-                  <div className="sell-tickets-side-bg">
+                  <div className="event-tickets-on-edit">
                     <Image
                       className="right-img-property"
                       src={backgroundImage} // Default or uploaded image
@@ -398,7 +398,7 @@ const EventEdit =  ({ eventData, handleCloseModal,refetchEventDetails  }: EventE
             <Col  xs={24} sm={12} md={12}>
               {/* Description */}
               <Form.Item
-                className="common-class desc"
+                className="common-class-edit desc"
                 label="Descriptions"
                 name="description"
                 rules={[
@@ -412,7 +412,7 @@ const EventEdit =  ({ eventData, handleCloseModal,refetchEventDetails  }: EventE
             <Col  xs={24} sm={12} md={12}>
               {/* Category */}
               <Form.Item
-                className="common-class basic-style2"
+                className="common-class-edit basic-style2-edit"
                 label="Category"
                 name="category_id"
                 rules={[{ required: true, message: "Please select a category!" }]}
@@ -447,7 +447,7 @@ const EventEdit =  ({ eventData, handleCloseModal,refetchEventDetails  }: EventE
               {/* Phone or Email based on Switch */}
               {!isPhone ? (
                 <Form.Item
-                  className="basic-style2"
+                  className="basic-style2-edit"
                   label="Phone Number"
                   name="event_phone"
                   rules={[
