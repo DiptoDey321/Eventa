@@ -1,10 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { QRCode } from 'antd';
+import moment from 'moment';
 import generatePDF, { Margin, Options, Resolution } from "react-to-pdf";
 import './success.css';
 
 function PaymentSuccess({ ticketData }:any) {
+
+  // console.log(ticketData);
+  
 
   const options: Options = {
     filename: "Eventa-tickets.pdf",
@@ -96,7 +100,7 @@ function PaymentSuccess({ ticketData }:any) {
                 </svg>
               </span>
               <div className="">
-                <p>General Admission</p>
+                <p>No. of tickets : {ticketData?.sit_qty} </p>
               </div>
             </div>
             <div className="left">
@@ -105,7 +109,7 @@ function PaymentSuccess({ ticketData }:any) {
               </div>
               <div className="image">
                 <p className="admit-one">
-                  <span>{ticketData?.event_id?.title}</span>
+                  {/* <span>{ticketData?.event_id?.title}</span> */}
                 </p>
                 <div className="ticket-number">
                   <p>{ticketData?.ticket_number}</p>
@@ -113,9 +117,9 @@ function PaymentSuccess({ ticketData }:any) {
               </div>
               <div className="ticket-info">
                 <p className="date">
-                  <span>TUEsDAY</span>
-                  <span className="june-29">JUNE 29TH</span>
-                  <span>2021</span>
+                  <span>{moment(ticketData?.event_id?.event_start_date_time).format('dddd')}</span>
+                  <span className="june-29">{moment(ticketData?.event_id?.event_start_date_time).format('Do MMMM ')}</span>
+                  <span>{moment(ticketData?.event_id?.event_start_date_time).format('YYYY')}</span>
                 </p>
 
                 <div className="show-name">
@@ -126,10 +130,10 @@ function PaymentSuccess({ ticketData }:any) {
                 <div className="time">
                   <div className="">
                     <p>
-                      11:00 AM <span>TO</span> 11:00 PM
+                    {moment(ticketData?.event_id?.event_start_date_time).format('h:mm A')} <span>TO</span> {moment(ticketData?.event_id?.event_end_date_time).format('h:mm A')}
                     </p>
                     <p>
-                      DOORS <span>@</span> 3:00 PM
+                      DOORS <span>@</span> {moment(ticketData?.event_id?.event_start_date_time).subtract(1, 'hours').format('h:mm A')}
                     </p>
                     <p>
                       Price :{" "}
@@ -160,12 +164,8 @@ function PaymentSuccess({ ticketData }:any) {
                   </div>
                 </div>
 
-                <p className="location">
-                  <span>{ticketData?.event_id?.venue_name}</span>
-                  <span className="separator">
-                    <i className="far fa-smile"></i>
-                  </span>
-                  <span>{ticketData?.event_id?.address}</span>
+                <p style={{fontSize:'16px'}} className="location">
+                  <span >{ticketData?.event_id?.venue_name}, {ticketData?.event_id?.address}</span>
                 </p>
               </div>
             </div>

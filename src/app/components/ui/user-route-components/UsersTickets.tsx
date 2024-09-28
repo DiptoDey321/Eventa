@@ -183,6 +183,9 @@ const UsersTickets = () => {
     setIsModalVisible(true);
   };
 
+  console.log(data);
+  
+
   return (
     <div>
       <Table

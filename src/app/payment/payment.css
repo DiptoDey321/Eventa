@@ -8,8 +8,12 @@
 }
 
 .payment-inner {
-  width: 900px;
+  width: 850px;
   margin: auto !important;
+}
+
+.main-container-payment-page{
+  margin: 0px 20px 0px 20px !important;
   background-color: white;
   padding-left: 30px;
   border-radius: 10px;

@@ -115,11 +115,10 @@ const Payment = () => {
   return (
     <div className="payment-page">
       <div className="payment-inner">
-        <div className="">
-          <div className=""></div>
-          <div className="items-userdetails">
-            <Row align="middle">
-              <Col span={12}>
+        <div className="main-container-payment-page">
+          <div style={{paddingBottom:'30px'}} className="items-userdetails">
+            <Row gutter={[16, 16]} align="middle">
+              <Col xs={24} sm={24} md={12}>
                 <div
                   style={{
                     display: "flex",
@@ -160,6 +159,7 @@ const Payment = () => {
                         <span key={2} style={{ margin: "0 10px" }}>
                           {ticket.quantity}
                         </span>,
+
                         <Button
                           className="count-btn"
                           key={3}
@@ -180,7 +180,7 @@ const Payment = () => {
                       ]}
                     >
                       <List.Item.Meta
-                        title={`${ticket.eventName} - Ticket ${ticket.id}`}
+                        title={`${ticket.eventName} - ${ticket.ticketTitle}`}
                         description={`Price: $${ticket.price} x ${
                           ticket.quantity
                         } = $${ticket.price * ticket.quantity}`}
@@ -211,11 +211,11 @@ const Payment = () => {
                   </span>
                 </div>
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={24} md={12}>
                 <div
                   style={{
                     backgroundColor: "white",
-                    padding: "40px",
+                    paddingRight: "40px",
                     borderRadius: "0px 20px 20px 0px",
                   }}
                   className=""

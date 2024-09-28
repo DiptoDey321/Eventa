@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 
 "use client"
-import "./UserRouteStyle.css";
-import React, { useState } from 'react'
-import { Select, Button } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
 import { removeUserInfo } from "@/services/auth.service";
+import { PlusOutlined } from "@ant-design/icons";
+import { Button, Select } from "antd";
 import { useRouter } from "next/navigation";
+import React, { useState } from 'react';
+import "./UserRouteStyle.css";
 
 const { Option } = Select;
 
@@ -39,7 +39,7 @@ const RightNav:React.FC<MenuProps> =({ isOpen, closeMenu })=> {
 
 
   return (
-    <div className={`dep-menu ${isOpen ? "open" : ""}`} onClick={closeMenu}>
+    <div style={{zIndex:'9999999'}} className={`dep-menu ${isOpen ? "open" : ""}`} onClick={closeMenu}>
       <div className="dep-menu-content" onClick={(e) => e.stopPropagation()}>
         <div className="dep-organization-name-pic">
           <Select
