@@ -49,7 +49,7 @@ const EventDetailsHero: React.FC<EventCardProps> = ({
   
   return (
     <div className="event-details-hero-card">
-      <div style={{display:"flex", justifyContent:"end", paddingBottom:"30px"}}>
+      <div style={{display:"flex", justifyContent:"end", paddingBottom:"30px", paddingRight: '10px'}}>
         <Button onClick={()=>router.push("/explore")}>
           <RollbackOutlined />
           Back to events

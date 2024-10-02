@@ -3,11 +3,13 @@
 import { usePaymentMutation } from "@/redux/api/paymentApi";
 import { initializeCart, removeTicket, updateTicketQuantity } from "@/redux/slice/cartSlice";
 import { RootState } from "@/redux/store";
+import { isUserLoggedIn } from "@/services/auth.service";
 import { DeleteOutlined, MinusOutlined, PlusOutlined, RollbackOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, List, message, Radio, Row } from "antd";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Loading from "../loading";
 import "./payment.css";
 
 const Payment = () => {
@@ -112,6 +114,20 @@ const Payment = () => {
 
   const tickets = useSelector((state: RootState) => state.cart.tickets);
   const totalAmount = calculateTotalAmount(tickets);
+
+  const userLoggedIn = isUserLoggedIn();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!userLoggedIn) {
+      router.push("/login");
+    }
+    setIsLoading(true);
+  }, [router, userLoggedIn]);
+
+  if (!isLoading) {
+    return <Loading></Loading>;
+  }
   return (
     <div className="payment-page">
       <div className="payment-inner">

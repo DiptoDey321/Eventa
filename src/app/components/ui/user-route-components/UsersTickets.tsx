@@ -1,4 +1,4 @@
-import PaymentSuccess from "@/app/payment/success/page";
+// import PaymentSuccess from "@/app/payment/success/page";
 import { useGetTicketsQuery } from "@/redux/api/paymentApi";
 import { SearchOutlined } from "@ant-design/icons";
 import type { InputRef, TableColumnsType, TableColumnType } from "antd";
@@ -6,6 +6,7 @@ import { Button, Input, Modal, Space, Table } from "antd";
 import type { FilterDropdownProps } from "antd/es/table/interface";
 import { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
+import PaymentSuccess from "../../resuable-component/PaymentSuccess";
 import './../../../payment/success/success.css';
 
 interface DataType {

@@ -151,7 +151,7 @@ function EventDetails({ params }: { params: { id: string } }) {
           </div>
 
           {totalItems > 0 && (
-            <div className="cart-section">
+            <div style={{zIndex:"9999"}} className="cart-section">
               <div onClick={() => showModal()} className="cart-container-icon">
                 <svg
                   width="70"

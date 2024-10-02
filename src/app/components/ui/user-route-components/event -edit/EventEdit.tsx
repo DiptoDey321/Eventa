@@ -143,11 +143,11 @@ const EventEdit =  ({ eventData, handleCloseModal,refetchEventDetails  }: EventE
       imageUrl: eventData?.event_image_url,
     });
     setEditorValue(eventData?.description || "");
-    setBackgroundImage(
-      eventData?.event_image_url
-        ? eventData?.event_image_url
-        : initialBackground
-    );
+    if (eventData?.event_image_url) {
+      setBackgroundImage(`https://link.storjshare.io/raw/jw2ydrl6k3ff65py2xpvvgm3qseq/${eventData.event_image_url}`);
+    } else {
+      setBackgroundImage(initialBackground);
+    }
     if (eventData?.tickets?.length) {
       setTickets(transformTicketData(eventData.tickets));
     } else {
